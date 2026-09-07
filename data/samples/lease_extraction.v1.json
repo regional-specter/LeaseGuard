@@ -7,6 +7,7 @@
     "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "document_type": "office_lease",
     "source_name": "Synthetic LeaseGuard example",
+    "rights_status": "open_license",
     "source_license": "CC0-1.0",
     "jurisdiction": "US",
     "language": "en"
@@ -17,6 +18,7 @@
       "role": "tenant",
       "evidence": [
         {
+          "document_id": "sample-office-lease",
           "text": "Example Tenant LLC (Tenant)",
           "page_number": 1,
           "section": "Parties"
@@ -27,7 +29,9 @@
   "clauses": [
     {
       "clause_id": "section-4.1",
-      "clause_type": "base_rent",
+      "clause_types": [
+        "base_rent"
+      ],
       "heading": "4.1 Base Rent",
       "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
       "page_start": 12,
@@ -43,6 +47,7 @@
       "frequency": "monthly",
       "evidence": [
         {
+          "document_id": "sample-office-lease",
           "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
           "page_number": 12,
           "section": "4.1 Base Rent"
@@ -61,6 +66,7 @@
       "recurrence": "First day of each month",
       "evidence": [
         {
+          "document_id": "sample-office-lease",
           "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
           "page_number": 12,
           "section": "4.1 Base Rent"

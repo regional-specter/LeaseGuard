@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "document_id": "gsa-l100-2026",
+    "family_id": "gsa-global-template-family",
+    "filename": "gsa-l100-2026.pdf",
+    "sha256": "e3ed7ade47e878b8d62079ac4d631a49da093aa85edcb4a2258bb98cf0f6a870",
+    "document_type": "office_lease",
+    "source_name": "GSA Global Lease Template L100, May 2026",
+    "source_url": "https://www.gsa.gov/system/files/Global%20Lease%20Template%20L100%20%28May%202026%29.pdf",
+    "rights_status": "public_domain",
+    "source_license": "US federal government work under 17 U.S.C. 105",
+    "rights_notes": "Official GSA template; retain attribution and provenance.",
+    "retrieved_at": "2026-09-07",
+    "is_template": true,
+    "jurisdiction": "US",
+    "language": "en"
+  },
+  "related_document_ids": [
+    "gsa-amendment-template-2021"
+  ],
+  "parties": [
+    {
+      "name": "Lessor's Name",
+      "role": "landlord",
+      "evidence": [
+        {
+          "document_id": "gsa-l100-2026",
+          "text": "Lessor’s Name",
+          "page_number": 1,
+          "section": "Parties"
+        }
+      ]
+    },
+    {
+      "name": "The United States of America",
+      "role": "tenant",
+      "evidence": [
+        {
+          "document_id": "gsa-l100-2026",
+          "text": "The United States of America (Government)",
+          "page_number": 1,
+          "section": "Parties"
+        }
+      ]
+    }
+  ],
+  "premises": [
+    {
+      "description": "All or a portion of the property identified in the completed template and its exhibits.",
+      "address": "[Address]",
+      "permitted_use": "Purposes determined by GSA",
+      "evidence": [
+        {
+          "document_id": "gsa-l100-2026",
+          "text": "Lessor hereby leases to the Government the Premises described herein, being all or a portion of the Property located at [Address]",
+          "page_number": 1,
+          "section": "Witnesseth"
+        }
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "clause_id": "gsa-l100-cover-term",
+      "clause_types": [
+        "lease_term"
+      ],
+      "heading": "Lease Term",
+      "text": "To Have and To Hold the said Premises with its appurtenances for the term beginning upon acceptance of the Premises as required by this Lease and continuing for a period of X Years, X Years Firm.",
+      "page_start": 2,
+      "page_end": 2
+    },
+    {
+      "clause_id": "gsa-l100-1.03",
+      "clause_types": [
+        "base_rent",
+        "operating_expenses",
+        "tenant_improvements",
+        "parking"
+      ],
+      "heading": "1.03 Rent and Other Consideration",
+      "text": "The Government must pay the Lessor annual rent, payable in monthly installments in arrears, at the following rates.",
+      "page_start": 10,
+      "page_end": 10
+    },
+    {
+      "clause_id": "gsa-l100-1.05",
+      "clause_types": [
+        "renewal_option"
+      ],
+      "heading": "1.05 Renewal Rights",
+      "text": "This Lease may be renewed at the option of the Government for a term of XX YEARS.",
+      "page_start": 11,
+      "page_end": 11
+    }
+  ],
+  "monetary_terms": [],
+  "date_terms": [],
+  "obligations": [
+    {
+      "obligation_id": "gsa-l100-rent-payment",
+      "responsible_party": "The United States of America",
+      "action": "Pay annual rent in monthly installments in arrears",
+      "beneficiary": "Lessor's Name",
+      "timing_type": "recurring",
+      "recurrence": "Monthly in arrears",
+      "evidence": [
+        {
+          "document_id": "gsa-l100-2026",
+          "text": "The Government must pay the Lessor annual rent, payable in monthly installments in arrears, at the following rates.",
+          "page_number": 10,
+          "section": "1.03 Rent and Other Consideration"
+        }
+      ]
+    }
+  ],
+  "amendment_effects": [],
+  "warnings": [
+    "This is an uncompleted government template, so placeholders are preserved and not treated as final lease values."
+  ]
+}

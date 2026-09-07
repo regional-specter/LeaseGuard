@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "document_id": "st-joseph-concession-2020",
+    "family_id": "st-joseph-concession-family",
+    "filename": "st-joseph-retail-concession.pdf",
+    "sha256": "cb730b4fec593a1c124e6f1947e33ed86c2f78cb67ab984b80b57d7471cde951",
+    "document_type": "retail_lease",
+    "source_name": "City of St. Joseph Concession and Restroom Facility Lease RFP",
+    "source_url": "https://www.stjosephmo.gov/DocumentCenter/View/11387",
+    "rights_status": "review_required",
+    "rights_notes": "Official municipal public record used for local schema validation only. Reuse rights must be confirmed before training or redistribution.",
+    "retrieved_at": "2026-09-07",
+    "is_template": true,
+    "jurisdiction": "US",
+    "state": "MO",
+    "language": "en",
+    "governing_law_text": "This Lease Agreement shall be construed and enforced in accordance with the laws of the State of Missouri."
+  },
+  "related_document_ids": [],
+  "parties": [
+    {
+      "name": "City of St. Joseph, Missouri",
+      "role": "landlord",
+      "evidence": [
+        {
+          "document_id": "st-joseph-concession-2020",
+          "text": "City of St. Joseph, Missouri, a Missouri municipal corporation",
+          "page_number": 4,
+          "section": "Lease Agreement"
+        }
+      ]
+    }
+  ],
+  "premises": [
+    {
+      "description": "Concession and restroom facility adjacent to the City Park at 7th and Felix.",
+      "property_name": "Downtown Concessions",
+      "address": "Northwest corner of Felix Street and North 7th Street, St. Joseph, Missouri",
+      "permitted_use": "Concession stand, restroom facility, public events, and limited private events",
+      "evidence": [
+        {
+          "document_id": "st-joseph-concession-2020",
+          "text": "The City hereby leases to the Lessee, and the Lessee leases from the City, for the rentals and upon, and subject to, the terms and conditions set forth herein, the Premises near the northwest corner of the intersection of Felix Street and North 7th Street in St. Joseph, Missouri.",
+          "page_number": 4,
+          "section": "A. Leasehold Grant"
+        }
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "clause_id": "st-joseph-leasehold-grant",
+      "clause_types": [
+        "lease_term",
+        "renewal_option",
+        "notice"
+      ],
+      "heading": "A. Leasehold Grant",
+      "text": "Thereafter, this Lease Agreement shall automatically renew annually for an additional one (1) year period, each upon the same terms as stated herein, unless either party notifies the other that it seeks to terminate or otherwise end the Lease Agreement, or the leasehold created herein, at the end of the then-current term.",
+      "page_start": 4,
+      "page_end": 4
+    },
+    {
+      "clause_id": "st-joseph-net-lease",
+      "clause_types": [
+        "additional_rent",
+        "taxes",
+        "utilities",
+        "repairs",
+        "maintenance",
+        "insurance"
+      ],
+      "heading": "B.2 Net Lease",
+      "text": "The parties hereto agree that this Lease Agreement is intended to be a net lease, with all payments for taxes, utilities, repairs, maintenance, and insurance related to the Lessee's use and possession of the Premises to be at the sole cost and expense of the Lessee.",
+      "page_start": 4,
+      "page_end": 4
+    },
+    {
+      "clause_id": "st-joseph-assignment",
+      "clause_types": [
+        "assignment",
+        "subletting"
+      ],
+      "heading": "G.11 Assignment and Sublease",
+      "text": "The Lessee may not assign, sublease, mortgage, pledge, sell, or in any other manner transfer, convey, or dispose of the Premises or its rights under this Lease Agreement, or any right or interest therein, or part thereof, whether voluntary, involuntary, or by operation of law, without the prior written consent of the City.",
+      "page_start": 7,
+      "page_end": 7
+    },
+    {
+      "clause_id": "st-joseph-maintenance",
+      "clause_types": [
+        "maintenance",
+        "repairs",
+        "janitorial"
+      ],
+      "heading": "G.12 Repairs, Maintenance, and Cleaning",
+      "text": "The Lessee is responsible for any and all repairs, replacement, maintenance, and cleaning to the Premises, including the buildings thereon, and any and all appurtenances to either.",
+      "page_start": 7,
+      "page_end": 8
+    },
+    {
+      "clause_id": "st-joseph-environmental",
+      "clause_types": [
+        "environmental",
+        "indemnity"
+      ],
+      "heading": "O. Hazardous Substances",
+      "text": "The Lessee agrees not to generate, store, use, treat, or dispose of, nor to allow, suffer, or permit the generation, storage, use, treatment, or disposal of, any “hazardous waste” or “hazardous substance”",
+      "page_start": 14,
+      "page_end": 15
+    }
+  ],
+  "monetary_terms": [],
+  "date_terms": [
+    {
+      "label": "Initial lease term",
+      "original_text": "for a term of five (5) years, commencing upon the date first listed above",
+      "trigger": "Execution date entered at the beginning of the lease",
+      "evidence": [
+        {
+          "document_id": "st-joseph-concession-2020",
+          "text": "for a term of five (5) years, commencing upon the date first listed above",
+          "page_number": 4,
+          "section": "A. Leasehold Grant"
+        }
+      ]
+    }
+  ],
+  "obligations": [
+    {
+      "obligation_id": "st-joseph-monthly-rent",
+      "responsible_party": "Lessee",
+      "action": "Pay Premises Rent to the City",
+      "beneficiary": "City of St. Joseph, Missouri",
+      "timing_type": "recurring",
+      "recurrence": "On or before the first day of each monthly term",
+      "evidence": [
+        {
+          "document_id": "st-joseph-concession-2020",
+          "text": "The Premises Rent shall be paid on or before the first day of the term for which it is due.",
+          "page_number": 4,
+          "section": "B.1.b Premises Rent Payment"
+        }
+      ]
+    },
+    {
+      "obligation_id": "st-joseph-insurance-certificate",
+      "responsible_party": "Lessee",
+      "action": "Provide a valid certificate of insurance directly to the City",
+      "beneficiary": "City of St. Joseph, Missouri",
+      "timing_type": "relative_deadline",
+      "relative_deadline": "Within ten business days after execution",
+      "timing_value": 10,
+      "timing_unit": "business_day",
+      "trigger": "Execution of the Lease Agreement",
+      "evidence": [
+        {
+          "document_id": "st-joseph-concession-2020",
+          "text": "Within ten (10) business days after execution of this Lease Agreement, a valid certificate of insurance verifying each of the coverages required above shall be issued directly to the City by the Lessee’s insurance agent of record or insurance company.",
+          "page_number": 11,
+          "section": "I.8 Certificate of Insurance"
+        }
+      ]
+    }
+  ],
+  "amendment_effects": [],
+  "warnings": [
+    "This is a municipal concession lease template rather than a private shopping-center lease.",
+    "Reuse rights require review before this source can enter a released training dataset.",
+    "The Lessee name and rent amount are blank template fields."
+  ]
+}

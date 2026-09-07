@@ -1,5 +1,92 @@
 {
   "$defs": {
+    "AmendmentAction": {
+      "description": "How an amendment changes an earlier document.",
+      "enum": [
+        "add",
+        "delete",
+        "replace",
+        "modify",
+        "confirm",
+        "other"
+      ],
+      "title": "AmendmentAction",
+      "type": "string"
+    },
+    "AmendmentEffect": {
+      "additionalProperties": false,
+      "description": "One explicit change an amendment makes to an earlier lease.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/AmendmentAction"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "effect_id": {
+          "minLength": 1,
+          "title": "Effect Id",
+          "type": "string"
+        },
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "target_clause_reference": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Clause Reference"
+        },
+        "target_document_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Document Id"
+        }
+      },
+      "required": [
+        "effect_id",
+        "action",
+        "description",
+        "evidence"
+      ],
+      "title": "AmendmentEffect",
+      "type": "object"
+    },
     "Clause": {
       "additionalProperties": false,
       "description": "A classified section of lease text.",
@@ -9,8 +96,13 @@
           "title": "Clause Id",
           "type": "string"
         },
-        "clause_type": {
-          "$ref": "#/$defs/ClauseType"
+        "clause_types": {
+          "items": {
+            "$ref": "#/$defs/ClauseType"
+          },
+          "minItems": 1,
+          "title": "Clause Types",
+          "type": "array"
         },
         "heading": {
           "anyOf": [
@@ -26,14 +118,43 @@
           "title": "Heading"
         },
         "page_end": {
-          "minimum": 1,
-          "title": "Page End",
-          "type": "integer"
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page End"
         },
         "page_start": {
-          "minimum": 1,
-          "title": "Page Start",
-          "type": "integer"
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Start"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
         },
         "text": {
           "minLength": 1,
@@ -43,10 +164,8 @@
       },
       "required": [
         "clause_id",
-        "clause_type",
-        "text",
-        "page_start",
-        "page_end"
+        "clause_types",
+        "text"
       ],
       "title": "Clause",
       "type": "object"
@@ -65,7 +184,10 @@
         "extension_option",
         "early_termination",
         "base_rent",
+        "additional_rent",
         "rent_increase",
+        "rent_abatement",
+        "tenant_share",
         "security_deposit",
         "operating_expenses",
         "common_area_maintenance",
@@ -77,14 +199,30 @@
         "repairs",
         "utilities",
         "alterations",
+        "tenant_improvements",
+        "delivery_condition",
         "access",
+        "common_areas",
         "signage",
         "parking",
+        "continuous_operation",
+        "co_tenancy",
+        "exclusivity",
+        "radius_restriction",
+        "prohibited_use",
+        "relocation",
         "assignment",
         "subletting",
         "change_of_control",
         "amendment",
         "notice",
+        "holdover",
+        "surrender",
+        "subordination",
+        "non_disturbance",
+        "estoppel",
+        "liens",
+        "brokerage",
         "default",
         "cure_period",
         "remedies",
@@ -93,6 +231,12 @@
         "damage_and_destruction",
         "condemnation",
         "force_majeure",
+        "accessibility",
+        "environmental",
+        "compliance_with_laws",
+        "services",
+        "janitorial",
+        "security",
         "dispute_resolution",
         "governing_law",
         "guarantee",
@@ -176,6 +320,11 @@
       "additionalProperties": false,
       "description": "Exact text supporting an extracted fact or answer.",
       "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
         "end_char": {
           "anyOf": [
             {
@@ -189,10 +338,31 @@
           "default": null,
           "title": "End Char"
         },
+        "page_label": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Label"
+        },
         "page_number": {
-          "minimum": 1,
-          "title": "Page Number",
-          "type": "integer"
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number"
         },
         "section": {
           "anyOf": [
@@ -227,8 +397,8 @@
         }
       },
       "required": [
-        "text",
-        "page_number"
+        "document_id",
+        "text"
       ],
       "title": "EvidenceSpan",
       "type": "object"
@@ -290,6 +460,32 @@
           "minLength": 1,
           "title": "Original Text",
           "type": "string"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period"
+        },
+        "rate_basis": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Basis"
         }
       },
       "required": [
@@ -406,6 +602,30 @@
         "timing_type": {
           "$ref": "#/$defs/TimingType"
         },
+        "timing_unit": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimingUnit"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timing_value": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timing Value"
+        },
         "trigger": {
           "anyOf": [
             {
@@ -434,6 +654,13 @@
       "additionalProperties": false,
       "description": "A named party and its role in the lease.",
       "properties": {
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
         "evidence": {
           "items": {
             "$ref": "#/$defs/EvidenceSpan"
@@ -471,6 +698,142 @@
       "title": "PartyRole",
       "type": "string"
     },
+    "Premises": {
+      "additionalProperties": false,
+      "description": "A physical space included in the lease.",
+      "properties": {
+        "address": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Address"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "floor": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Floor"
+        },
+        "permitted_use": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Permitted Use"
+        },
+        "property_name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Property Name"
+        },
+        "rentable_square_feet": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rentable Square Feet"
+        },
+        "suite": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suite"
+        },
+        "usable_square_feet": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usable Square Feet"
+        }
+      },
+      "required": [
+        "description",
+        "evidence"
+      ],
+      "title": "Premises",
+      "type": "object"
+    },
+    "RightsStatus": {
+      "description": "Review status for using and redistributing a source.",
+      "enum": [
+        "public_domain",
+        "open_license",
+        "permission_granted",
+        "review_required",
+        "restricted"
+      ],
+      "title": "RightsStatus",
+      "type": "string"
+    },
     "SourceDocument": {
       "additionalProperties": false,
       "description": "Identity, provenance, and scope information for one document.",
@@ -506,6 +869,11 @@
           "default": null,
           "title": "Governing Law Text"
         },
+        "is_template": {
+          "default": false,
+          "title": "Is Template",
+          "type": "boolean"
+        },
         "jurisdiction": {
           "const": "US",
           "default": "US",
@@ -518,15 +886,65 @@
           "title": "Language",
           "type": "string"
         },
+        "normalized_text_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Text Sha256"
+        },
+        "retrieved_at": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retrieved At"
+        },
+        "rights_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Notes"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
         "sha256": {
           "pattern": "^[a-f0-9]{64}$",
           "title": "Sha256",
           "type": "string"
         },
         "source_license": {
-          "minLength": 1,
-          "title": "Source License",
-          "type": "string"
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
         },
         "source_name": {
           "minLength": 1,
@@ -567,7 +985,7 @@
         "sha256",
         "document_type",
         "source_name",
-        "source_license"
+        "rights_status"
       ],
       "title": "SourceDocument",
       "type": "object"
@@ -583,11 +1001,29 @@
       ],
       "title": "TimingType",
       "type": "string"
+    },
+    "TimingUnit": {
+      "description": "Normalized unit for a relative obligation deadline.",
+      "enum": [
+        "day",
+        "business_day",
+        "month",
+        "year"
+      ],
+      "title": "TimingUnit",
+      "type": "string"
     }
   },
   "additionalProperties": false,
   "description": "Complete structured extraction result for one lease document.",
   "properties": {
+    "amendment_effects": {
+      "items": {
+        "$ref": "#/$defs/AmendmentEffect"
+      },
+      "title": "Amendment Effects",
+      "type": "array"
+    },
     "clauses": {
       "items": {
         "$ref": "#/$defs/Clause"
@@ -621,6 +1057,20 @@
         "$ref": "#/$defs/Party"
       },
       "title": "Parties",
+      "type": "array"
+    },
+    "premises": {
+      "items": {
+        "$ref": "#/$defs/Premises"
+      },
+      "title": "Premises",
+      "type": "array"
+    },
+    "related_document_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Document Ids",
       "type": "array"
     },
     "schema_version": {

@@ -1,15 +1,19 @@
 """Lease concepts, labels, and structured schemas."""
 
 from leaseguard.ontology.enums import (
+    AmendmentAction,
     AnswerStatus,
     ClauseType,
     DocumentType,
     PartyRole,
+    RightsStatus,
     StakeholderPerspective,
     TimingType,
+    TimingUnit,
 )
 from leaseguard.ontology.models import (
     SCHEMA_VERSION,
+    AmendmentEffect,
     Clause,
     DateTerm,
     DocumentAnswer,
@@ -18,11 +22,14 @@ from leaseguard.ontology.models import (
     MonetaryTerm,
     Obligation,
     Party,
+    Premises,
     SourceDocument,
 )
 
 __all__ = [
     "SCHEMA_VERSION",
+    "AmendmentAction",
+    "AmendmentEffect",
     "AnswerStatus",
     "Clause",
     "ClauseType",
@@ -35,7 +42,10 @@ __all__ = [
     "Obligation",
     "Party",
     "PartyRole",
+    "Premises",
+    "RightsStatus",
     "SourceDocument",
     "StakeholderPerspective",
     "TimingType",
+    "TimingUnit",
 ]

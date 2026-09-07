@@ -7,6 +7,7 @@
   "confidence": 0.98,
   "evidence": [
     {
+      "document_id": "sample-office-lease",
       "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
       "page_number": 12,
       "section": "4.1 Base Rent"

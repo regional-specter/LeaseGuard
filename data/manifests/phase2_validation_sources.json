@@ -1,0 +1,60 @@
+{
+  "manifest_version": "1.0.0",
+  "purpose": "Phase 2 ontology validation only",
+  "storage_policy": "Only small source documents are stored locally under Git-ignored data/raw/validation. Heavy data work belongs in Google Colab.",
+  "sources": [
+    {
+      "document_id": "gsa-l100-2026",
+      "family_id": "gsa-global-template-family",
+      "document_type": "office_lease",
+      "source_name": "GSA Global Lease Template L100, May 2026",
+      "source_url": "https://www.gsa.gov/system/files/Global%20Lease%20Template%20L100%20%28May%202026%29.pdf",
+      "local_path": "data/raw/validation/gsa-l100-2026.pdf",
+      "sha256": "e3ed7ade47e878b8d62079ac4d631a49da093aa85edcb4a2258bb98cf0f6a870",
+      "rights_status": "public_domain",
+      "rights_notes": "Official US General Services Administration template. Treated as a US federal government work under 17 U.S.C. 105; provenance must remain attached.",
+      "is_template": true,
+      "validation_role": "Office lease structure, premises, rent, options, services, and event-based obligations"
+    },
+    {
+      "document_id": "gsa-amendment-template-2021",
+      "family_id": "gsa-global-template-family",
+      "document_type": "amendment",
+      "source_name": "GSA lease amendment template for cleaning requirement changes",
+      "source_url": "https://www.gsa.gov/system/files/Real_Estate_Acquisitions/Attachment_3_-_Lease_Amendment_Template_Rescinding_Routine_Disinfecting_Req-c.pdf",
+      "local_path": "data/raw/validation/gsa-amendment-template.pdf",
+      "sha256": "4bcaeb50bd7e63f1abe6f64425896989ceb2794f9c6845f74b09f25e4d6b40cf",
+      "rights_status": "public_domain",
+      "rights_notes": "Official US General Services Administration template. Treated as a US federal government work under 17 U.S.C. 105; provenance must remain attached.",
+      "is_template": true,
+      "validation_role": "Related-document links and add, delete, replace, modify, and effective-date behavior"
+    },
+    {
+      "document_id": "pandadoc-commercial-lease-template",
+      "family_id": "pandadoc-commercial-template-family",
+      "document_type": "retail_lease",
+      "source_name": "PandaDoc Commercial Lease Agreement Template",
+      "source_url": "https://raw.githubusercontent.com/PandaDoc/property-agreement-templates/main/templates/commercial-lease-agreement.md",
+      "local_path": "data/raw/validation/pandadoc-commercial-lease.md",
+      "sha256": "f441ea10f3b519fd8275afb7e88af5006b2c7b257ed05bf18d9d7614ae48e4ee",
+      "rights_status": "open_license",
+      "source_license": "MIT",
+      "rights_notes": "The repository LICENSE is MIT and requires preservation of its copyright and license notice.",
+      "is_template": true,
+      "validation_role": "Explicitly reusable office, retail, or industrial lease template"
+    },
+    {
+      "document_id": "st-joseph-concession-2020",
+      "family_id": "st-joseph-concession-family",
+      "document_type": "retail_lease",
+      "source_name": "City of St. Joseph Concession and Restroom Facility Lease RFP",
+      "source_url": "https://www.stjosephmo.gov/DocumentCenter/View/11387",
+      "local_path": "data/raw/validation/st-joseph-retail-concession.pdf",
+      "sha256": "cb730b4fec593a1c124e6f1947e33ed86c2f78cb67ab984b80b57d7471cde951",
+      "rights_status": "review_required",
+      "rights_notes": "Official municipal public record used for local ontology validation. State and local government works are not automatically covered by 17 U.S.C. 105. Do not place it in a released training corpus until reuse rights are confirmed.",
+      "is_template": true,
+      "validation_role": "Retail-like concession use, rent, renewals, maintenance, assignment, insurance, default, and environmental obligations"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Last reviewed: 2026-09-07
 
 ## Current Focus
 
-Phase 2 is in progress. The next goal is to test ontology version `1.0.0` against representative US office and retail leases, correct any missing or unclear fields, and freeze the schemas before building the evaluation set.
+Phase 2 is complete. Ontology version `1.0.0` is frozen. The next goal is Phase 3: define the evaluation policy, metrics, acceptance thresholds, and frozen evaluation-set structure before collecting training data.
 
 ## Phase 0 — Product Decisions
 
@@ -61,17 +61,18 @@ Phase 2 is in progress. The next goal is to test ontology version `1.0.0` agains
 - [x] Export versioned JSON Schemas.
 - [x] Add synthetic extraction and answer examples.
 - [x] Test validation rules and generated-schema synchronization.
-- [ ] Collect a small validation set of reusable office leases.
-- [ ] Collect a small validation set of reusable retail leases.
-- [ ] Include at least one amendment and related lease family.
-- [ ] Label representative documents using ontology version `1.0.0`.
-- [ ] Record concepts that do not fit the current ontology.
-- [ ] Review whether clause labels are too broad, narrow, or overlapping.
-- [ ] Review obligation timing against real lease wording.
-- [ ] Review evidence offsets against parsed document text.
-- [ ] Revise models, examples, and documentation from validation findings.
-- [ ] Add migration notes if validation requires breaking schema changes.
-- [ ] Freeze the validated ontology and schemas for Dataset v1.
+- [x] Collect a small validation set of reusable office leases.
+- [x] Collect a small validation set of reusable retail-capable lease templates.
+- [x] Add a municipal retail-like lease for local ontology validation while its reuse rights are reviewed.
+- [x] Include at least one amendment and related template family.
+- [x] Label representative documents using ontology version `1.0.0`.
+- [x] Record concepts that do not fit the initial ontology.
+- [x] Review whether clause labels are too broad, narrow, or overlapping.
+- [x] Review obligation timing against real lease wording.
+- [x] Define evidence-offset behavior and defer exact offset checks to the Phase 4 parser.
+- [x] Revise models, examples, and documentation from validation findings.
+- [x] Record that no migration is required because version `1.0.0` has not been released.
+- [x] Freeze the validated ontology and schemas for Dataset v1.
 
 **Completion gate:** Several office and retail leases can be labelled consistently without unsupported fields or ambiguous labels.
 
@@ -99,6 +100,10 @@ Phase 2 is in progress. The next goal is to test ontology version `1.0.0` agains
 
 ## Phase 4 — Document Pipeline
 
+- [ ] Create one Google Colab T4 notebook that selects and runs every heavy task.
+- [ ] Keep the Colab notebook as a thin caller of package code and versioned configurations.
+- [ ] Mount approved remote storage for corpora, checkpoints, and generated artifacts.
+- [ ] Add checkpoint and resume behavior for Colab session limits.
 - [ ] Define the source-manifest format.
 - [ ] Record source URL, license, date, jurisdiction, and checksum.
 - [ ] Implement approved document downloading and local importing.

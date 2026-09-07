@@ -12,6 +12,8 @@ LeaseGuard should remain private, evidence-based, and affordable to run. Importa
 
 Reusable logic belongs in the `src/leaseguard` package. Scripts and notebooks should call that package instead of containing separate copies of the same logic. Data, model weights, and generated artifacts must be versioned independently from the application code.
 
+Heavy work runs through one Google Colab notebook on a T4 GPU. The notebook is an orchestrator: it clones the repository and calls versioned package functions and configurations. Full datasets, model weights, CUDA dependencies, Unsloth, and checkpoints stay out of the local development machine.
+
 ## Repository Structure
 
 ```text
@@ -85,7 +87,7 @@ Structured schemas will define document metadata, evidence spans, clauses, oblig
 
 Phase 2 is complete when several different leases can be labelled consistently with the same schemas and ontology.
 
-Phase 2 is in progress. Ontology version `1.0.0`, strict Python models, and exported JSON Schemas now cover source provenance, parties, clauses, monetary and date terms, obligations, evidence spans, and document-grounded answers. The next Phase 2 task is to test these schemas against representative office and retail lease samples before freezing them for dataset work.
+Phase 2 is complete. Ontology version `1.0.0` was validated against reusable office and retail-capable templates, a municipal retail-like lease, and an amendment template family. Strict Python models and exported JSON Schemas cover provenance and rights, parties, premises, multi-label clauses, monetary and date terms, obligations, amendment effects, evidence spans, and document-grounded answers. The findings and remaining dataset licensing boundary are recorded in `docs/phase2-validation.md`.
 
 ## Phase 3 — Create Evaluation Before Training
 

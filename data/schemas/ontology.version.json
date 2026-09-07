@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "status": "frozen",
+  "frozen_on": "2026-09-07",
+  "product_scope": "Nationwide US document-grounded analysis of English office and retail leases",
+  "validation_report": "docs/phase2-validation.md",
+  "compatibility_rule": "Breaking field or label changes require a new major version."
+}

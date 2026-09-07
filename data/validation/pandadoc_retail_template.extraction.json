@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "document_id": "pandadoc-commercial-lease-template",
+    "family_id": "pandadoc-commercial-template-family",
+    "filename": "pandadoc-commercial-lease.md",
+    "sha256": "f441ea10f3b519fd8275afb7e88af5006b2c7b257ed05bf18d9d7614ae48e4ee",
+    "document_type": "retail_lease",
+    "source_name": "PandaDoc Commercial Lease Agreement Template",
+    "source_url": "https://raw.githubusercontent.com/PandaDoc/property-agreement-templates/main/templates/commercial-lease-agreement.md",
+    "rights_status": "open_license",
+    "source_license": "MIT",
+    "rights_notes": "Preserve the PandaDoc copyright and MIT license notice when redistributing substantial portions.",
+    "retrieved_at": "2026-09-07",
+    "is_template": true,
+    "jurisdiction": "US",
+    "language": "en",
+    "governing_law_text": "Laws of [STATE]."
+  },
+  "related_document_ids": [],
+  "parties": [
+    {
+      "name": "[LANDLORD NAME]",
+      "role": "landlord",
+      "evidence": [
+        {
+          "document_id": "pandadoc-commercial-lease-template",
+          "text": "between `[LANDLORD NAME]` (\"Landlord\") and `[TENANT / BUSINESS NAME]` (\"Tenant\")",
+          "section": "Commercial Lease Agreement"
+        }
+      ]
+    },
+    {
+      "name": "[TENANT / BUSINESS NAME]",
+      "role": "tenant",
+      "evidence": [
+        {
+          "document_id": "pandadoc-commercial-lease-template",
+          "text": "between `[LANDLORD NAME]` (\"Landlord\") and `[TENANT / BUSINESS NAME]` (\"Tenant\")",
+          "section": "Commercial Lease Agreement"
+        }
+      ]
+    }
+  ],
+  "premises": [
+    {
+      "description": "[ADDRESS, SUITE, SQ FT]",
+      "address": "[ADDRESS, SUITE, SQ FT]",
+      "permitted_use": "[PERMITTED USE]",
+      "evidence": [
+        {
+          "document_id": "pandadoc-commercial-lease-template",
+          "text": "for the premises at `[ADDRESS, SUITE, SQ FT]` (the \"Premises\")",
+          "section": "Commercial Lease Agreement"
+        }
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "clause_id": "pandadoc-permitted-use",
+      "clause_types": [
+        "property_use"
+      ],
+      "heading": "1. Permitted use",
+      "text": "Tenant may use the Premises only for `[PERMITTED USE]`."
+    },
+    {
+      "clause_id": "pandadoc-term",
+      "clause_types": [
+        "lease_term",
+        "renewal_option"
+      ],
+      "heading": "2. Term",
+      "text": "`[START]` to `[END]`, with `[renewal option(s)]`."
+    },
+    {
+      "clause_id": "pandadoc-rent",
+      "clause_types": [
+        "base_rent",
+        "rent_increase"
+      ],
+      "heading": "3. Rent",
+      "text": "Base rent `$[AMOUNT]`/month. Rent escalations: `[annual % or schedule]`."
+    },
+    {
+      "clause_id": "pandadoc-lease-type",
+      "clause_types": [
+        "additional_rent",
+        "taxes",
+        "insurance",
+        "common_area_maintenance"
+      ],
+      "heading": "4. Lease type",
+      "text": "`[Gross / Net / NNN — specify who pays taxes, insurance, CAM/common-area maintenance]`."
+    },
+    {
+      "clause_id": "pandadoc-assignment",
+      "clause_types": [
+        "assignment",
+        "subletting"
+      ],
+      "heading": "9. Assignment / sublease",
+      "text": "`[Allowed with consent / not allowed]`."
+    },
+    {
+      "clause_id": "pandadoc-default",
+      "clause_types": [
+        "default",
+        "cure_period",
+        "remedies"
+      ],
+      "heading": "10. Default & remedies",
+      "text": "`[Cure periods, remedies]`."
+    }
+  ],
+  "monetary_terms": [
+    {
+      "label": "Monthly base rent",
+      "original_text": "Base rent `$[AMOUNT]`/month.",
+      "currency": "USD",
+      "frequency": "monthly",
+      "period": "Lease term",
+      "rate_basis": "Fixed amount per month",
+      "evidence": [
+        {
+          "document_id": "pandadoc-commercial-lease-template",
+          "text": "Base rent `$[AMOUNT]`/month.",
+          "section": "3. Rent"
+        }
+      ]
+    }
+  ],
+  "date_terms": [],
+  "obligations": [
+    {
+      "obligation_id": "pandadoc-monthly-rent",
+      "responsible_party": "[TENANT / BUSINESS NAME]",
+      "action": "Pay base rent",
+      "beneficiary": "[LANDLORD NAME]",
+      "timing_type": "recurring",
+      "recurrence": "Monthly",
+      "evidence": [
+        {
+          "document_id": "pandadoc-commercial-lease-template",
+          "text": "Base rent `$[AMOUNT]`/month.",
+          "section": "3. Rent"
+        }
+      ]
+    }
+  ],
+  "amendment_effects": [],
+  "warnings": [
+    "This short MIT-licensed template supports office, retail, or industrial use but does not contain detailed shopping-center clauses.",
+    "Bracketed placeholders are preserved and must not be treated as final values."
+  ]
+}

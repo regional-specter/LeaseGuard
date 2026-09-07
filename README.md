@@ -229,11 +229,13 @@ CUAD, ContractNLI, LegalBench-RAG, and ContractEval can provide starting benchma
 | Models and datasets | Hugging Face |
 | Data processing | Python and open-source document tools |
 | Fine-tuning | Unsloth, Transformers, and TRL |
-| Free GPU access | Kaggle or Google Colab, subject to their limits |
+| Heavy compute | One Google Colab notebook using a T4 GPU |
 | Local inference | llama.cpp, Ollama, MLX, or vLLM |
 | Apple Silicon | MLX or llama.cpp for local inference |
 
-Unsloth training normally needs an NVIDIA CUDA GPU. Free GPU services have session, storage, and availability limits, so training must support checkpoints and safe restarts.
+The local repository holds code, schemas, manifests, tiny samples, and tests. Bulk parsing, dataset generation, evaluation, fine-tuning, and model export run in Colab. Full datasets, CUDA libraries, Unsloth, model weights, and checkpoints must stay off the local machine.
+
+Colab sessions have time and storage limits, so every heavy task must support checkpoints, safe restarts, pinned configurations, and remote output storage.
 
 ## Important Principle
 

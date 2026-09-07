@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "document_id": "gsa-amendment-template-2021",
+    "family_id": "gsa-global-template-family",
+    "filename": "gsa-amendment-template.pdf",
+    "sha256": "4bcaeb50bd7e63f1abe6f64425896989ceb2794f9c6845f74b09f25e4d6b40cf",
+    "document_type": "amendment",
+    "source_name": "GSA lease amendment template for cleaning requirement changes",
+    "source_url": "https://www.gsa.gov/system/files/Real_Estate_Acquisitions/Attachment_3_-_Lease_Amendment_Template_Rescinding_Routine_Disinfecting_Req-c.pdf",
+    "rights_status": "public_domain",
+    "source_license": "US federal government work under 17 U.S.C. 105",
+    "rights_notes": "Official GSA template; retain attribution and provenance.",
+    "retrieved_at": "2026-09-07",
+    "is_template": true,
+    "jurisdiction": "US",
+    "language": "en"
+  },
+  "related_document_ids": [
+    "gsa-l100-2026"
+  ],
+  "parties": [
+    {
+      "name": "Lessor",
+      "role": "landlord",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "hereinafter called the Lessor",
+          "page_number": 1,
+          "section": "Parties"
+        }
+      ]
+    },
+    {
+      "name": "The United States of America",
+      "role": "tenant",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "the UNITED STATES OF AMERICA, hereinafter called the Government",
+          "page_number": 1,
+          "section": "Parties"
+        }
+      ]
+    }
+  ],
+  "premises": [],
+  "clauses": [
+    {
+      "clause_id": "gsa-amendment-purpose",
+      "clause_types": [
+        "amendment",
+        "janitorial"
+      ],
+      "heading": "Purpose",
+      "text": "WHEREAS, the parties hereto desire to amend the above Lease to cancel routine cleaning and disinfecting requirements.",
+      "page_start": 1,
+      "page_end": 1
+    },
+    {
+      "clause_id": "gsa-amendment-effective-date",
+      "clause_types": [
+        "amendment"
+      ],
+      "heading": "Effective Date",
+      "text": "the said Lease is amended, effective October 1, 2021 as follows",
+      "page_start": 1,
+      "page_end": 1
+    }
+  ],
+  "monetary_terms": [],
+  "date_terms": [
+    {
+      "label": "Amendment effective date",
+      "original_text": "effective October 1, 2021",
+      "normalized_date": "2021-10-01",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "the said Lease is amended, effective October 1, 2021 as follows",
+          "page_number": 1,
+          "section": "Effective Date"
+        }
+      ]
+    }
+  ],
+  "obligations": [],
+  "amendment_effects": [
+    {
+      "effect_id": "replace-rent-paragraph",
+      "action": "replace",
+      "target_document_id": "gsa-l100-2026",
+      "target_clause_reference": "Lease Paragraph 1.03(A)",
+      "description": "Delete and replace the annual rent table and payment language.",
+      "effective_date": "2021-10-01",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "Subparagraph A of Lease Paragraph 1.03, RENT AND OTHER CONSIDERATION, is amended by deleting the existing text and inserting in lieu thereof the following",
+          "page_number": 1,
+          "section": "B"
+        }
+      ]
+    },
+    {
+      "effect_id": "delete-rent-subparagraph-l",
+      "action": "delete",
+      "target_document_id": "gsa-l100-2026",
+      "target_clause_reference": "Lease Paragraph 1.03(L)",
+      "description": "Delete subparagraph L from the rent clause.",
+      "effective_date": "2021-10-01",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "Subparagraph L of Lease Paragraph 1.03, RENT AND OTHER CONSIDERATION, is deleted in its entirety.",
+          "page_number": 2,
+          "section": "C"
+        }
+      ]
+    },
+    {
+      "effect_id": "delete-janitorial-subparagraph-n",
+      "action": "delete",
+      "target_document_id": "gsa-l100-2026",
+      "target_clause_reference": "Lease Paragraph 6.07(N)",
+      "description": "Delete the routine cleaning and disinfecting requirement.",
+      "effective_date": "2021-10-01",
+      "evidence": [
+        {
+          "document_id": "gsa-amendment-template-2021",
+          "text": "Subparagraph N of Lease Paragraph 6.07, JANITORIAL SERVICES, is deleted in its entirety.",
+          "page_number": 2,
+          "section": "D"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "This amendment is a government template with blank lease and party identifiers.",
+    "The linked GSA L100 document is a later template edition used to validate family mechanics, not the executed base lease for this amendment."
+  ]
+}

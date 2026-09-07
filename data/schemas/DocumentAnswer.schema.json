@@ -15,6 +15,11 @@
       "additionalProperties": false,
       "description": "Exact text supporting an extracted fact or answer.",
       "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
         "end_char": {
           "anyOf": [
             {
@@ -28,10 +33,31 @@
           "default": null,
           "title": "End Char"
         },
+        "page_label": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Label"
+        },
         "page_number": {
-          "minimum": 1,
-          "title": "Page Number",
-          "type": "integer"
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number"
         },
         "section": {
           "anyOf": [
@@ -66,8 +92,8 @@
         }
       },
       "required": [
-        "text",
-        "page_number"
+        "document_id",
+        "text"
       ],
       "title": "EvidenceSpan",
       "type": "object"

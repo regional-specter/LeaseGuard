@@ -55,6 +55,14 @@ Lease processing will be local by default. User documents, corrections, and outp
 
 The first release will not require cloud document storage. Logs must avoid storing full lease text or personal information unless the user explicitly enables a future secure storage feature.
 
+## Compute and Storage
+
+Heavy work will run through one Google Colab notebook using a T4 GPU. This includes bulk document processing, dataset generation, model evaluation, fine-tuning, and model export.
+
+The local machine will be used for source code, schemas, manifests, small validation samples, and tests. Full datasets, model weights, CUDA libraries, Unsloth, and checkpoints must not be downloaded or installed locally.
+
+The Colab notebook should clone the repository, install pinned dependencies, mount approved remote storage, run a selected task, save resumable outputs, and record the exact configuration used.
+
 ## Safety Boundary
 
 LeaseGuard is a decision-support system, not a lawyer or final decision-maker. It should:

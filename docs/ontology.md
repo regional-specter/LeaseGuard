@@ -8,7 +8,7 @@ Ontology version `1.0.0` belongs to the first product scope. Future changes must
 
 The ontology separates document facts from interpretation. A party name, rent amount, or notice period can be extracted as a fact. A claim that a clause is enforceable or fair is a legal interpretation and is outside the first release.
 
-Every important fact needs at least one evidence span. The evidence must contain exact text from the source document and identify its page. Section names and character offsets should be included when the document parser can provide them.
+Every important fact needs at least one evidence span. The evidence must contain exact text and identify its document. A physical page, printed page label, section, or character offset must provide a stable location.
 
 The normalized value must never replace the original wording. For example, a date may be normalized for software use, but the source expression must also remain available through evidence.
 
@@ -36,6 +36,10 @@ The first release recognizes:
 
 A party record contains its name, role, and supporting evidence. If a party's role is unclear, it should use the `other` role rather than guessing.
 
+## Premises
+
+A premises record may contain the property name, address, suite, floor, rentable area, usable area, permitted use, and a plain description. Blank template fields must remain blank rather than becoming invented facts.
+
 ## Clause Types
 
 The first ontology includes the following clause groups:
@@ -59,7 +63,10 @@ The first ontology includes the following clause groups:
 ### Money
 
 - Base rent
+- Additional rent
 - Rent increase
+- Rent abatement
+- Tenant share
 - Security deposit
 - Operating expenses
 - Common area maintenance
@@ -74,9 +81,18 @@ The first ontology includes the following clause groups:
 - Repairs
 - Utilities
 - Alterations
+- Tenant improvements
+- Delivery condition
 - Access
+- Common areas
 - Signage
 - Parking
+- Continuous operation
+- Co-tenancy
+- Exclusivity
+- Radius restriction
+- Prohibited use
+- Relocation
 
 ### Transfers and Changes
 
@@ -85,6 +101,13 @@ The first ontology includes the following clause groups:
 - Change of control
 - Amendment
 - Notice
+- Holdover
+- Surrender
+- Subordination
+- Non-disturbance
+- Estoppel
+- Liens
+- Brokerage
 
 ### Enforcement and Protection
 
@@ -96,6 +119,12 @@ The first ontology includes the following clause groups:
 - Damage and destruction
 - Condemnation
 - Force majeure
+- Accessibility
+- Environmental duties
+- Compliance with laws
+- Services
+- Janitorial work
+- Security
 - Dispute resolution
 - Governing law
 
@@ -106,7 +135,7 @@ The first ontology includes the following clause groups:
 - Schedule
 - Other
 
-Labels describe what a clause discusses. They do not decide whether the clause is valid, balanced, or enforceable.
+Labels describe what a clause discusses. They do not decide whether the clause is valid, balanced, or enforceable. One clause may have several labels when its exact text covers multiple concepts.
 
 ## Obligations
 
@@ -117,23 +146,36 @@ An obligation records:
 - The party receiving the action, when stated
 - The source wording
 - A fixed date, relative deadline, or triggering event
+- An optional normalized duration and unit, such as ten business days
 - Recurrence, when stated
 - A monetary amount, when stated
 - Whether the obligation depends on a condition
 - Supporting evidence
 
-The system should keep relative expressions such as “within ten business days after notice” instead of inventing a calendar date when the triggering date is unknown.
+The system should keep relative expressions such as “within ten business days after notice” instead of inventing a calendar date when the triggering date is unknown. A normalized duration must always include both its value and unit.
 
 ## Evidence
 
 An evidence span contains:
 
 - Exact quoted text
-- One-based page number
+- Source document identifier
+- One-based physical page number when available
+- Printed page label when available
 - Section or heading when available
 - Start and end character offsets when available
 
-Offsets use a zero-based, end-exclusive convention. The end offset must be greater than the start offset. Evidence from different pages should use separate spans.
+Offsets use a zero-based, end-exclusive convention against normalized full-document text. The end offset must be greater than the start offset. Evidence from different pages should use separate spans.
+
+## Amendments
+
+An amendment belongs to the same document family as the lease it changes. Each effect identifies an earlier document, target clause, action, effective date, description, and supporting evidence.
+
+Supported actions are add, delete, replace, modify, confirm, and other. LeaseGuard must not treat the amendment and original clause as simultaneously current when the amendment replaces or deletes the earlier language.
+
+## Source Rights
+
+Every source has a rights status: public domain, open license, permission granted, review required, or restricted. Open-license sources must name the license. Sources awaiting review must explain why they cannot yet enter a released dataset.
 
 ## Answers
 

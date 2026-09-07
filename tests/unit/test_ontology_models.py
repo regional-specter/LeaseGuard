@@ -15,15 +15,18 @@ from leaseguard.ontology import (
     EvidenceSpan,
     LeaseExtraction,
     Obligation,
+    RightsStatus,
     SourceDocument,
     StakeholderPerspective,
     TimingType,
+    TimingUnit,
 )
 
 
 def evidence(**changes: Any) -> EvidenceSpan:
     """Build a valid evidence span with optional field changes."""
     values: dict[str, Any] = {
+        "document_id": "document-1",
         "text": "Tenant shall pay rent on the first day of each month.",
         "page_number": 12,
         "section": "4.1 Base Rent",
@@ -65,24 +68,43 @@ def test_evidence_rejects_invalid_offsets(
         evidence(start_char=start_char, end_char=end_char)
 
 
+def test_evidence_requires_a_stable_locator() -> None:
+    """Evidence without a page, section, or offset cannot be audited."""
+    with pytest.raises(ValidationError, match="requires a page"):
+        evidence(page_number=None, section=None)
+
+
 def test_clause_pages_remain_in_document_order() -> None:
     """A clause cannot finish before it starts."""
     valid = Clause(
         clause_id="clause-1",
-        clause_type=ClauseType.BASE_RENT,
+        clause_types=[ClauseType.BASE_RENT],
         text="Base rent terms",
         page_start=4,
         page_end=5,
     )
     assert valid.page_end == 5
+    without_pages = Clause(
+        clause_id="clause-no-pages",
+        clause_types=[ClauseType.GOVERNING_LAW],
+        text="Laws of [STATE].",
+    )
+    assert without_pages.page_start is None
 
     with pytest.raises(ValidationError, match="page_end"):
         Clause(
             clause_id="clause-2",
-            clause_type=ClauseType.BASE_RENT,
+            clause_types=[ClauseType.BASE_RENT],
             text="Invalid range",
             page_start=5,
             page_end=4,
+        )
+    with pytest.raises(ValidationError, match="provided together"):
+        Clause(
+            clause_id="clause-incomplete-pages",
+            clause_types=[ClauseType.BASE_RENT],
+            text="Invalid page pair",
+            page_start=5,
         )
 
 
@@ -122,6 +144,21 @@ def test_obligation_rejects_missing_timing_detail(timing_type: TimingType) -> No
         obligation(timing_type=timing_type, recurrence=None)
 
 
+def test_normalized_relative_timing_requires_a_value_and_unit_pair() -> None:
+    """Normalized timing cannot contain only half of a duration."""
+    normalized = obligation(
+        timing_type=TimingType.RELATIVE_DEADLINE,
+        recurrence=None,
+        relative_deadline="Within ten business days after execution",
+        timing_value=10,
+        timing_unit=TimingUnit.BUSINESS_DAY,
+    )
+    assert normalized.timing_value == 10
+
+    with pytest.raises(ValidationError, match="must be provided together"):
+        obligation(timing_value=10)
+
+
 def test_answered_response_requires_evidence() -> None:
     """Successful answers need exact source support."""
     answer = DocumentAnswer(
@@ -156,6 +193,30 @@ def test_non_answer_status_may_have_no_evidence() -> None:
     assert answer.evidence == []
 
 
+def test_source_rights_details_are_auditable() -> None:
+    """Open licenses and pending reviews require their supporting details."""
+    base: dict[str, Any] = {
+        "document_id": "document-1",
+        "family_id": "family-1",
+        "filename": "lease.pdf",
+        "sha256": "a" * 64,
+        "document_type": DocumentType.OFFICE_LEASE,
+        "source_name": "Example source",
+    }
+
+    with pytest.raises(ValidationError, match="require source_license"):
+        SourceDocument(**base, rights_status=RightsStatus.OPEN_LICENSE)
+    with pytest.raises(ValidationError, match="require rights_notes"):
+        SourceDocument(**base, rights_status=RightsStatus.REVIEW_REQUIRED)
+
+    pending = SourceDocument(
+        **base,
+        rights_status=RightsStatus.REVIEW_REQUIRED,
+        rights_notes="Publicly filed document; redistribution rights require review.",
+    )
+    assert pending.source_license is None
+
+
 def test_complete_extraction_keeps_source_family_and_obligations() -> None:
     """The top-level result joins provenance and extracted records."""
     source = SourceDocument(
@@ -165,6 +226,7 @@ def test_complete_extraction_keeps_source_family_and_obligations() -> None:
         sha256="a" * 64,
         document_type=DocumentType.OFFICE_LEASE,
         source_name="Synthetic test fixture",
+        rights_status=RightsStatus.OPEN_LICENSE,
         source_license="CC0-1.0",
     )
     extraction = LeaseExtraction(source=source, obligations=[obligation()])

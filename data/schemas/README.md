@@ -2,7 +2,7 @@
 
 This directory contains versioned machine-readable schemas for LeaseGuard records.
 
-Ontology version `1.0.0` currently exposes:
+Ontology version `1.0.0` was frozen on September 7, 2026 after the review recorded in `docs/phase2-validation.md`. It currently exposes:
 
 - `LeaseExtraction.schema.json` for a complete document extraction.
 - `DocumentAnswer.schema.json` for evidence-based questions and answers.
