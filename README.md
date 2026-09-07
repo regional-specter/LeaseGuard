@@ -137,6 +137,22 @@ Unsloth training normally needs an NVIDIA CUDA GPU. Free GPU services have sessi
 
 LeaseGuard is a review and decision-support system, not a replacement for a qualified legal professional. It should show evidence, report uncertainty, distinguish landlord and tenant interests, and avoid conclusions that the source material cannot support.
 
+## Development
+
+The detailed development roadmap is available in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Project scope, architecture, dataset, evaluation, and safety decisions are documented separately under `docs/`.
+
+LeaseGuard supports Python 3.11 and 3.12. Install the development environment and run the Phase 1 checks with:
+
+```bash
+uv sync --dev
+uv run ruff format --check .
+uv run ruff check .
+uv run mypy
+uv run pytest
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes.
+
 ## License
 
 This project uses the MIT License.

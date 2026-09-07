@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.python-version
+.venv/
+dist/
+build/
+
+# Quality tools
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Datasets: keep only documentation, manifests, schemas, and small samples
+data/raw/
+data/interim/
+data/processed/
+data/annotations/
+
+# Generated outputs and model files
+artifacts/*
+!artifacts/README.md
+checkpoints/
+outputs/
+*.gguf
+*.safetensors
+*.ckpt
+*.pt
+*.pth
