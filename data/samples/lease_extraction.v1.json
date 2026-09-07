@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "document_id": "sample-office-lease",
+    "family_id": "sample-office-family",
+    "filename": "sample-office-lease.pdf",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "document_type": "office_lease",
+    "source_name": "Synthetic LeaseGuard example",
+    "source_license": "CC0-1.0",
+    "jurisdiction": "US",
+    "language": "en"
+  },
+  "parties": [
+    {
+      "name": "Example Tenant LLC",
+      "role": "tenant",
+      "evidence": [
+        {
+          "text": "Example Tenant LLC (Tenant)",
+          "page_number": 1,
+          "section": "Parties"
+        }
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "clause_id": "section-4.1",
+      "clause_type": "base_rent",
+      "heading": "4.1 Base Rent",
+      "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+      "page_start": 12,
+      "page_end": 12
+    }
+  ],
+  "monetary_terms": [
+    {
+      "label": "Monthly base rent",
+      "original_text": "base rent of USD 5,000",
+      "amount": "5000",
+      "currency": "USD",
+      "frequency": "monthly",
+      "evidence": [
+        {
+          "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+          "page_number": 12,
+          "section": "4.1 Base Rent"
+        }
+      ]
+    }
+  ],
+  "date_terms": [],
+  "obligations": [
+    {
+      "obligation_id": "obligation-base-rent",
+      "responsible_party": "Example Tenant LLC",
+      "action": "Pay monthly base rent",
+      "beneficiary": "Example Landlord LLC",
+      "timing_type": "recurring",
+      "recurrence": "First day of each month",
+      "evidence": [
+        {
+          "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+          "page_number": 12,
+          "section": "4.1 Base Rent"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "This is a synthetic example and not a real lease."
+  ]
+}

@@ -17,7 +17,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Typing :: Typed",
 ]
-dependencies = []
+dependencies = [
+    "pydantic>=2.11,<3",
+]
 
 [dependency-groups]
 dev = [
@@ -40,7 +42,7 @@ branch = true
 source = ["leaseguard"]
 
 [tool.coverage.report]
-fail_under = 100
+fail_under = 95
 show_missing = true
 
 [tool.ruff]

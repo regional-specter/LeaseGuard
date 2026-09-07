@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "question": "When must the tenant pay base rent?",
+  "perspective": "neutral",
+  "status": "answered",
+  "explanation": "The tenant must pay base rent on the first day of each month.",
+  "confidence": 0.98,
+  "evidence": [
+    {
+      "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+      "page_number": 12,
+      "section": "4.1 Base Rent"
+    }
+  ],
+  "warnings": [
+    "This answer uses synthetic example text."
+  ]
+}

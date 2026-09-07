@@ -65,6 +65,8 @@ The first release should focus on a small group of measurable tasks: lease metad
 
 Phase 0 is complete when the supported users, documents, outputs, jurisdictions, safety limits, and non-goals are recorded in `docs/scope.md`.
 
+Phase 0 is complete for the first release. The approved scope is nationwide US document analysis for English office and retail leases. The primary users are property managers and real-estate operations teams. Initial tasks are extraction, evidence-based questions and answers, and obligation tracking. State-law conclusions, OCR, redlining, and direct legal advice are deferred.
+
 ## Phase 1 — Build the Repository Foundation
 
 This phase makes the repository easy to install, test, understand, and contribute to. It creates the Python package, dependency configuration, source layout, test layout, configuration directories, contribution guidance, and continuous integration.
@@ -80,6 +82,8 @@ Before collecting a large dataset, LeaseGuard needs a stable definition of what 
 Structured schemas will define document metadata, evidence spans, clauses, obligations, risks, and model responses. Every extracted finding should include the answer, exact supporting text, page or clause reference, affected party, and uncertainty information.
 
 Phase 2 is complete when several different leases can be labelled consistently with the same schemas and ontology.
+
+Phase 2 is in progress. Ontology version `1.0.0`, strict Python models, and exported JSON Schemas now cover source provenance, parties, clauses, monetary and date terms, obligations, evidence spans, and document-grounded answers. The next Phase 2 task is to test these schemas against representative office and retail lease samples before freezing them for dataset work.
 
 ## Phase 3 — Create Evaluation Before Training
 

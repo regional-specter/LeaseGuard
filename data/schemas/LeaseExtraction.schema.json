@@ -1,0 +1,648 @@
+{
+  "$defs": {
+    "Clause": {
+      "additionalProperties": false,
+      "description": "A classified section of lease text.",
+      "properties": {
+        "clause_id": {
+          "minLength": 1,
+          "title": "Clause Id",
+          "type": "string"
+        },
+        "clause_type": {
+          "$ref": "#/$defs/ClauseType"
+        },
+        "heading": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading"
+        },
+        "page_end": {
+          "minimum": 1,
+          "title": "Page End",
+          "type": "integer"
+        },
+        "page_start": {
+          "minimum": 1,
+          "title": "Page Start",
+          "type": "integer"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clause_id",
+        "clause_type",
+        "text",
+        "page_start",
+        "page_end"
+      ],
+      "title": "Clause",
+      "type": "object"
+    },
+    "ClauseType": {
+      "description": "Clause labels supported by ontology version 1.",
+      "enum": [
+        "parties",
+        "premises",
+        "property_use",
+        "definitions",
+        "lease_term",
+        "commencement",
+        "expiration",
+        "renewal_option",
+        "extension_option",
+        "early_termination",
+        "base_rent",
+        "rent_increase",
+        "security_deposit",
+        "operating_expenses",
+        "common_area_maintenance",
+        "taxes",
+        "insurance",
+        "late_fees",
+        "percentage_rent",
+        "maintenance",
+        "repairs",
+        "utilities",
+        "alterations",
+        "access",
+        "signage",
+        "parking",
+        "assignment",
+        "subletting",
+        "change_of_control",
+        "amendment",
+        "notice",
+        "default",
+        "cure_period",
+        "remedies",
+        "indemnity",
+        "liability",
+        "damage_and_destruction",
+        "condemnation",
+        "force_majeure",
+        "dispute_resolution",
+        "governing_law",
+        "guarantee",
+        "exhibit",
+        "schedule",
+        "other"
+      ],
+      "title": "ClauseType",
+      "type": "string"
+    },
+    "DateTerm": {
+      "additionalProperties": false,
+      "description": "A source expression and optional normalized calendar date.",
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "normalized_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Date"
+        },
+        "original_text": {
+          "minLength": 1,
+          "title": "Original Text",
+          "type": "string"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger"
+        }
+      },
+      "required": [
+        "label",
+        "original_text",
+        "evidence"
+      ],
+      "title": "DateTerm",
+      "type": "object"
+    },
+    "DocumentType": {
+      "description": "Supported document types.",
+      "enum": [
+        "office_lease",
+        "retail_lease",
+        "amendment",
+        "exhibit",
+        "other_related"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    },
+    "EvidenceSpan": {
+      "additionalProperties": false,
+      "description": "Exact text supporting an extracted fact or answer.",
+      "properties": {
+        "end_char": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Char"
+        },
+        "page_number": {
+          "minimum": 1,
+          "title": "Page Number",
+          "type": "integer"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "start_char": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Char"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "page_number"
+      ],
+      "title": "EvidenceSpan",
+      "type": "object"
+    },
+    "MonetaryTerm": {
+      "additionalProperties": false,
+      "description": "A source expression and optional normalized monetary value.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "frequency": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frequency"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "original_text": {
+          "minLength": 1,
+          "title": "Original Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "original_text",
+        "evidence"
+      ],
+      "title": "MonetaryTerm",
+      "type": "object"
+    },
+    "Obligation": {
+      "additionalProperties": false,
+      "description": "An action a named party is required to perform.",
+      "properties": {
+        "action": {
+          "minLength": 1,
+          "title": "Action",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MonetaryTerm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "beneficiary": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Beneficiary"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "due_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Due Date"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "obligation_id": {
+          "minLength": 1,
+          "title": "Obligation Id",
+          "type": "string"
+        },
+        "recurrence": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recurrence"
+        },
+        "relative_deadline": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relative Deadline"
+        },
+        "responsible_party": {
+          "minLength": 1,
+          "title": "Responsible Party",
+          "type": "string"
+        },
+        "timing_type": {
+          "$ref": "#/$defs/TimingType"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger"
+        }
+      },
+      "required": [
+        "obligation_id",
+        "responsible_party",
+        "action",
+        "timing_type",
+        "evidence"
+      ],
+      "title": "Obligation",
+      "type": "object"
+    },
+    "Party": {
+      "additionalProperties": false,
+      "description": "A named party and its role in the lease.",
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/PartyRole"
+        }
+      },
+      "required": [
+        "name",
+        "role",
+        "evidence"
+      ],
+      "title": "Party",
+      "type": "object"
+    },
+    "PartyRole": {
+      "description": "Roles a named party may have in a lease.",
+      "enum": [
+        "landlord",
+        "tenant",
+        "guarantor",
+        "property_manager",
+        "other"
+      ],
+      "title": "PartyRole",
+      "type": "string"
+    },
+    "SourceDocument": {
+      "additionalProperties": false,
+      "description": "Identity, provenance, and scope information for one document.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "filename": {
+          "minLength": 1,
+          "title": "Filename",
+          "type": "string"
+        },
+        "governing_law_text": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Governing Law Text"
+        },
+        "jurisdiction": {
+          "const": "US",
+          "default": "US",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "language": {
+          "const": "en",
+          "default": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_license": {
+          "minLength": 1,
+          "title": "Source License",
+          "type": "string"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "minLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "filename",
+        "sha256",
+        "document_type",
+        "source_name",
+        "source_license"
+      ],
+      "title": "SourceDocument",
+      "type": "object"
+    },
+    "TimingType": {
+      "description": "How an obligation's timing is expressed.",
+      "enum": [
+        "fixed_date",
+        "relative_deadline",
+        "recurring",
+        "event_based",
+        "unstated"
+      ],
+      "title": "TimingType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete structured extraction result for one lease document.",
+  "properties": {
+    "clauses": {
+      "items": {
+        "$ref": "#/$defs/Clause"
+      },
+      "title": "Clauses",
+      "type": "array"
+    },
+    "date_terms": {
+      "items": {
+        "$ref": "#/$defs/DateTerm"
+      },
+      "title": "Date Terms",
+      "type": "array"
+    },
+    "monetary_terms": {
+      "items": {
+        "$ref": "#/$defs/MonetaryTerm"
+      },
+      "title": "Monetary Terms",
+      "type": "array"
+    },
+    "obligations": {
+      "items": {
+        "$ref": "#/$defs/Obligation"
+      },
+      "title": "Obligations",
+      "type": "array"
+    },
+    "parties": {
+      "items": {
+        "$ref": "#/$defs/Party"
+      },
+      "title": "Parties",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceDocument"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "title": "LeaseExtraction",
+  "type": "object"
+}

@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "AnswerStatus": {
+      "description": "Evidence status for a document-grounded answer.",
+      "enum": [
+        "answered",
+        "insufficient_evidence",
+        "conflicting_evidence",
+        "unreadable_source"
+      ],
+      "title": "AnswerStatus",
+      "type": "string"
+    },
+    "EvidenceSpan": {
+      "additionalProperties": false,
+      "description": "Exact text supporting an extracted fact or answer.",
+      "properties": {
+        "end_char": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Char"
+        },
+        "page_number": {
+          "minimum": 1,
+          "title": "Page Number",
+          "type": "integer"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "start_char": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Char"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "page_number"
+      ],
+      "title": "EvidenceSpan",
+      "type": "object"
+    },
+    "StakeholderPerspective": {
+      "description": "Perspective requested for an explanation.",
+      "enum": [
+        "landlord",
+        "tenant",
+        "neutral"
+      ],
+      "title": "StakeholderPerspective",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Simple and structured answer grounded in one or more evidence spans.",
+  "properties": {
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceSpan"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "explanation": {
+      "minLength": 1,
+      "title": "Explanation",
+      "type": "string"
+    },
+    "perspective": {
+      "$ref": "#/$defs/StakeholderPerspective"
+    },
+    "question": {
+      "minLength": 1,
+      "title": "Question",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/AnswerStatus"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "question",
+    "perspective",
+    "status",
+    "explanation",
+    "confidence"
+  ],
+  "title": "DocumentAnswer",
+  "type": "object"
+}
