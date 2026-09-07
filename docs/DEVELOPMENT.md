@@ -4,6 +4,8 @@ This document explains how LeaseGuard should be built in a clear and repeatable 
 
 The order matters. Training a model before defining the expected outputs and evaluation rules would make it difficult to tell whether the model is actually improving.
 
+Current implementation progress is tracked in [`TODO.md`](../TODO.md). Update that checklist in the same commit as completed roadmap work.
+
 ## Project Principles
 
 LeaseGuard should remain private, evidence-based, and affordable to run. Important conclusions must point back to the exact lease text or to a dated official source. The system must also say when the available information is unclear or incomplete.

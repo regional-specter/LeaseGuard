@@ -139,7 +139,7 @@ LeaseGuard is a review and decision-support system, not a replacement for a qual
 
 ## Development
 
-The detailed development roadmap is available in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Project scope, architecture, dataset, evaluation, and safety decisions are documented separately under `docs/`.
+Track current progress in [TODO.md](TODO.md) and read the detailed roadmap in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Project scope, architecture, dataset, evaluation, and safety decisions are documented separately under `docs/`.
 
 LeaseGuard supports Python 3.11 and 3.12. Install the development environment and run the Phase 1 checks with:
 
