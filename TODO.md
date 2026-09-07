@@ -6,7 +6,7 @@ Last reviewed: 2026-09-07
 
 ## Current Focus
 
-Phase 2 is complete. Ontology version `1.0.0` is frozen. The next goal is Phase 3: define the evaluation policy, metrics, acceptance thresholds, and frozen evaluation-set structure before collecting training data.
+Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 3 is complete: professional benchmarks are pinned, and the internal lease suite is regression only. The next goal is Phase 4: the document pipeline and Colab orchestration for heavy jobs.
 
 ## Phase 0 — Product Decisions
 
@@ -78,25 +78,25 @@ Phase 2 is complete. Ontology version `1.0.0` is frozen. The next goal is Phase 
 
 ## Phase 3 — Evaluation Before Training
 
-- [ ] Write the evaluation-set inclusion and exclusion rules.
-- [ ] Define agreement-family split rules.
-- [ ] Define extraction precision, recall, and F1.
-- [ ] Define evidence-span accuracy.
-- [ ] Define structured-output validity.
-- [ ] Define date and monetary accuracy.
-- [ ] Define obligation and responsible-party accuracy.
-- [ ] Define unsupported-claim and correct-abstention measures.
-- [ ] Define conflicting-provision and amendment-handling measures.
-- [ ] Select acceptance thresholds for each important metric.
-- [ ] Collect 50–100 representative evaluation leases.
-- [ ] Include missing, conflicting, unusual, and table-based provisions.
-- [ ] Include both landlord-friendly and tenant-friendly language.
-- [ ] Create expert-reviewed reference annotations.
-- [ ] Build a repeatable evaluation command.
-- [ ] Save machine-readable evaluation reports.
-- [ ] Prevent evaluation documents from entering training or synthetic generation.
+- [x] Adopt published professional benchmarks as the only headline standard: LegalBench, CUAD, ContractNLI, and LegalBench-RAG.
+- [x] Pin official dataset and evaluator repository revisions in `configs/evaluation/benchmarks.v1.json`.
+- [x] Write inclusion rules: published runs must use official test splits and official evaluators; local inventions cannot be substituted.
+- [x] Write exclusion rules: official test data cannot be used for training, prompt search, or synthetic generation.
+- [x] Define agreement-family split rules for the internal lease regression suite.
+- [x] Define extraction precision, recall, F1, AUPR, and precision-at-recall helpers, with official CUAD scoring reserved for `evaluate.py`.
+- [x] Define evidence-span and character-retrieval accuracy.
+- [x] Define structured-output validity against ontology schemas.
+- [x] Define date, monetary, obligation, and responsible-party regression metrics.
+- [x] Define unsupported-claim and correct-abstention checks.
+- [x] Define amendment-handling checks and keep related documents in one family.
+- [x] Record that numeric acceptance thresholds wait for unmodified base-model baselines in Phase 6.
+- [x] Keep the internal office/retail set as a small regression suite, not a 50–100 lease professional benchmark.
+- [x] Build a repeatable evaluation command in `scripts/evaluate/run_benchmark.py`.
+- [x] Save machine-readable `BenchmarkRun` and `RegressionReport` records.
+- [x] Block regression document IDs from training manifests.
+- [x] Gate full official evaluator downloads to Colab via `notebooks/colab_orchestrator.ipynb`.
 
-**Completion gate:** Any candidate model can be evaluated with one command and compared against saved results.
+**Completion gate:** Any candidate model can be evaluated with one command. Published claims require a frozen professional benchmark and its official evaluator. The internal lease suite is regression only.
 
 ## Phase 4 — Document Pipeline
 

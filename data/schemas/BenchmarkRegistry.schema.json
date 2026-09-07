@@ -1,0 +1,154 @@
+{
+  "$defs": {
+    "BenchmarkSpec": {
+      "additionalProperties": false,
+      "description": "Pinned identity and official protocol for one published benchmark.",
+      "properties": {
+        "benchmark_id": {
+          "minLength": 1,
+          "title": "Benchmark Id",
+          "type": "string"
+        },
+        "development_variant": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Development Variant"
+        },
+        "evaluator_entrypoint": {
+          "minLength": 1,
+          "title": "Evaluator Entrypoint",
+          "type": "string"
+        },
+        "evaluator_repository_url": {
+          "minLength": 1,
+          "title": "Evaluator Repository Url",
+          "type": "string"
+        },
+        "evaluator_revision": {
+          "pattern": "^[a-f0-9]{40}$",
+          "title": "Evaluator Revision",
+          "type": "string"
+        },
+        "final_run_required": {
+          "title": "Final Run Required",
+          "type": "boolean"
+        },
+        "headline_claim_allowed": {
+          "const": true,
+          "default": true,
+          "title": "Headline Claim Allowed",
+          "type": "boolean"
+        },
+        "license": {
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "official_metrics": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Official Metrics",
+          "type": "array"
+        },
+        "paper_url": {
+          "minLength": 1,
+          "title": "Paper Url",
+          "type": "string"
+        },
+        "repository_revision": {
+          "pattern": "^[a-f0-9]{40}$",
+          "title": "Repository Revision",
+          "type": "string"
+        },
+        "repository_url": {
+          "minLength": 1,
+          "title": "Repository Url",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "test_split": {
+          "minLength": 1,
+          "title": "Test Split",
+          "type": "string"
+        },
+        "venue": {
+          "minLength": 1,
+          "title": "Venue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "benchmark_id",
+        "name",
+        "role",
+        "venue",
+        "paper_url",
+        "repository_url",
+        "repository_revision",
+        "evaluator_repository_url",
+        "evaluator_revision",
+        "evaluator_entrypoint",
+        "license",
+        "test_split",
+        "official_metrics",
+        "final_run_required"
+      ],
+      "title": "BenchmarkSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Versioned set of approved professional benchmarks.",
+  "properties": {
+    "benchmarks": {
+      "items": {
+        "$ref": "#/$defs/BenchmarkSpec"
+      },
+      "minItems": 1,
+      "title": "Benchmarks",
+      "type": "array"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "policy": {
+      "minLength": 1,
+      "title": "Policy",
+      "type": "string"
+    },
+    "registry_version": {
+      "const": "1.0.0",
+      "title": "Registry Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "registry_version",
+    "frozen_on",
+    "policy",
+    "benchmarks"
+  ],
+  "title": "BenchmarkRegistry",
+  "type": "object"
+}

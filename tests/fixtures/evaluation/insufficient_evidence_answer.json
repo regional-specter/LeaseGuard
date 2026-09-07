@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "question": "What late fee does this lease charge after a missed rent payment?",
+  "perspective": "neutral",
+  "status": "insufficient_evidence",
+  "explanation": "The available excerpt does not state a late fee, so LeaseGuard must abstain rather than invent a number.",
+  "confidence": 0.2,
+  "evidence": [],
+  "warnings": [
+    "This is a synthetic abstention fixture and not a real lease."
+  ]
+}

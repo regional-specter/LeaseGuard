@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "MetricResult": {
+      "additionalProperties": false,
+      "description": "One score normalized to a zero-to-one scale.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "official": {
+          "default": false,
+          "title": "Official",
+          "type": "boolean"
+        },
+        "value": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "MetricResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Audit record for one model evaluated on one benchmark.",
+  "properties": {
+    "adapter_revision": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Adapter Revision"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "title": "Benchmark Id",
+      "type": "string"
+    },
+    "benchmark_registry_version": {
+      "const": "1.0.0",
+      "title": "Benchmark Registry Version",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "contamination_notes": {
+      "minLength": 1,
+      "title": "Contamination Notes",
+      "type": "string"
+    },
+    "dataset_revision": {
+      "minLength": 1,
+      "title": "Dataset Revision",
+      "type": "string"
+    },
+    "evaluator_revision": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Evaluator Revision",
+      "type": "string"
+    },
+    "hardware": {
+      "minLength": 1,
+      "title": "Hardware",
+      "type": "string"
+    },
+    "metrics": {
+      "items": {
+        "$ref": "#/$defs/MetricResult"
+      },
+      "minItems": 1,
+      "title": "Metrics",
+      "type": "array"
+    },
+    "model_id": {
+      "minLength": 1,
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_revision": {
+      "minLength": 1,
+      "title": "Model Revision",
+      "type": "string"
+    },
+    "paid_api_used": {
+      "const": false,
+      "default": false,
+      "title": "Paid Api Used",
+      "type": "boolean"
+    },
+    "prompt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Prompt Sha256",
+      "type": "string"
+    },
+    "quantization": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantization"
+    },
+    "random_seed": {
+      "title": "Random Seed",
+      "type": "integer"
+    },
+    "raw_predictions_uri": {
+      "minLength": 1,
+      "title": "Raw Predictions Uri",
+      "type": "string"
+    },
+    "repository_revision": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Repository Revision",
+      "type": "string"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "split": {
+      "minLength": 1,
+      "title": "Split",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "test_data_used_for_development": {
+      "const": false,
+      "default": false,
+      "title": "Test Data Used For Development",
+      "type": "boolean"
+    },
+    "used_official_evaluator": {
+      "const": true,
+      "title": "Used Official Evaluator",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "run_id",
+    "benchmark_id",
+    "benchmark_registry_version",
+    "repository_revision",
+    "model_id",
+    "model_revision",
+    "dataset_revision",
+    "evaluator_revision",
+    "split",
+    "hardware",
+    "prompt_sha256",
+    "random_seed",
+    "started_at",
+    "completed_at",
+    "metrics",
+    "raw_predictions_uri",
+    "used_official_evaluator",
+    "contamination_notes"
+  ],
+  "title": "BenchmarkRun",
+  "type": "object"
+}

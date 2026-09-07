@@ -6,6 +6,12 @@ from pathlib import Path
 import pytest
 from pydantic import BaseModel
 
+from leaseguard.evaluation import (
+    BenchmarkRegistry,
+    BenchmarkRun,
+    RegressionReport,
+    RegressionSuiteConfig,
+)
 from leaseguard.ontology import SCHEMA_VERSION, DocumentAnswer, LeaseExtraction
 
 SCHEMA_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "schemas"
@@ -13,7 +19,17 @@ SAMPLE_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "samples"
 VALIDATION_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "validation"
 
 
-@pytest.mark.parametrize("model", [LeaseExtraction, DocumentAnswer])
+@pytest.mark.parametrize(
+    "model",
+    [
+        LeaseExtraction,
+        DocumentAnswer,
+        BenchmarkRegistry,
+        BenchmarkRun,
+        RegressionReport,
+        RegressionSuiteConfig,
+    ],
+)
 def test_committed_json_schema_matches_model(model: type[BaseModel]) -> None:
     """Generated JSON Schema must stay synchronized with its source model."""
     schema_path = SCHEMA_DIRECTORY / f"{model.__name__}.schema.json"

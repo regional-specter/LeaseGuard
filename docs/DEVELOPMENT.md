@@ -91,13 +91,22 @@ Phase 2 is complete. Ontology version `1.0.0` was validated against reusable off
 
 ## Phase 3 — Create Evaluation Before Training
 
-A small, expert-reviewed evaluation set should be created before model training. This prevents the project from changing its tests to match whichever model was trained most recently.
+Phase 3 freezes how LeaseGuard is judged before any training data is collected. A high score on a private lease set created by this project is not a breakthrough. The headline standard is a published, professionally constructed benchmark that frontier and large labs already use, scored with that benchmark's official test split and official evaluator.
 
-The evaluation set should include ordinary leases, missing clauses, conflicting provisions, amendments, tables, poor scans, unusual wording, and both landlord-friendly and tenant-friendly terms. Entire leases and related amendments must stay in the same split.
+The frozen professional suite is:
 
-Evaluation should measure extraction accuracy, evidence accuracy, valid structured output, date and money accuracy, unsupported claims, correct abstention, and amendment handling.
+- LegalBench (NeurIPS 2023 Datasets and Benchmarks) for legal reasoning
+- CUAD (NeurIPS 2021) for contract clause extraction
+- ContractNLI (Findings of EMNLP 2021) for evidence-grounded contract inference
+- LegalBench-RAG for legal retrieval
 
-Phase 3 is complete when any supported model can be tested with one repeatable evaluation command and compared against saved baseline results.
+Numeric acceptance thresholds are not invented here. They will be frozen in Phase 6 after unmodified base models are scored on these official protocols.
+
+A small internal office and retail regression suite still exists. It checks schema validity, evidence, family splits, rights gates, and abstention. It must always be described as regression, not as a professional benchmark. Entire leases and their amendments stay in the same family, and those documents are blocked from training.
+
+Phase 3 is complete when any supported model can be selected through one evaluation command, professional benchmarks are pinned to official evaluators, and local regression can be compared against saved machine-readable reports.
+
+Phase 3 is complete. The frozen registry, integrity rules, official-evaluator checkout pins, internal regression suite, and repeatable CLI are in `configs/evaluation/` and `src/leaseguard/evaluation/`. Full benchmark downloads and official scoring run from `notebooks/colab_orchestrator.ipynb` on Colab, not on the local machine.
 
 ## Phase 4 — Build the Document Pipeline
 

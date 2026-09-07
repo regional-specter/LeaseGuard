@@ -1,0 +1,10 @@
+{
+  "description": "Synthetic ranked predictions for local AUPR tests. This is not CUAD data and is not an official evaluator result.",
+  "predictions": [
+    {"score": 0.95, "relevant": true},
+    {"score": 0.80, "relevant": true},
+    {"score": 0.40, "relevant": false},
+    {"score": 0.20, "relevant": true},
+    {"score": 0.05, "relevant": false}
+  ]
+}

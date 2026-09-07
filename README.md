@@ -197,7 +197,7 @@ Training, validation, and test data will be split by complete agreement and docu
 | --- | --- |
 | 1. Scope | Choose the first jurisdiction, lease type, users, and safety limits |
 | 2. Ontology | Define clause labels and structured output fields |
-| 3. Gold evaluation | Prepare a private expert-reviewed test set |
+| 3. Gold evaluation | Pin professional benchmarks and keep a private regression set |
 | 4. Baselines | Compare the unmodified 4B, 9B, and 12B candidate models |
 | 5. Data pipeline | Collect, clean, deduplicate, redact, and label documents |
 | 6. Supervised training | Run QLoRA fine-tuning with high-quality examples |
@@ -210,17 +210,18 @@ Long leases will use clause parsing and retrieval instead of placing every page 
 
 ## Evaluation
 
-| Area | Measures |
-| --- | --- |
-| Extraction | Precision, recall, F1, and evidence-span overlap |
-| Structured output | Valid JSON and correct field types |
-| Legal grounding | Citation accuracy and unsupported-claim rate |
-| Lease reasoning | Obligation, contradiction, amendment, date, and money accuracy |
-| Safety | Missed risks, uncertainty calibration, and correct abstention |
-| Fairness | Consistent analysis from landlord and tenant viewpoints |
-| Retrieval | Relevant-source recall and ranking quality |
+Headline research claims must come from published professional benchmarks scored with their official evaluators:
 
-CUAD, ContractNLI, LegalBench-RAG, and ContractEval can provide starting benchmarks. LeaseGuard will also need a private lease-specific evaluation set that is never used for training or synthetic data generation.
+| Benchmark | What it measures | Why it counts |
+| --- | --- | --- |
+| LegalBench | Legal reasoning across expert-authored tasks | NeurIPS 2023 Datasets and Benchmarks; widely used by labs |
+| CUAD | Contract clause extraction | NeurIPS 2021; lawyer-supervised commercial-contract labels |
+| ContractNLI | Evidence-grounded entailment, contradiction, and not-mentioned | Findings of EMNLP 2021 |
+| LegalBench-RAG | Character-level legal retrieval | Published retrieval protocol used for legal RAG |
+
+The internal office and retail set is a regression suite for LeaseGuard's JSON schema, evidence, family splits, and abstention. It is not a substitute for those benchmarks and cannot support a breakthrough claim.
+
+There is no blended “LeaseGuard score.” Numeric thresholds are frozen only after unmodified base models are run on the official protocols.
 
 ## Free Tooling
 

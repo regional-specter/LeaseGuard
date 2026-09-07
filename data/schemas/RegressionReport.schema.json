@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "MetricResult": {
+      "additionalProperties": false,
+      "description": "One score normalized to a zero-to-one scale.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "official": {
+          "default": false,
+          "title": "Official",
+          "type": "boolean"
+        },
+        "value": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "MetricResult",
+      "type": "object"
+    },
+    "RegressionCheck": {
+      "additionalProperties": false,
+      "description": "One pass or fail result from the internal lease regression suite.",
+      "properties": {
+        "detail": {
+          "minLength": 1,
+          "title": "Detail",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "RegressionCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Internal product checks. This is not a published professional benchmark.",
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/RegressionCheck"
+      },
+      "minItems": 1,
+      "title": "Checks",
+      "type": "array"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "headline_claim_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Headline Claim Allowed",
+      "type": "boolean"
+    },
+    "is_professional_benchmark": {
+      "const": false,
+      "default": false,
+      "title": "Is Professional Benchmark",
+      "type": "boolean"
+    },
+    "metrics": {
+      "items": {
+        "$ref": "#/$defs/MetricResult"
+      },
+      "minItems": 1,
+      "title": "Metrics",
+      "type": "array"
+    },
+    "records_scored": {
+      "minimum": 0,
+      "title": "Records Scored",
+      "type": "integer"
+    },
+    "report_id": {
+      "minLength": 1,
+      "title": "Report Id",
+      "type": "string"
+    },
+    "suite_version": {
+      "const": "1.0.0",
+      "title": "Suite Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_id",
+    "suite_version",
+    "records_scored",
+    "checks",
+    "metrics",
+    "completed_at"
+  ],
+  "title": "RegressionReport",
+  "type": "object"
+}

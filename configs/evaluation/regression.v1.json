@@ -1,0 +1,54 @@
+{
+  "suite_version": "1.0.0",
+  "frozen_on": "2026-09-07",
+  "is_professional_benchmark": false,
+  "purpose": "Internal product regression for ontology validity, evidence, family splits, rights gates, and abstention. This suite is not a published professional benchmark and cannot support a breakthrough claim.",
+  "records": [
+    {
+      "path": "data/validation/gsa_office_template.extraction.json",
+      "family_id": "gsa-global-template-family",
+      "training_eligible": false
+    },
+    {
+      "path": "data/validation/gsa_amendment_template.extraction.json",
+      "family_id": "gsa-global-template-family",
+      "training_eligible": false
+    },
+    {
+      "path": "data/validation/pandadoc_retail_template.extraction.json",
+      "family_id": "pandadoc-commercial-template-family",
+      "training_eligible": false
+    },
+    {
+      "path": "data/validation/st_joseph_retail.extraction.json",
+      "family_id": "st-joseph-concession-family",
+      "training_eligible": false
+    }
+  ],
+  "required_families": [
+    {
+      "family_id": "gsa-global-template-family",
+      "member_document_ids": [
+        "gsa-l100-2026",
+        "gsa-amendment-template-2021"
+      ]
+    }
+  ],
+  "blocked_from_training_document_ids": [
+    "gsa-l100-2026",
+    "gsa-amendment-template-2021",
+    "pandadoc-commercial-lease-template",
+    "st-joseph-concession-2020",
+    "sample-office-lease"
+  ],
+  "answer_records": [
+    {
+      "path": "data/samples/document_answer.v1.json",
+      "expected_status": "answered"
+    },
+    {
+      "path": "tests/fixtures/evaluation/insufficient_evidence_answer.json",
+      "expected_status": "insufficient_evidence"
+    }
+  ]
+}

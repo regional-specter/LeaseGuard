@@ -5,9 +5,22 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from leaseguard.evaluation import (
+    BenchmarkRegistry,
+    BenchmarkRun,
+    RegressionReport,
+    RegressionSuiteConfig,
+)
 from leaseguard.ontology import DocumentAnswer, LeaseExtraction
 
-SCHEMA_MODELS: tuple[type[BaseModel], ...] = (LeaseExtraction, DocumentAnswer)
+SCHEMA_MODELS: tuple[type[BaseModel], ...] = (
+    LeaseExtraction,
+    DocumentAnswer,
+    BenchmarkRegistry,
+    BenchmarkRun,
+    RegressionReport,
+    RegressionSuiteConfig,
+)
 OUTPUT_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "schemas"
 
 

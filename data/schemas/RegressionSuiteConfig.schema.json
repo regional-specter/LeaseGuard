@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "RegressionAnswerSpec": {
+      "additionalProperties": false,
+      "description": "An evidence-grounded answer used to check abstention behavior.",
+      "properties": {
+        "expected_status": {
+          "minLength": 1,
+          "title": "Expected Status",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "expected_status"
+      ],
+      "title": "RegressionAnswerSpec",
+      "type": "object"
+    },
+    "RegressionFamilySpec": {
+      "additionalProperties": false,
+      "description": "Documents that must stay together in the same split.",
+      "properties": {
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "member_document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Member Document Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "family_id",
+        "member_document_ids"
+      ],
+      "title": "RegressionFamilySpec",
+      "type": "object"
+    },
+    "RegressionRecordSpec": {
+      "additionalProperties": false,
+      "description": "One internal lease record used only for product regression.",
+      "properties": {
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "training_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Training Eligible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path",
+        "family_id"
+      ],
+      "title": "RegressionRecordSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen internal regression suite. Never a professional benchmark.",
+  "properties": {
+    "answer_records": {
+      "items": {
+        "$ref": "#/$defs/RegressionAnswerSpec"
+      },
+      "minItems": 1,
+      "title": "Answer Records",
+      "type": "array"
+    },
+    "blocked_from_training_document_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Blocked From Training Document Ids",
+      "type": "array"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "is_professional_benchmark": {
+      "const": false,
+      "default": false,
+      "title": "Is Professional Benchmark",
+      "type": "boolean"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/RegressionRecordSpec"
+      },
+      "minItems": 1,
+      "title": "Records",
+      "type": "array"
+    },
+    "required_families": {
+      "items": {
+        "$ref": "#/$defs/RegressionFamilySpec"
+      },
+      "minItems": 1,
+      "title": "Required Families",
+      "type": "array"
+    },
+    "suite_version": {
+      "const": "1.0.0",
+      "title": "Suite Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "suite_version",
+    "frozen_on",
+    "purpose",
+    "records",
+    "required_families",
+    "blocked_from_training_document_ids",
+    "answer_records"
+  ],
+  "title": "RegressionSuiteConfig",
+  "type": "object"
+}

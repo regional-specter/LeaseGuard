@@ -7,7 +7,13 @@ Ontology version `1.0.0` was frozen on September 7, 2026 after the review record
 - `LeaseExtraction.schema.json` for a complete document extraction.
 - `DocumentAnswer.schema.json` for evidence-based questions and answers.
 
-The source models live in `src/leaseguard/ontology`. Regenerate the JSON Schema files after an approved model change:
+Evaluation records currently expose:
+
+- `BenchmarkRegistry.schema.json` for the frozen professional benchmark list.
+- `BenchmarkRun.schema.json` for official published runs.
+- `RegressionSuiteConfig.schema.json` and `RegressionReport.schema.json` for the internal product suite.
+
+The source models live in `src/leaseguard/ontology` and `src/leaseguard/evaluation`. Regenerate the JSON Schema files after an approved model change:
 
 ```bash
 uv run python scripts/prepare/export_schemas.py

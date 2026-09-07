@@ -1,0 +1,95 @@
+{
+  "registry_version": "1.0.0",
+  "frozen_on": "2026-09-07",
+  "policy": "Published claims use only these professionally constructed benchmarks, their official test splits, and their pinned official evaluators. A local or newly invented lease set cannot be substituted. Test data is never used for development.",
+  "benchmarks": [
+    {
+      "benchmark_id": "legalbench",
+      "name": "LegalBench",
+      "role": "headline_legal_reasoning",
+      "venue": "NeurIPS 2023 Datasets and Benchmarks",
+      "paper_url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/89e44582fd28ddfea1ea4dcb0ebbf4b0-Abstract-Datasets_and_Benchmarks.html",
+      "repository_url": "https://github.com/HazyResearch/legalbench",
+      "repository_revision": "b46bf4ffae90524b2b72aaa30e7745fe9db64481",
+      "evaluator_repository_url": "https://github.com/HazyResearch/legalbench",
+      "evaluator_revision": "b46bf4ffae90524b2b72aaa30e7745fe9db64481",
+      "evaluator_entrypoint": "tasks",
+      "license": "Task-specific source terms require audit before download",
+      "test_split": "Official task test splits",
+      "official_metrics": [
+        "Task-defined official metric",
+        "Macro average across compatible tasks"
+      ],
+      "development_variant": null,
+      "final_run_required": true,
+      "headline_claim_allowed": true
+    },
+    {
+      "benchmark_id": "cuad",
+      "name": "Contract Understanding Atticus Dataset",
+      "role": "contract_clause_extraction",
+      "venue": "NeurIPS 2021",
+      "paper_url": "https://proceedings.neurips.cc/paper/2021/hash/6ea9ab1baa0efb9e19094440c317e21b-Abstract-round1.html",
+      "repository_url": "https://github.com/TheAtticusProject/cuad",
+      "repository_revision": "67faa0e6023b04fcaae6cc09497ab00e5d63a2a2",
+      "evaluator_repository_url": "https://github.com/TheAtticusProject/cuad",
+      "evaluator_revision": "67faa0e6023b04fcaae6cc09497ab00e5d63a2a2",
+      "evaluator_entrypoint": "evaluate.py",
+      "license": "CC BY 4.0",
+      "test_split": "Official CUAD test split",
+      "official_metrics": [
+        "Area under the precision-recall curve",
+        "Precision at 80 percent recall",
+        "Precision at 90 percent recall"
+      ],
+      "development_variant": null,
+      "final_run_required": true,
+      "headline_claim_allowed": true
+    },
+    {
+      "benchmark_id": "contractnli",
+      "name": "ContractNLI",
+      "role": "evidence_grounded_contract_inference",
+      "venue": "Findings of EMNLP 2021",
+      "paper_url": "https://aclanthology.org/2021.findings-emnlp.164/",
+      "repository_url": "https://github.com/stanfordnlp/contract-nli",
+      "repository_revision": "eced6528dd3c1d14d73f9a87df8f7bdbc03126f9",
+      "evaluator_repository_url": "https://github.com/stanfordnlp/contract-nli-bert",
+      "evaluator_revision": "058c56fd62d56897bb4fcfbf1be71b17aee3a79c",
+      "evaluator_entrypoint": "evaluate.py",
+      "license": "CC BY 4.0 dataset; Apache-2.0 official evaluator",
+      "test_split": "Official ContractNLI test split",
+      "official_metrics": [
+        "NLI accuracy",
+        "Entailment F1",
+        "Contradiction F1",
+        "Evidence mean average precision",
+        "Evidence precision at 80 percent recall"
+      ],
+      "development_variant": null,
+      "final_run_required": true,
+      "headline_claim_allowed": true
+    },
+    {
+      "benchmark_id": "legalbench-rag",
+      "name": "LegalBench-RAG",
+      "role": "legal_retrieval",
+      "venue": "arXiv 2024 retrieval benchmark used for legal RAG evaluation",
+      "paper_url": "https://arxiv.org/abs/2408.10343",
+      "repository_url": "https://github.com/zeroentropy-ai/legalbenchrag",
+      "repository_revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+      "evaluator_repository_url": "https://github.com/zeroentropy-ai/legalbenchrag",
+      "evaluator_revision": "431bc8f2488a81569ab7259fa633dcc50ab77f9a",
+      "evaluator_entrypoint": "legalbenchrag/benchmark.py",
+      "license": "MIT evaluator; underlying source dataset terms still apply",
+      "test_split": "Published full benchmark",
+      "official_metrics": [
+        "Character-level precision at k",
+        "Character-level recall at k"
+      ],
+      "development_variant": "LegalBench-RAG-mini",
+      "final_run_required": true,
+      "headline_claim_allowed": true
+    }
+  ]
+}
