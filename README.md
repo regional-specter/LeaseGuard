@@ -240,6 +240,8 @@ Process approved source documents locally only when the files are already on dis
 
 ```bash
 uv run python scripts/collect/process_documents.py validate-manifest
+uv run python scripts/prepare/build_dataset.py validate-config
+uv run python scripts/prepare/build_dataset.py validate-seed
 ```
 
 Colab sessions have time and storage limits, so every heavy task must support checkpoints, safe restarts, pinned configurations, and remote output storage.

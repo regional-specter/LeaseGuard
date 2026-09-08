@@ -1,0 +1,295 @@
+{
+  "$defs": {
+    "DocumentType": {
+      "description": "Supported document types.",
+      "enum": [
+        "office_lease",
+        "retail_lease",
+        "amendment",
+        "exhibit",
+        "other_related"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    },
+    "ExclusionRules": {
+      "additionalProperties": false,
+      "description": "What must stay out of Dataset v1 training and validation.",
+      "properties": {
+        "blocked_from_training_document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Blocked From Training Document Ids",
+          "type": "array"
+        },
+        "blocked_rights": {
+          "items": {
+            "$ref": "#/$defs/RightsStatus"
+          },
+          "minItems": 1,
+          "title": "Blocked Rights",
+          "type": "array"
+        },
+        "exact_duplicates": {
+          "const": true,
+          "default": true,
+          "title": "Exact Duplicates",
+          "type": "boolean"
+        },
+        "near_duplicates_across_splits": {
+          "const": true,
+          "default": true,
+          "title": "Near Duplicates Across Splits",
+          "type": "boolean"
+        },
+        "official_benchmark_test_splits": {
+          "const": true,
+          "default": true,
+          "title": "Official Benchmark Test Splits",
+          "type": "boolean"
+        },
+        "user_uploaded_documents": {
+          "const": true,
+          "default": true,
+          "title": "User Uploaded Documents",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "blocked_from_training_document_ids",
+        "blocked_rights"
+      ],
+      "title": "ExclusionRules",
+      "type": "object"
+    },
+    "InclusionRules": {
+      "additionalProperties": false,
+      "description": "What may enter Dataset v1.",
+      "properties": {
+        "allowed_rights": {
+          "items": {
+            "$ref": "#/$defs/RightsStatus"
+          },
+          "minItems": 1,
+          "title": "Allowed Rights",
+          "type": "array"
+        },
+        "document_types": {
+          "items": {
+            "$ref": "#/$defs/DocumentType"
+          },
+          "minItems": 1,
+          "title": "Document Types",
+          "type": "array"
+        },
+        "jurisdiction": {
+          "const": "US",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "language": {
+          "const": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "require_evidence_for_answered": {
+          "const": true,
+          "default": true,
+          "title": "Require Evidence For Answered",
+          "type": "boolean"
+        },
+        "synthetic_must_not_invent_legal_facts": {
+          "const": true,
+          "default": true,
+          "title": "Synthetic Must Not Invent Legal Facts",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "document_types",
+        "jurisdiction",
+        "language",
+        "allowed_rights"
+      ],
+      "title": "InclusionRules",
+      "type": "object"
+    },
+    "QualityRules": {
+      "additionalProperties": false,
+      "description": "Checks applied to every retained example.",
+      "properties": {
+        "evidence_must_occur_in_source": {
+          "const": true,
+          "default": true,
+          "title": "Evidence Must Occur In Source",
+          "type": "boolean"
+        },
+        "min_source_text_chars": {
+          "minimum": 1,
+          "title": "Min Source Text Chars",
+          "type": "integer"
+        },
+        "near_duplicate_threshold": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Near Duplicate Threshold",
+          "type": "number"
+        },
+        "preference_requires_ranking_reason": {
+          "const": true,
+          "default": true,
+          "title": "Preference Requires Ranking Reason",
+          "type": "boolean"
+        },
+        "quality_sample_per_subset": {
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Quality Sample Per Subset",
+          "type": "integer"
+        },
+        "shingle_size": {
+          "maximum": 16,
+          "minimum": 2,
+          "title": "Shingle Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min_source_text_chars",
+        "near_duplicate_threshold",
+        "shingle_size",
+        "quality_sample_per_subset"
+      ],
+      "title": "QualityRules",
+      "type": "object"
+    },
+    "RightsStatus": {
+      "description": "Review status for using and redistributing a source.",
+      "enum": [
+        "public_domain",
+        "open_license",
+        "permission_granted",
+        "review_required",
+        "restricted"
+      ],
+      "title": "RightsStatus",
+      "type": "string"
+    },
+    "SplitRules": {
+      "additionalProperties": false,
+      "description": "Reproducible agreement-family assignment into train, validation, and test.",
+      "properties": {
+        "method": {
+          "const": "family_hash",
+          "title": "Method",
+          "type": "string"
+        },
+        "salt": {
+          "minLength": 1,
+          "title": "Salt",
+          "type": "string"
+        },
+        "test_percent": {
+          "maximum": 98,
+          "minimum": 1,
+          "title": "Test Percent",
+          "type": "integer"
+        },
+        "train_percent": {
+          "maximum": 98,
+          "minimum": 1,
+          "title": "Train Percent",
+          "type": "integer"
+        },
+        "validation_percent": {
+          "maximum": 98,
+          "minimum": 1,
+          "title": "Validation Percent",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "method",
+        "salt",
+        "train_percent",
+        "validation_percent",
+        "test_percent"
+      ],
+      "title": "SplitRules",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen Dataset v1 construction rules.",
+  "properties": {
+    "dataset_version": {
+      "const": "1.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "exclusion": {
+      "$ref": "#/$defs/ExclusionRules"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "inclusion": {
+      "$ref": "#/$defs/InclusionRules"
+    },
+    "ontology_version": {
+      "const": "1.0.0",
+      "title": "Ontology Version",
+      "type": "string"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "quality": {
+      "$ref": "#/$defs/QualityRules"
+    },
+    "splits": {
+      "$ref": "#/$defs/SplitRules"
+    },
+    "storage_policy": {
+      "minLength": 1,
+      "title": "Storage Policy",
+      "type": "string"
+    },
+    "subsets": {
+      "items": {
+        "enum": [
+          "raw_domain_text",
+          "structured_extraction",
+          "evidence_conversation",
+          "refusal_uncertainty",
+          "multi_turn",
+          "preference_pairs"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Subsets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_version",
+    "frozen_on",
+    "ontology_version",
+    "purpose",
+    "storage_policy",
+    "inclusion",
+    "exclusion",
+    "quality",
+    "splits",
+    "subsets"
+  ],
+  "title": "DatasetConfig",
+  "type": "object"
+}

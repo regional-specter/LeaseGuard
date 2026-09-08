@@ -1,0 +1,14 @@
+{
+  "record_id": "ds1-raw-retail",
+  "subset": "raw_domain_text",
+  "family_id": "ds1-retail-family",
+  "document_ids": ["ds1-retail-lease"],
+  "source_texts": {
+    "ds1-retail-lease": "Landlord leases the retail premises known as Unit 12 in the Westfield Gallery to Tenant for the sale of apparel. Tenant shall pay annual base rent of USD 48,000 plus percentage rent equal to six percent (6%) of gross sales above the breakpoint. Tenant shall continuously operate during mall hours."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic retail lease",
+  "synthetic": true,
+  "document_type": "retail_lease"
+}

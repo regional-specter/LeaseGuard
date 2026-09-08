@@ -1,0 +1,105 @@
+{
+  "record_id": "ds1-extract-retail",
+  "subset": "structured_extraction",
+  "family_id": "ds1-retail-family",
+  "document_ids": ["ds1-retail-lease"],
+  "source_texts": {
+    "ds1-retail-lease": "Landlord leases the retail premises known as Unit 12 in the Westfield Gallery to Tenant for the sale of apparel. Tenant shall pay annual base rent of USD 48,000 plus percentage rent equal to six percent (6%) of gross sales above the breakpoint. Tenant shall continuously operate during mall hours."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic retail lease",
+  "synthetic": true,
+  "extraction": {
+    "schema_version": "1.0.0",
+    "source": {
+      "document_id": "ds1-retail-lease",
+      "family_id": "ds1-retail-family",
+      "filename": "ds1-retail-lease.md",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "document_type": "retail_lease",
+      "source_name": "LeaseGuard Dataset v1 synthetic retail lease",
+      "rights_status": "open_license",
+      "source_license": "CC0-1.0",
+      "is_template": true,
+      "jurisdiction": "US",
+      "language": "en"
+    },
+    "premises": [
+      {
+        "description": "Unit 12 in the Westfield Gallery",
+        "property_name": "Westfield Gallery",
+        "suite": "Unit 12",
+        "permitted_use": "sale of apparel",
+        "evidence": [
+          {
+            "document_id": "ds1-retail-lease",
+            "text": "retail premises known as Unit 12 in the Westfield Gallery to Tenant for the sale of apparel",
+            "section": "Premises"
+          }
+        ]
+      }
+    ],
+    "clauses": [
+      {
+        "clause_id": "ds1-retail-percentage-rent",
+        "clause_types": ["percentage_rent", "base_rent"],
+        "heading": "Rent",
+        "text": "Tenant shall pay annual base rent of USD 48,000 plus percentage rent equal to six percent (6%) of gross sales above the breakpoint."
+      },
+      {
+        "clause_id": "ds1-retail-hours",
+        "clause_types": ["continuous_operation"],
+        "heading": "Hours",
+        "text": "Tenant shall continuously operate during mall hours."
+      }
+    ],
+    "monetary_terms": [
+      {
+        "label": "Annual base rent",
+        "original_text": "annual base rent of USD 48,000",
+        "amount": "48000",
+        "currency": "USD",
+        "frequency": "annual",
+        "evidence": [
+          {
+            "document_id": "ds1-retail-lease",
+            "text": "Tenant shall pay annual base rent of USD 48,000 plus percentage rent equal to six percent (6%) of gross sales above the breakpoint.",
+            "section": "Rent"
+          }
+        ]
+      },
+      {
+        "label": "Percentage rent",
+        "original_text": "six percent (6%) of gross sales above the breakpoint",
+        "rate_basis": "six percent of gross sales above the breakpoint",
+        "currency": "USD",
+        "evidence": [
+          {
+            "document_id": "ds1-retail-lease",
+            "text": "percentage rent equal to six percent (6%) of gross sales above the breakpoint",
+            "section": "Rent"
+          }
+        ]
+      }
+    ],
+    "date_terms": [],
+    "obligations": [
+      {
+        "obligation_id": "ds1-retail-operate",
+        "responsible_party": "Tenant",
+        "action": "Continuously operate during mall hours",
+        "timing_type": "recurring",
+        "recurrence": "During mall hours",
+        "evidence": [
+          {
+            "document_id": "ds1-retail-lease",
+            "text": "Tenant shall continuously operate during mall hours.",
+            "section": "Hours"
+          }
+        ]
+      }
+    ],
+    "warnings": ["Synthetic Dataset v1 seed; not a shopping-center form."]
+  }
+}

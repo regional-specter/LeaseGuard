@@ -6,7 +6,7 @@ Last reviewed: 2026-09-08
 
 ## Current Focus
 
-Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 4 is complete: approved sources can be parsed into checkpointed intermediate records. The next goal is Phase 5: Dataset v1.
+Phase 5 is complete: Dataset v1 rules, seed examples, leakage-safe family splits, and checksummed validation are in place. The next goal is Phase 6: base-model evaluation on the frozen professional suite.
 
 ## Phase 0 — Product Decisions
 
@@ -125,23 +125,23 @@ Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 4 is complete: ap
 
 ## Phase 5 — Dataset Version 1
 
-- [ ] Write Dataset v1 inclusion, exclusion, and quality rules.
-- [ ] Build the raw lease-domain text subset.
-- [ ] Build the structured extraction subset.
-- [ ] Build the evidence-grounded conversation subset.
-- [ ] Build the refusal and uncertainty subset.
-- [ ] Build the multi-turn conversation subset.
-- [ ] Build preference pairs only from clearly ranked responses.
-- [ ] Validate all records against versioned schemas.
-- [ ] Verify that quoted evidence exists in the source text.
-- [ ] Remove duplicate and near-duplicate examples.
-- [ ] Split by complete agreement family.
-- [ ] Check for leakage across train, validation, and test sets.
-- [ ] Track dataset sources and licenses.
-- [ ] Generate checksums and dataset statistics.
-- [ ] Perform manual quality sampling.
-- [ ] Write the Dataset v1 card and limitations.
-- [ ] Publish or store the dataset without committing large files to Git.
+- [x] Write Dataset v1 inclusion, exclusion, and quality rules.
+- [x] Build the raw lease-domain text subset.
+- [x] Build the structured extraction subset.
+- [x] Build the evidence-grounded conversation subset.
+- [x] Build the refusal and uncertainty subset.
+- [x] Build the multi-turn conversation subset.
+- [x] Build preference pairs only from clearly ranked responses.
+- [x] Validate all records against versioned schemas.
+- [x] Verify that quoted evidence exists in the source text.
+- [x] Remove duplicate and near-duplicate examples.
+- [x] Split by complete agreement family.
+- [x] Check for leakage across train, validation, and test sets.
+- [x] Track dataset sources and licenses.
+- [x] Generate checksums and dataset statistics.
+- [x] Perform manual quality sampling.
+- [x] Write the Dataset v1 card and limitations.
+- [x] Publish or store the dataset without committing large files to Git.
 
 **Completion gate:** Dataset v1 is documented, licensed, validated, reproducible, and leakage-safe.
 

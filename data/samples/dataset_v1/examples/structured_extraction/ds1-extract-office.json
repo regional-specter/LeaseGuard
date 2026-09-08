@@ -1,0 +1,116 @@
+{
+  "record_id": "ds1-extract-office",
+  "subset": "structured_extraction",
+  "family_id": "ds1-office-family",
+  "document_ids": ["ds1-office-lease"],
+  "source_texts": {
+    "ds1-office-lease": "Example North Office LLC (Landlord) leases Suite 400 at 100 Market Street to Example Tenant LLC (Tenant). Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month. Either party may terminate for material default after thirty (30) days' written notice."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic office lease",
+  "synthetic": true,
+  "extraction": {
+    "schema_version": "1.0.0",
+    "source": {
+      "document_id": "ds1-office-lease",
+      "family_id": "ds1-office-family",
+      "filename": "ds1-office-lease.md",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "document_type": "office_lease",
+      "source_name": "LeaseGuard Dataset v1 synthetic office lease",
+      "rights_status": "open_license",
+      "source_license": "CC0-1.0",
+      "is_template": true,
+      "jurisdiction": "US",
+      "language": "en"
+    },
+    "parties": [
+      {
+        "name": "Example North Office LLC",
+        "role": "landlord",
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Example North Office LLC (Landlord)",
+            "section": "Parties"
+          }
+        ]
+      },
+      {
+        "name": "Example Tenant LLC",
+        "role": "tenant",
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Example Tenant LLC (Tenant)",
+            "section": "Parties"
+          }
+        ]
+      }
+    ],
+    "premises": [
+      {
+        "description": "Suite 400 at 100 Market Street",
+        "suite": "400",
+        "address": "100 Market Street",
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "leases Suite 400 at 100 Market Street",
+            "section": "Premises"
+          }
+        ]
+      }
+    ],
+    "clauses": [
+      {
+        "clause_id": "ds1-office-base-rent",
+        "clause_types": ["base_rent"],
+        "heading": "Base Rent",
+        "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month."
+      },
+      {
+        "clause_id": "ds1-office-termination",
+        "clause_types": ["early_termination"],
+        "heading": "Default and Termination",
+        "text": "Either party may terminate for material default after thirty (30) days' written notice."
+      }
+    ],
+    "monetary_terms": [
+      {
+        "label": "Monthly base rent",
+        "original_text": "base rent of USD 5,000",
+        "amount": "5000",
+        "currency": "USD",
+        "frequency": "monthly",
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+            "section": "Base Rent"
+          }
+        ]
+      }
+    ],
+    "date_terms": [],
+    "obligations": [
+      {
+        "obligation_id": "ds1-office-pay-rent",
+        "responsible_party": "Example Tenant LLC",
+        "action": "Pay monthly base rent",
+        "beneficiary": "Example North Office LLC",
+        "timing_type": "recurring",
+        "recurrence": "First day of each month",
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+            "section": "Base Rent"
+          }
+        ]
+      }
+    ],
+    "warnings": ["Synthetic Dataset v1 seed; not a real lease."]
+  }
+}

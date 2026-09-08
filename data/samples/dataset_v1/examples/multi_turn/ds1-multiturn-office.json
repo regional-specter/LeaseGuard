@@ -1,0 +1,62 @@
+{
+  "record_id": "ds1-multiturn-office",
+  "subset": "multi_turn",
+  "family_id": "ds1-office-family",
+  "document_ids": ["ds1-office-lease"],
+  "source_texts": {
+    "ds1-office-lease": "Example North Office LLC (Landlord) leases Suite 400 at 100 Market Street to Example Tenant LLC (Tenant). Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month. Either party may terminate for material default after thirty (30) days' written notice."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic office lease",
+  "synthetic": true,
+  "perspective": "landlord",
+  "turns": [
+    {
+      "role": "user",
+      "text": "What is the monthly base rent?"
+    },
+    {
+      "role": "assistant",
+      "text": "The tenant pays USD 5,000 in base rent each month.",
+      "answer": {
+        "schema_version": "1.0.0",
+        "question": "What is the monthly base rent?",
+        "perspective": "landlord",
+        "status": "answered",
+        "explanation": "The tenant pays USD 5,000 in base rent each month.",
+        "confidence": 0.97,
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+            "section": "Base Rent"
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "text": "When is that payment due?"
+    },
+    {
+      "role": "assistant",
+      "text": "Payment is due on the first day of each month.",
+      "answer": {
+        "schema_version": "1.0.0",
+        "question": "When is that payment due?",
+        "perspective": "landlord",
+        "status": "answered",
+        "explanation": "Payment is due on the first day of each month.",
+        "confidence": 0.95,
+        "evidence": [
+          {
+            "document_id": "ds1-office-lease",
+            "text": "Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month.",
+            "section": "Base Rent"
+          }
+        ]
+      }
+    }
+  ]
+}

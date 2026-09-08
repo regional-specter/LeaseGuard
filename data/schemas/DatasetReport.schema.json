@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "DatasetIssue": {
+      "additionalProperties": false,
+      "description": "One validation finding.",
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "record_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Record Id"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "DatasetIssue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Machine-readable result of building or validating Dataset v1.",
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "dataset_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/DatasetIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "record_count": {
+      "minimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "passed",
+    "record_count",
+    "completed_at"
+  ],
+  "title": "DatasetReport",
+  "type": "object"
+}

@@ -1,0 +1,103 @@
+{
+  "record_id": "ds1-extract-amendment",
+  "subset": "structured_extraction",
+  "family_id": "ds1-office-family",
+  "document_ids": ["ds1-office-lease", "ds1-office-amendment"],
+  "source_texts": {
+    "ds1-office-lease": "Example North Office LLC (Landlord) leases Suite 400 at 100 Market Street to Example Tenant LLC (Tenant). Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month. Either party may terminate for material default after thirty (30) days' written notice.",
+    "ds1-office-amendment": "This amendment replaces the base rent clause. Beginning 1 March 2027, Tenant shall pay Landlord base rent of USD 5,250 on the first day of each month."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic office amendment",
+  "synthetic": true,
+  "extraction": {
+    "schema_version": "1.0.0",
+    "source": {
+      "document_id": "ds1-office-amendment",
+      "family_id": "ds1-office-family",
+      "filename": "ds1-office-amendment.md",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "document_type": "amendment",
+      "source_name": "LeaseGuard Dataset v1 synthetic office amendment",
+      "rights_status": "open_license",
+      "source_license": "CC0-1.0",
+      "is_template": true,
+      "jurisdiction": "US",
+      "language": "en"
+    },
+    "related_document_ids": ["ds1-office-lease"],
+    "clauses": [
+      {
+        "clause_id": "ds1-amd-rent",
+        "clause_types": ["base_rent", "amendment"],
+        "heading": "Amended Base Rent",
+        "text": "Beginning 1 March 2027, Tenant shall pay Landlord base rent of USD 5,250 on the first day of each month."
+      }
+    ],
+    "monetary_terms": [
+      {
+        "label": "Amended monthly base rent",
+        "original_text": "base rent of USD 5,250",
+        "amount": "5250",
+        "currency": "USD",
+        "frequency": "monthly",
+        "evidence": [
+          {
+            "document_id": "ds1-office-amendment",
+            "text": "Beginning 1 March 2027, Tenant shall pay Landlord base rent of USD 5,250 on the first day of each month.",
+            "section": "Amended Base Rent"
+          }
+        ]
+      }
+    ],
+    "date_terms": [
+      {
+        "label": "Rent amendment effective date",
+        "original_text": "Beginning 1 March 2027",
+        "normalized_date": "2027-03-01",
+        "evidence": [
+          {
+            "document_id": "ds1-office-amendment",
+            "text": "Beginning 1 March 2027, Tenant shall pay Landlord base rent of USD 5,250 on the first day of each month.",
+            "section": "Amended Base Rent"
+          }
+        ]
+      }
+    ],
+    "obligations": [
+      {
+        "obligation_id": "ds1-amd-pay-rent",
+        "responsible_party": "Example Tenant LLC",
+        "action": "Pay the amended monthly base rent",
+        "timing_type": "recurring",
+        "recurrence": "First day of each month beginning 1 March 2027",
+        "evidence": [
+          {
+            "document_id": "ds1-office-amendment",
+            "text": "Beginning 1 March 2027, Tenant shall pay Landlord base rent of USD 5,250 on the first day of each month.",
+            "section": "Amended Base Rent"
+          }
+        ]
+      }
+    ],
+    "amendment_effects": [
+      {
+        "effect_id": "ds1-amd-replace-rent",
+        "action": "replace",
+        "target_document_id": "ds1-office-lease",
+        "target_clause_reference": "Base Rent",
+        "description": "Replaces monthly base rent with USD 5,250 beginning 1 March 2027.",
+        "effective_date": "2027-03-01",
+        "evidence": [
+          {
+            "document_id": "ds1-office-amendment",
+            "text": "This amendment replaces the base rent clause.",
+            "section": "Amended Base Rent"
+          }
+        ]
+      }
+    ],
+    "warnings": ["Synthetic Dataset v1 seed; keep the amendment with the original lease family."]
+  }
+}

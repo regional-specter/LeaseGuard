@@ -1,0 +1,24 @@
+{
+  "record_id": "ds1-refuse-state-law",
+  "subset": "refusal_uncertainty",
+  "family_id": "ds1-office-family",
+  "document_ids": ["ds1-office-lease"],
+  "source_texts": {
+    "ds1-office-lease": "Example North Office LLC (Landlord) leases Suite 400 at 100 Market Street to Example Tenant LLC (Tenant). Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month. Either party may terminate for material default after thirty (30) days' written notice."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic office lease",
+  "synthetic": true,
+  "perspective": "neutral",
+  "answer": {
+    "schema_version": "1.0.0",
+    "question": "Which state's statute requires this tenant to carry two million dollars of liability insurance?",
+    "perspective": "neutral",
+    "status": "insufficient_evidence",
+    "explanation": "The supplied lease text does not state an insurance amount or a governing statute. LeaseGuard cannot invent a state-law requirement.",
+    "confidence": 0.18,
+    "evidence": [],
+    "warnings": ["State-law conclusions are out of scope for Dataset v1 answers."]
+  }
+}

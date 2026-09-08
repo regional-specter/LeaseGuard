@@ -130,6 +130,8 @@ Dataset splits must happen at the agreement-family level. A lease, its amendment
 
 Phase 5 is complete when Dataset v1 has a dataset card, source and license records, summary statistics, validation results, checksums, and leakage-safe splits.
 
+Phase 5 is complete for the seed and the construction rules. `configs/data/dataset.v1.json` freezes inclusion, exclusion, quality, and family-hash splits. The package builds six subsets, verifies evidence, blocks the evaluation holdout, checksums the bundle, and records a manual quality sample. The Git seed is synthetic and small. Full corpora stay off the local machine and are assembled from Colab with `TASK=build-dataset`.
+
 ## Phase 6 — Establish Model Baselines
 
 Candidate models should be tested before fine-tuning. Initial candidates include Qwen3.5-4B, Qwen3.5-9B, and Gemma 3 12B. Each model should receive the same prompts, context, retrieval results, output schema, and evaluation set.

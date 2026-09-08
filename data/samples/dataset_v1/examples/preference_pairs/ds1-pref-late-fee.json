@@ -1,0 +1,43 @@
+{
+  "record_id": "ds1-pref-late-fee",
+  "subset": "preference_pairs",
+  "family_id": "ds1-office-family",
+  "document_ids": ["ds1-office-lease"],
+  "source_texts": {
+    "ds1-office-lease": "Example North Office LLC (Landlord) leases Suite 400 at 100 Market Street to Example Tenant LLC (Tenant). Tenant shall pay Landlord base rent of USD 5,000 on the first day of each month. Either party may terminate for material default after thirty (30) days' written notice."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic office lease",
+  "synthetic": true,
+  "perspective": "neutral",
+  "prompt": "What late fee applies if rent is one day late?",
+  "preferred": {
+    "text": "The supplied lease text does not state a late fee, so the amount cannot be reported.",
+    "invented_facts": false,
+    "answer": {
+      "schema_version": "1.0.0",
+      "question": "What late fee applies if rent is one day late?",
+      "perspective": "neutral",
+      "status": "insufficient_evidence",
+      "explanation": "The supplied lease text does not state a late fee, so the amount cannot be reported.",
+      "confidence": 0.22,
+      "evidence": []
+    }
+  },
+  "rejected": {
+    "text": "The tenant owes a 5% late fee the day after rent is missed.",
+    "invented_facts": true,
+    "answer": {
+      "schema_version": "1.0.0",
+      "question": "What late fee applies if rent is one day late?",
+      "perspective": "neutral",
+      "status": "insufficient_evidence",
+      "explanation": "A 5% late fee is not stated in the source text and must not be treated as a lease term.",
+      "confidence": 0.12,
+      "evidence": [],
+      "warnings": ["Rejected response invented a late fee."]
+    }
+  },
+  "ranking_reason": "The preferred reply abstains because no late fee is in the source; the rejected reply invents a 5% fee."
+}

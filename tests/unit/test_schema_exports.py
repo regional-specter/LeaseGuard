@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import BaseModel
 
+from leaseguard.dataset import DatasetBundle, DatasetConfig, DatasetReport
 from leaseguard.evaluation import (
     BenchmarkRegistry,
     BenchmarkRun,
@@ -34,6 +35,9 @@ VALIDATION_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "validatio
         PipelineConfig,
         BatchReport,
         ProcessedDocument,
+        DatasetConfig,
+        DatasetBundle,
+        DatasetReport,
     ],
 )
 def test_committed_json_schema_matches_model(model: type[BaseModel]) -> None:

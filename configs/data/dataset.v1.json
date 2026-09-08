@@ -1,0 +1,65 @@
+{
+  "dataset_version": "1.0.0",
+  "frozen_on": "2026-09-08",
+  "ontology_version": "1.0.0",
+  "purpose": "Lease-domain Dataset v1 for supervised fine-tuning of extraction, grounded answers, refusals, multi-turn follow-up, and clearly ranked preference pairs. This dataset is not a professional benchmark.",
+  "storage_policy": "Commit only tiny seed examples, schemas, and this configuration. Write full generated corpora to ignored data/datasets/ or Colab Drive.",
+  "inclusion": {
+    "document_types": [
+      "office_lease",
+      "retail_lease",
+      "amendment",
+      "exhibit",
+      "other_related"
+    ],
+    "jurisdiction": "US",
+    "language": "en",
+    "allowed_rights": [
+      "public_domain",
+      "open_license",
+      "permission_granted"
+    ],
+    "require_evidence_for_answered": true,
+    "synthetic_must_not_invent_legal_facts": true
+  },
+  "exclusion": {
+    "blocked_from_training_document_ids": [
+      "gsa-l100-2026",
+      "gsa-amendment-template-2021",
+      "pandadoc-commercial-lease-template",
+      "st-joseph-concession-2020",
+      "sample-office-lease"
+    ],
+    "blocked_rights": [
+      "review_required",
+      "restricted"
+    ],
+    "official_benchmark_test_splits": true,
+    "user_uploaded_documents": true,
+    "exact_duplicates": true,
+    "near_duplicates_across_splits": true
+  },
+  "quality": {
+    "min_source_text_chars": 40,
+    "near_duplicate_threshold": 0.9,
+    "shingle_size": 5,
+    "preference_requires_ranking_reason": true,
+    "evidence_must_occur_in_source": true,
+    "quality_sample_per_subset": 2
+  },
+  "splits": {
+    "method": "family_hash",
+    "salt": "leaseguard-dataset-v1",
+    "train_percent": 70,
+    "validation_percent": 15,
+    "test_percent": 15
+  },
+  "subsets": [
+    "raw_domain_text",
+    "structured_extraction",
+    "evidence_conversation",
+    "refusal_uncertainty",
+    "multi_turn",
+    "preference_pairs"
+  ]
+}

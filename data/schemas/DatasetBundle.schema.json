@@ -1,0 +1,2221 @@
+{
+  "$defs": {
+    "AmendmentAction": {
+      "description": "How an amendment changes an earlier document.",
+      "enum": [
+        "add",
+        "delete",
+        "replace",
+        "modify",
+        "confirm",
+        "other"
+      ],
+      "title": "AmendmentAction",
+      "type": "string"
+    },
+    "AmendmentEffect": {
+      "additionalProperties": false,
+      "description": "One explicit change an amendment makes to an earlier lease.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/AmendmentAction"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "effect_id": {
+          "minLength": 1,
+          "title": "Effect Id",
+          "type": "string"
+        },
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "target_clause_reference": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Clause Reference"
+        },
+        "target_document_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Document Id"
+        }
+      },
+      "required": [
+        "effect_id",
+        "action",
+        "description",
+        "evidence"
+      ],
+      "title": "AmendmentEffect",
+      "type": "object"
+    },
+    "AnswerStatus": {
+      "description": "Evidence status for a document-grounded answer.",
+      "enum": [
+        "answered",
+        "insufficient_evidence",
+        "conflicting_evidence",
+        "unreadable_source"
+      ],
+      "title": "AnswerStatus",
+      "type": "string"
+    },
+    "Clause": {
+      "additionalProperties": false,
+      "description": "A classified section of lease text.",
+      "properties": {
+        "clause_id": {
+          "minLength": 1,
+          "title": "Clause Id",
+          "type": "string"
+        },
+        "clause_types": {
+          "items": {
+            "$ref": "#/$defs/ClauseType"
+          },
+          "minItems": 1,
+          "title": "Clause Types",
+          "type": "array"
+        },
+        "heading": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading"
+        },
+        "page_end": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page End"
+        },
+        "page_start": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Start"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clause_id",
+        "clause_types",
+        "text"
+      ],
+      "title": "Clause",
+      "type": "object"
+    },
+    "ClauseType": {
+      "description": "Clause labels supported by ontology version 1.",
+      "enum": [
+        "parties",
+        "premises",
+        "property_use",
+        "definitions",
+        "lease_term",
+        "commencement",
+        "expiration",
+        "renewal_option",
+        "extension_option",
+        "early_termination",
+        "base_rent",
+        "additional_rent",
+        "rent_increase",
+        "rent_abatement",
+        "tenant_share",
+        "security_deposit",
+        "operating_expenses",
+        "common_area_maintenance",
+        "taxes",
+        "insurance",
+        "late_fees",
+        "percentage_rent",
+        "maintenance",
+        "repairs",
+        "utilities",
+        "alterations",
+        "tenant_improvements",
+        "delivery_condition",
+        "access",
+        "common_areas",
+        "signage",
+        "parking",
+        "continuous_operation",
+        "co_tenancy",
+        "exclusivity",
+        "radius_restriction",
+        "prohibited_use",
+        "relocation",
+        "assignment",
+        "subletting",
+        "change_of_control",
+        "amendment",
+        "notice",
+        "holdover",
+        "surrender",
+        "subordination",
+        "non_disturbance",
+        "estoppel",
+        "liens",
+        "brokerage",
+        "default",
+        "cure_period",
+        "remedies",
+        "indemnity",
+        "liability",
+        "damage_and_destruction",
+        "condemnation",
+        "force_majeure",
+        "accessibility",
+        "environmental",
+        "compliance_with_laws",
+        "services",
+        "janitorial",
+        "security",
+        "dispute_resolution",
+        "governing_law",
+        "guarantee",
+        "exhibit",
+        "schedule",
+        "other"
+      ],
+      "title": "ClauseType",
+      "type": "string"
+    },
+    "ConversationTurn": {
+      "additionalProperties": false,
+      "description": "One user or assistant turn in a multi-turn lease conversation.",
+      "properties": {
+        "answer": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentAnswer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "role": {
+          "enum": [
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "text"
+      ],
+      "title": "ConversationTurn",
+      "type": "object"
+    },
+    "DatasetChecksums": {
+      "additionalProperties": false,
+      "description": "SHA-256 digests for the configuration and each subset.",
+      "properties": {
+        "config_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Config Sha256",
+          "type": "string"
+        },
+        "records_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Records Sha256",
+          "type": "string"
+        },
+        "subsets": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subsets",
+          "type": "object"
+        }
+      },
+      "required": [
+        "config_sha256",
+        "records_sha256",
+        "subsets"
+      ],
+      "title": "DatasetChecksums",
+      "type": "object"
+    },
+    "DatasetStatistics": {
+      "additionalProperties": false,
+      "description": "Summary counts for a built dataset.",
+      "properties": {
+        "family_count": {
+          "minimum": 0,
+          "title": "Family Count",
+          "type": "integer"
+        },
+        "license_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "License Counts",
+          "type": "object"
+        },
+        "record_count": {
+          "minimum": 0,
+          "title": "Record Count",
+          "type": "integer"
+        },
+        "source_count": {
+          "minimum": 0,
+          "title": "Source Count",
+          "type": "integer"
+        },
+        "split_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "train",
+              "validation",
+              "test"
+            ]
+          },
+          "title": "Split Counts",
+          "type": "object"
+        },
+        "subset_counts": {
+          "items": {
+            "$ref": "#/$defs/SubsetCounts"
+          },
+          "title": "Subset Counts",
+          "type": "array"
+        },
+        "synthetic_count": {
+          "minimum": 0,
+          "title": "Synthetic Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "record_count",
+        "family_count",
+        "source_count",
+        "split_counts",
+        "subset_counts",
+        "license_counts",
+        "synthetic_count"
+      ],
+      "title": "DatasetStatistics",
+      "type": "object"
+    },
+    "DateTerm": {
+      "additionalProperties": false,
+      "description": "A source expression and optional normalized calendar date.",
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "normalized_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Date"
+        },
+        "original_text": {
+          "minLength": 1,
+          "title": "Original Text",
+          "type": "string"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger"
+        }
+      },
+      "required": [
+        "label",
+        "original_text",
+        "evidence"
+      ],
+      "title": "DateTerm",
+      "type": "object"
+    },
+    "DocumentAnswer": {
+      "additionalProperties": false,
+      "description": "Simple and structured answer grounded in one or more evidence spans.",
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "perspective": {
+          "$ref": "#/$defs/StakeholderPerspective"
+        },
+        "question": {
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/AnswerStatus"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "question",
+        "perspective",
+        "status",
+        "explanation",
+        "confidence"
+      ],
+      "title": "DocumentAnswer",
+      "type": "object"
+    },
+    "DocumentType": {
+      "description": "Supported document types.",
+      "enum": [
+        "office_lease",
+        "retail_lease",
+        "amendment",
+        "exhibit",
+        "other_related"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    },
+    "EvidenceConversationRecord": {
+      "additionalProperties": false,
+      "description": "Single-turn question and evidence-grounded answer.",
+      "properties": {
+        "answer": {
+          "$ref": "#/$defs/DocumentAnswer"
+        },
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "perspective": {
+          "$ref": "#/$defs/StakeholderPerspective"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "evidence_conversation",
+          "default": "evidence_conversation",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "perspective",
+        "answer"
+      ],
+      "title": "EvidenceConversationRecord",
+      "type": "object"
+    },
+    "EvidenceSpan": {
+      "additionalProperties": false,
+      "description": "Exact text supporting an extracted fact or answer.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "end_char": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Char"
+        },
+        "page_label": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Label"
+        },
+        "page_number": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "start_char": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Char"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "text"
+      ],
+      "title": "EvidenceSpan",
+      "type": "object"
+    },
+    "LeaseExtraction": {
+      "additionalProperties": false,
+      "description": "Complete structured extraction result for one lease document.",
+      "properties": {
+        "amendment_effects": {
+          "items": {
+            "$ref": "#/$defs/AmendmentEffect"
+          },
+          "title": "Amendment Effects",
+          "type": "array"
+        },
+        "clauses": {
+          "items": {
+            "$ref": "#/$defs/Clause"
+          },
+          "title": "Clauses",
+          "type": "array"
+        },
+        "date_terms": {
+          "items": {
+            "$ref": "#/$defs/DateTerm"
+          },
+          "title": "Date Terms",
+          "type": "array"
+        },
+        "monetary_terms": {
+          "items": {
+            "$ref": "#/$defs/MonetaryTerm"
+          },
+          "title": "Monetary Terms",
+          "type": "array"
+        },
+        "obligations": {
+          "items": {
+            "$ref": "#/$defs/Obligation"
+          },
+          "title": "Obligations",
+          "type": "array"
+        },
+        "parties": {
+          "items": {
+            "$ref": "#/$defs/Party"
+          },
+          "title": "Parties",
+          "type": "array"
+        },
+        "premises": {
+          "items": {
+            "$ref": "#/$defs/Premises"
+          },
+          "title": "Premises",
+          "type": "array"
+        },
+        "related_document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Document Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "1.0.0",
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceDocument"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "title": "LeaseExtraction",
+      "type": "object"
+    },
+    "MonetaryTerm": {
+      "additionalProperties": false,
+      "description": "A source expression and optional normalized monetary value.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "default": "USD",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "frequency": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frequency"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "original_text": {
+          "minLength": 1,
+          "title": "Original Text",
+          "type": "string"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period"
+        },
+        "rate_basis": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Basis"
+        }
+      },
+      "required": [
+        "label",
+        "original_text",
+        "evidence"
+      ],
+      "title": "MonetaryTerm",
+      "type": "object"
+    },
+    "MultiTurnRecord": {
+      "additionalProperties": false,
+      "description": "Follow-up conversation that stays on the same agreement family.",
+      "properties": {
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "perspective": {
+          "$ref": "#/$defs/StakeholderPerspective"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "multi_turn",
+          "default": "multi_turn",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        },
+        "turns": {
+          "items": {
+            "$ref": "#/$defs/ConversationTurn"
+          },
+          "minItems": 2,
+          "title": "Turns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "perspective",
+        "turns"
+      ],
+      "title": "MultiTurnRecord",
+      "type": "object"
+    },
+    "Obligation": {
+      "additionalProperties": false,
+      "description": "An action a named party is required to perform.",
+      "properties": {
+        "action": {
+          "minLength": 1,
+          "title": "Action",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MonetaryTerm"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "beneficiary": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Beneficiary"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "due_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Due Date"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "obligation_id": {
+          "minLength": 1,
+          "title": "Obligation Id",
+          "type": "string"
+        },
+        "recurrence": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recurrence"
+        },
+        "relative_deadline": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relative Deadline"
+        },
+        "responsible_party": {
+          "minLength": 1,
+          "title": "Responsible Party",
+          "type": "string"
+        },
+        "timing_type": {
+          "$ref": "#/$defs/TimingType"
+        },
+        "timing_unit": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimingUnit"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timing_value": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timing Value"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trigger"
+        }
+      },
+      "required": [
+        "obligation_id",
+        "responsible_party",
+        "action",
+        "timing_type",
+        "evidence"
+      ],
+      "title": "Obligation",
+      "type": "object"
+    },
+    "Party": {
+      "additionalProperties": false,
+      "description": "A named party and its role in the lease.",
+      "properties": {
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/PartyRole"
+        }
+      },
+      "required": [
+        "name",
+        "role",
+        "evidence"
+      ],
+      "title": "Party",
+      "type": "object"
+    },
+    "PartyRole": {
+      "description": "Roles a named party may have in a lease.",
+      "enum": [
+        "landlord",
+        "tenant",
+        "guarantor",
+        "property_manager",
+        "other"
+      ],
+      "title": "PartyRole",
+      "type": "string"
+    },
+    "PreferencePairRecord": {
+      "additionalProperties": false,
+      "description": "Two responses with an explicit human ranking.",
+      "properties": {
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "perspective": {
+          "$ref": "#/$defs/StakeholderPerspective"
+        },
+        "preferred": {
+          "$ref": "#/$defs/RankedResponse"
+        },
+        "prompt": {
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "ranking_reason": {
+          "minLength": 8,
+          "title": "Ranking Reason",
+          "type": "string"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rejected": {
+          "$ref": "#/$defs/RankedResponse"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "preference_pairs",
+          "default": "preference_pairs",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "perspective",
+        "prompt",
+        "preferred",
+        "rejected",
+        "ranking_reason"
+      ],
+      "title": "PreferencePairRecord",
+      "type": "object"
+    },
+    "Premises": {
+      "additionalProperties": false,
+      "description": "A physical space included in the lease.",
+      "properties": {
+        "address": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Address"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "floor": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Floor"
+        },
+        "permitted_use": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Permitted Use"
+        },
+        "property_name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Property Name"
+        },
+        "rentable_square_feet": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rentable Square Feet"
+        },
+        "suite": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suite"
+        },
+        "usable_square_feet": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usable Square Feet"
+        }
+      },
+      "required": [
+        "description",
+        "evidence"
+      ],
+      "title": "Premises",
+      "type": "object"
+    },
+    "QualitySample": {
+      "additionalProperties": false,
+      "description": "One record selected for manual review.",
+      "properties": {
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "review_status": {
+          "default": "pending_review",
+          "enum": [
+            "pending_review",
+            "accepted",
+            "rejected"
+          ],
+          "title": "Review Status",
+          "type": "string"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "test"
+          ],
+          "title": "Split",
+          "type": "string"
+        },
+        "subset": {
+          "enum": [
+            "raw_domain_text",
+            "structured_extraction",
+            "evidence_conversation",
+            "refusal_uncertainty",
+            "multi_turn",
+            "preference_pairs"
+          ],
+          "title": "Subset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "subset",
+        "split"
+      ],
+      "title": "QualitySample",
+      "type": "object"
+    },
+    "RankedResponse": {
+      "additionalProperties": false,
+      "description": "One side of a preference pair.",
+      "properties": {
+        "answer": {
+          "$ref": "#/$defs/DocumentAnswer"
+        },
+        "invented_facts": {
+          "default": false,
+          "title": "Invented Facts",
+          "type": "boolean"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "answer"
+      ],
+      "title": "RankedResponse",
+      "type": "object"
+    },
+    "RawDomainRecord": {
+      "additionalProperties": false,
+      "description": "Lease-domain text used for language exposure, not labelled extraction.",
+      "properties": {
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "document_type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "raw_domain_text",
+          "default": "raw_domain_text",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "document_type"
+      ],
+      "title": "RawDomainRecord",
+      "type": "object"
+    },
+    "RefusalRecord": {
+      "additionalProperties": false,
+      "description": "Uncertainty, missing evidence, or out-of-scope refusal.",
+      "properties": {
+        "answer": {
+          "$ref": "#/$defs/DocumentAnswer"
+        },
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "perspective": {
+          "$ref": "#/$defs/StakeholderPerspective"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "refusal_uncertainty",
+          "default": "refusal_uncertainty",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "perspective",
+        "answer"
+      ],
+      "title": "RefusalRecord",
+      "type": "object"
+    },
+    "RightsStatus": {
+      "description": "Review status for using and redistributing a source.",
+      "enum": [
+        "public_domain",
+        "open_license",
+        "permission_granted",
+        "review_required",
+        "restricted"
+      ],
+      "title": "RightsStatus",
+      "type": "string"
+    },
+    "SourceDocument": {
+      "additionalProperties": false,
+      "description": "Identity, provenance, and scope information for one document.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "filename": {
+          "minLength": 1,
+          "title": "Filename",
+          "type": "string"
+        },
+        "governing_law_text": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Governing Law Text"
+        },
+        "is_template": {
+          "default": false,
+          "title": "Is Template",
+          "type": "boolean"
+        },
+        "jurisdiction": {
+          "const": "US",
+          "default": "US",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "language": {
+          "const": "en",
+          "default": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "normalized_text_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Text Sha256"
+        },
+        "retrieved_at": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retrieved At"
+        },
+        "rights_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Notes"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "minLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "filename",
+        "sha256",
+        "document_type",
+        "source_name",
+        "rights_status"
+      ],
+      "title": "SourceDocument",
+      "type": "object"
+    },
+    "SourceLicenseRecord": {
+      "additionalProperties": false,
+      "description": "License and rights metadata for one document used in the dataset.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "rights_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Notes"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        },
+        "training_eligible": {
+          "title": "Training Eligible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "source_name",
+        "rights_status",
+        "training_eligible"
+      ],
+      "title": "SourceLicenseRecord",
+      "type": "object"
+    },
+    "StakeholderPerspective": {
+      "description": "Perspective requested for an explanation.",
+      "enum": [
+        "landlord",
+        "tenant",
+        "neutral"
+      ],
+      "title": "StakeholderPerspective",
+      "type": "string"
+    },
+    "StructuredExtractionRecord": {
+      "additionalProperties": false,
+      "description": "Ontology-valid labelled extraction grounded in source text.",
+      "properties": {
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "extraction": {
+          "$ref": "#/$defs/LeaseExtraction"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_texts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "minProperties": 1,
+          "title": "Source Texts",
+          "type": "object"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "enum": [
+                "train",
+                "validation",
+                "test"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "subset": {
+          "const": "structured_extraction",
+          "default": "structured_extraction",
+          "title": "Subset",
+          "type": "string"
+        },
+        "synthetic": {
+          "default": false,
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "document_ids",
+        "source_texts",
+        "rights_status",
+        "source_name",
+        "extraction"
+      ],
+      "title": "StructuredExtractionRecord",
+      "type": "object"
+    },
+    "SubsetCounts": {
+      "additionalProperties": false,
+      "description": "Example counts for one subset.",
+      "properties": {
+        "subset": {
+          "enum": [
+            "raw_domain_text",
+            "structured_extraction",
+            "evidence_conversation",
+            "refusal_uncertainty",
+            "multi_turn",
+            "preference_pairs"
+          ],
+          "title": "Subset",
+          "type": "string"
+        },
+        "test": {
+          "minimum": 0,
+          "title": "Test",
+          "type": "integer"
+        },
+        "total": {
+          "minimum": 0,
+          "title": "Total",
+          "type": "integer"
+        },
+        "train": {
+          "minimum": 0,
+          "title": "Train",
+          "type": "integer"
+        },
+        "validation": {
+          "minimum": 0,
+          "title": "Validation",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "subset",
+        "total",
+        "train",
+        "validation",
+        "test"
+      ],
+      "title": "SubsetCounts",
+      "type": "object"
+    },
+    "TimingType": {
+      "description": "How an obligation's timing is expressed.",
+      "enum": [
+        "fixed_date",
+        "relative_deadline",
+        "recurring",
+        "event_based",
+        "unstated"
+      ],
+      "title": "TimingType",
+      "type": "string"
+    },
+    "TimingUnit": {
+      "description": "Normalized unit for a relative obligation deadline.",
+      "enum": [
+        "day",
+        "business_day",
+        "month",
+        "year"
+      ],
+      "title": "TimingUnit",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete Dataset v1 artifact, small enough to validate locally.",
+  "properties": {
+    "checksums": {
+      "$ref": "#/$defs/DatasetChecksums"
+    },
+    "dataset_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "evidence_conversation": {
+      "items": {
+        "$ref": "#/$defs/EvidenceConversationRecord"
+      },
+      "title": "Evidence Conversation",
+      "type": "array"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "multi_turn": {
+      "items": {
+        "$ref": "#/$defs/MultiTurnRecord"
+      },
+      "title": "Multi Turn",
+      "type": "array"
+    },
+    "ontology_version": {
+      "const": "1.0.0",
+      "title": "Ontology Version",
+      "type": "string"
+    },
+    "preference_pairs": {
+      "items": {
+        "$ref": "#/$defs/PreferencePairRecord"
+      },
+      "title": "Preference Pairs",
+      "type": "array"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "quality_samples": {
+      "items": {
+        "$ref": "#/$defs/QualitySample"
+      },
+      "title": "Quality Samples",
+      "type": "array"
+    },
+    "raw_domain_text": {
+      "items": {
+        "$ref": "#/$defs/RawDomainRecord"
+      },
+      "title": "Raw Domain Text",
+      "type": "array"
+    },
+    "refusal_uncertainty": {
+      "items": {
+        "$ref": "#/$defs/RefusalRecord"
+      },
+      "title": "Refusal Uncertainty",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceLicenseRecord"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "statistics": {
+      "$ref": "#/$defs/DatasetStatistics"
+    },
+    "structured_extraction": {
+      "items": {
+        "$ref": "#/$defs/StructuredExtractionRecord"
+      },
+      "title": "Structured Extraction",
+      "type": "array"
+    }
+  },
+  "required": [
+    "ontology_version",
+    "frozen_on",
+    "purpose",
+    "sources",
+    "raw_domain_text",
+    "structured_extraction",
+    "evidence_conversation",
+    "refusal_uncertainty",
+    "multi_turn",
+    "preference_pairs",
+    "statistics",
+    "checksums"
+  ],
+  "title": "DatasetBundle",
+  "type": "object"
+}

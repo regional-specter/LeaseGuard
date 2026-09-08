@@ -20,7 +20,13 @@ Document-pipeline records currently expose:
 - `ProcessedDocument.schema.json` for intermediate parsed records.
 - `BatchReport.schema.json` for one pipeline run.
 
-The source models live in `src/leaseguard/ontology` and `src/leaseguard/evaluation`. Regenerate the JSON Schema files after an approved model change:
+Dataset v1 records currently expose:
+
+- `DatasetConfig.schema.json` for inclusion, exclusion, quality, and split rules.
+- `DatasetBundle.schema.json` for a checksummed dataset artifact.
+- `DatasetReport.schema.json` for build and validation results.
+
+The source models live in `src/leaseguard/ontology`, `src/leaseguard/evaluation`, `src/leaseguard/ingestion`, `src/leaseguard/preprocessing`, and `src/leaseguard/dataset`. Regenerate the JSON Schema files after an approved model change:
 
 ```bash
 uv run python scripts/prepare/export_schemas.py

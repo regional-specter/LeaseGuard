@@ -1,0 +1,52 @@
+{
+  "reviewed_on": "2026-09-08",
+  "reviewer": "dataset-v1-seed",
+  "notes": "Manual review of the tiny synthetic seed: evidence quotes match source text, families stay together, no official-benchmark or regression IDs, and preference ranking is explicit.",
+  "samples": [
+    {
+      "record_id": "ds1-raw-office",
+      "review_status": "accepted",
+      "notes": "Office domain text is synthetic and internally consistent."
+    },
+    {
+      "record_id": "ds1-raw-retail",
+      "review_status": "accepted",
+      "notes": "Retail domain text includes percentage rent and continuous operation."
+    },
+    {
+      "record_id": "ds1-extract-amendment",
+      "review_status": "accepted",
+      "notes": "Amendment stays in the office family and records a replace effect."
+    },
+    {
+      "record_id": "ds1-extract-office",
+      "review_status": "accepted",
+      "notes": "Office extraction quotes exist in the source string."
+    },
+    {
+      "record_id": "ds1-qa-office-rent",
+      "review_status": "accepted",
+      "notes": "Grounded rent question."
+    },
+    {
+      "record_id": "ds1-qa-retail-pct",
+      "review_status": "accepted",
+      "notes": "Grounded percentage-rent question."
+    },
+    {
+      "record_id": "ds1-refuse-state-law",
+      "review_status": "accepted",
+      "notes": "Correct abstention on a state-law question."
+    },
+    {
+      "record_id": "ds1-multiturn-office",
+      "review_status": "accepted",
+      "notes": "Follow-up stays on the same family and evidence."
+    },
+    {
+      "record_id": "ds1-pref-late-fee",
+      "review_status": "accepted",
+      "notes": "Preferred abstention clearly outranks an invented late fee."
+    }
+  ]
+}

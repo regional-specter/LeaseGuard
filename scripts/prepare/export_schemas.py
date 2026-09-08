@@ -5,6 +5,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from leaseguard.dataset import DatasetBundle, DatasetConfig, DatasetReport
 from leaseguard.evaluation import (
     BenchmarkRegistry,
     BenchmarkRun,
@@ -26,6 +27,9 @@ SCHEMA_MODELS: tuple[type[BaseModel], ...] = (
     PipelineConfig,
     BatchReport,
     ProcessedDocument,
+    DatasetConfig,
+    DatasetBundle,
+    DatasetReport,
 )
 OUTPUT_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "schemas"
 

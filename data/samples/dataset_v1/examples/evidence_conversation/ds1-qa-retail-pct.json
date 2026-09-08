@@ -1,0 +1,30 @@
+{
+  "record_id": "ds1-qa-retail-pct",
+  "subset": "evidence_conversation",
+  "family_id": "ds1-retail-family",
+  "document_ids": ["ds1-retail-lease"],
+  "source_texts": {
+    "ds1-retail-lease": "Landlord leases the retail premises known as Unit 12 in the Westfield Gallery to Tenant for the sale of apparel. Tenant shall pay annual base rent of USD 48,000 plus percentage rent equal to six percent (6%) of gross sales above the breakpoint. Tenant shall continuously operate during mall hours."
+  },
+  "rights_status": "open_license",
+  "source_license": "CC0-1.0",
+  "source_name": "LeaseGuard Dataset v1 synthetic retail lease",
+  "synthetic": true,
+  "perspective": "tenant",
+  "answer": {
+    "schema_version": "1.0.0",
+    "question": "What percentage rent does this retail lease require?",
+    "perspective": "tenant",
+    "status": "answered",
+    "explanation": "The tenant also pays percentage rent equal to six percent of gross sales above the breakpoint, in addition to USD 48,000 annual base rent.",
+    "confidence": 0.94,
+    "evidence": [
+      {
+        "document_id": "ds1-retail-lease",
+        "text": "percentage rent equal to six percent (6%) of gross sales above the breakpoint",
+        "section": "Rent"
+      }
+    ],
+    "warnings": ["Synthetic Dataset v1 seed."]
+  }
+}

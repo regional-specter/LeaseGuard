@@ -30,6 +30,8 @@ htmlcov/
 
 # Datasets: keep only documentation, manifests, schemas, and small samples
 data/raw/
+data/datasets/*
+!data/datasets/README.md
 data/interim/
 data/processed/
 data/annotations/
