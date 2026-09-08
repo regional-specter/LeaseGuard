@@ -236,6 +236,12 @@ There is no blended “LeaseGuard score.” Numeric thresholds are frozen only a
 
 The local repository holds code, schemas, manifests, tiny samples, and tests. Bulk parsing, dataset generation, evaluation, fine-tuning, and model export run in Colab. Full datasets, CUDA libraries, Unsloth, model weights, and checkpoints must stay off the local machine.
 
+Process approved source documents locally only when the files are already on disk:
+
+```bash
+uv run python scripts/collect/process_documents.py validate-manifest
+```
+
 Colab sessions have time and storage limits, so every heavy task must support checkpoints, safe restarts, pinned configurations, and remote output storage.
 
 ## Important Principle

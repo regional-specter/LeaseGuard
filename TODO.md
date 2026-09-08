@@ -2,11 +2,11 @@
 
 This checklist tracks the implementation plan in [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md). Update it in the same commit as completed work so progress remains visible outside chat history.
 
-Last reviewed: 2026-09-07
+Last reviewed: 2026-09-08
 
 ## Current Focus
 
-Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 3 is complete: professional benchmarks are pinned, and the internal lease suite is regression only. The next goal is Phase 4: the document pipeline and Colab orchestration for heavy jobs.
+Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 4 is complete: approved sources can be parsed into checkpointed intermediate records. The next goal is Phase 5: Dataset v1.
 
 ## Phase 0 — Product Decisions
 
@@ -100,26 +100,26 @@ Phase 2 is complete. Ontology version `1.0.0` is frozen. Phase 3 is complete: pr
 
 ## Phase 4 — Document Pipeline
 
-- [ ] Create one Google Colab T4 notebook that selects and runs every heavy task.
-- [ ] Keep the Colab notebook as a thin caller of package code and versioned configurations.
-- [ ] Mount approved remote storage for corpora, checkpoints, and generated artifacts.
-- [ ] Add checkpoint and resume behavior for Colab session limits.
-- [ ] Define the source-manifest format.
-- [ ] Record source URL, license, date, jurisdiction, and checksum.
-- [ ] Implement approved document downloading and local importing.
-- [ ] Validate file type and file integrity.
-- [ ] Parse digital PDF files while preserving page boundaries.
-- [ ] Parse DOCX files while preserving headings and tables.
-- [ ] Keep raw documents unchanged.
-- [ ] Create separate normalized and labelled records.
-- [ ] Segment documents into headings, sections, clauses, tables, and exhibits.
-- [ ] Detect exact duplicates.
-- [ ] Detect near-duplicate filings.
-- [ ] Link leases, amendments, exhibits, and related documents by family.
-- [ ] Detect and redact private information where required.
-- [ ] Validate processed records against the Phase 2 schemas.
-- [ ] Add pipeline unit and integration tests.
-- [ ] Produce processing reports with errors and warnings.
+- [x] Create one Google Colab T4 notebook that selects and runs every heavy task.
+- [x] Keep the Colab notebook as a thin caller of package code and versioned configurations.
+- [x] Mount approved remote storage for corpora, checkpoints, and generated artifacts.
+- [x] Add checkpoint and resume behavior for Colab session limits.
+- [x] Define the source-manifest format.
+- [x] Record source URL, license, date, jurisdiction, and checksum.
+- [x] Implement approved document downloading and local importing.
+- [x] Validate file type and file integrity.
+- [x] Parse digital PDF files while preserving page boundaries.
+- [x] Parse DOCX files while preserving headings and tables.
+- [x] Keep raw documents unchanged.
+- [x] Create separate normalized and labelled records.
+- [x] Segment documents into headings, sections, clauses, tables, and exhibits.
+- [x] Detect exact duplicates.
+- [x] Detect near-duplicate filings.
+- [x] Link leases, amendments, exhibits, and related documents by family.
+- [x] Detect and redact private information where required.
+- [x] Validate processed records against the Phase 2 schemas.
+- [x] Add pipeline unit and integration tests.
+- [x] Produce processing reports with errors and warnings.
 
 **Completion gate:** An approved source can be reproduced from its manifest entry as a validated intermediate record.
 

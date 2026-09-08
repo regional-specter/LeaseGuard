@@ -1,0 +1,9 @@
+{
+  "pipeline_version": "1.0.0",
+  "allowed_media_types": ["pdf", "docx", "markdown", "text"],
+  "max_file_bytes": 20971520,
+  "near_duplicate_threshold": 0.85,
+  "ocr_enabled": false,
+  "allow_download_env": "LEASEGUARD_ALLOW_DOCUMENT_DOWNLOAD",
+  "shingle_size": 5
+}

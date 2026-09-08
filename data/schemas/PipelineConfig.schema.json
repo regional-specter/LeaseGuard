@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "description": "Limits and policies for document acquisition and parsing.",
+  "properties": {
+    "allow_download_env": {
+      "minLength": 1,
+      "title": "Allow Download Env",
+      "type": "string"
+    },
+    "allowed_media_types": {
+      "items": {
+        "enum": [
+          "pdf",
+          "docx",
+          "markdown",
+          "text"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Media Types",
+      "type": "array"
+    },
+    "max_file_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Max File Bytes",
+      "type": "integer"
+    },
+    "near_duplicate_threshold": {
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "title": "Near Duplicate Threshold",
+      "type": "number"
+    },
+    "ocr_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Ocr Enabled",
+      "type": "boolean"
+    },
+    "pipeline_version": {
+      "const": "1.0.0",
+      "title": "Pipeline Version",
+      "type": "string"
+    },
+    "shingle_size": {
+      "default": 5,
+      "maximum": 16,
+      "minimum": 2,
+      "title": "Shingle Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "pipeline_version",
+    "allowed_media_types",
+    "max_file_bytes",
+    "near_duplicate_threshold",
+    "allow_download_env"
+  ],
+  "title": "PipelineConfig",
+  "type": "object"
+}

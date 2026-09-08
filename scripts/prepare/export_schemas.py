@@ -11,7 +11,9 @@ from leaseguard.evaluation import (
     RegressionReport,
     RegressionSuiteConfig,
 )
+from leaseguard.ingestion import BatchReport, PipelineConfig, SourceManifest
 from leaseguard.ontology import DocumentAnswer, LeaseExtraction
+from leaseguard.preprocessing import ProcessedDocument
 
 SCHEMA_MODELS: tuple[type[BaseModel], ...] = (
     LeaseExtraction,
@@ -20,6 +22,10 @@ SCHEMA_MODELS: tuple[type[BaseModel], ...] = (
     BenchmarkRun,
     RegressionReport,
     RegressionSuiteConfig,
+    SourceManifest,
+    PipelineConfig,
+    BatchReport,
+    ProcessedDocument,
 )
 OUTPUT_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "schemas"
 

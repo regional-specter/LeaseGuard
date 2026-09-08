@@ -12,7 +12,9 @@ from leaseguard.evaluation import (
     RegressionReport,
     RegressionSuiteConfig,
 )
+from leaseguard.ingestion import BatchReport, PipelineConfig, SourceManifest
 from leaseguard.ontology import SCHEMA_VERSION, DocumentAnswer, LeaseExtraction
+from leaseguard.preprocessing import ProcessedDocument
 
 SCHEMA_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "schemas"
 SAMPLE_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "samples"
@@ -28,6 +30,10 @@ VALIDATION_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "validatio
         BenchmarkRun,
         RegressionReport,
         RegressionSuiteConfig,
+        SourceManifest,
+        PipelineConfig,
+        BatchReport,
+        ProcessedDocument,
     ],
 )
 def test_committed_json_schema_matches_model(model: type[BaseModel]) -> None:

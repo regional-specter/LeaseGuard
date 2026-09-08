@@ -1,0 +1,218 @@
+{
+  "$defs": {
+    "FamilyGroup": {
+      "additionalProperties": false,
+      "description": "Documents that must stay together across dataset splits.",
+      "properties": {
+        "document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Document Ids",
+          "type": "array"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "family_id",
+        "document_ids"
+      ],
+      "title": "FamilyGroup",
+      "type": "object"
+    },
+    "ProcessingIssue": {
+      "additionalProperties": false,
+      "description": "One warning or error produced while processing a document.",
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "warning",
+            "error"
+          ],
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "severity",
+        "code",
+        "message"
+      ],
+      "title": "ProcessingIssue",
+      "type": "object"
+    },
+    "ProcessingReport": {
+      "additionalProperties": false,
+      "description": "Machine-readable result for one manifest entry.",
+      "properties": {
+        "completed_stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "acquired",
+                "validated",
+                "parsed",
+                "normalized",
+                "segmented",
+                "redacted",
+                "exported"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed Stage"
+        },
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "duplicate_of": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duplicate Of"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/ProcessingIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "near_duplicate_of": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Near Duplicate Of",
+          "type": "array"
+        },
+        "output_path": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Path"
+        },
+        "raw_bytes_unchanged": {
+          "default": true,
+          "title": "Raw Bytes Unchanged",
+          "type": "boolean"
+        },
+        "raw_path": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Path"
+        },
+        "status": {
+          "enum": [
+            "exported",
+            "skipped",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "status"
+      ],
+      "title": "ProcessingReport",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One pipeline run over a source manifest.",
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "families": {
+      "items": {
+        "$ref": "#/$defs/FamilyGroup"
+      },
+      "title": "Families",
+      "type": "array"
+    },
+    "pipeline_version": {
+      "const": "1.0.0",
+      "title": "Pipeline Version",
+      "type": "string"
+    },
+    "reports": {
+      "items": {
+        "$ref": "#/$defs/ProcessingReport"
+      },
+      "title": "Reports",
+      "type": "array"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "pipeline_version",
+    "started_at",
+    "completed_at",
+    "reports"
+  ],
+  "title": "BatchReport",
+  "type": "object"
+}

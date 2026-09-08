@@ -1,0 +1,381 @@
+{
+  "$defs": {
+    "DocumentType": {
+      "description": "Supported document types.",
+      "enum": [
+        "office_lease",
+        "retail_lease",
+        "amendment",
+        "exhibit",
+        "other_related"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    },
+    "PageRecord": {
+      "additionalProperties": false,
+      "description": "Text extracted from one physical page or equivalent unit.",
+      "properties": {
+        "page_number": {
+          "minimum": 1,
+          "title": "Page Number",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page_number",
+        "text"
+      ],
+      "title": "PageRecord",
+      "type": "object"
+    },
+    "RightsStatus": {
+      "description": "Review status for using and redistributing a source.",
+      "enum": [
+        "public_domain",
+        "open_license",
+        "permission_granted",
+        "review_required",
+        "restricted"
+      ],
+      "title": "RightsStatus",
+      "type": "string"
+    },
+    "SourceDocument": {
+      "additionalProperties": false,
+      "description": "Identity, provenance, and scope information for one document.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "filename": {
+          "minLength": 1,
+          "title": "Filename",
+          "type": "string"
+        },
+        "governing_law_text": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Governing Law Text"
+        },
+        "is_template": {
+          "default": false,
+          "title": "Is Template",
+          "type": "boolean"
+        },
+        "jurisdiction": {
+          "const": "US",
+          "default": "US",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "language": {
+          "const": "en",
+          "default": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "normalized_text_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Text Sha256"
+        },
+        "retrieved_at": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retrieved At"
+        },
+        "rights_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Notes"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "minLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "filename",
+        "sha256",
+        "document_type",
+        "source_name",
+        "rights_status"
+      ],
+      "title": "SourceDocument",
+      "type": "object"
+    },
+    "TextBlock": {
+      "additionalProperties": false,
+      "description": "A heading, paragraph, table, or exhibit with character offsets.",
+      "properties": {
+        "block_id": {
+          "minLength": 1,
+          "title": "Block Id",
+          "type": "string"
+        },
+        "end_char": {
+          "minimum": 1,
+          "title": "End Char",
+          "type": "integer"
+        },
+        "heading": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "paragraph",
+            "table",
+            "exhibit",
+            "page"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "page_number": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Number"
+        },
+        "start_char": {
+          "minimum": 0,
+          "title": "Start Char",
+          "type": "integer"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "block_id",
+        "kind",
+        "text",
+        "start_char",
+        "end_char"
+      ],
+      "title": "TextBlock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Validated intermediate record between raw files and labelled ontology output.",
+  "properties": {
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/TextBlock"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "duplicate_of": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duplicate Of"
+    },
+    "media_type": {
+      "enum": [
+        "pdf",
+        "docx",
+        "markdown",
+        "text"
+      ],
+      "title": "Media Type",
+      "type": "string"
+    },
+    "near_duplicate_of": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Near Duplicate Of",
+      "type": "array"
+    },
+    "normalized_text": {
+      "title": "Normalized Text",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageRecord"
+      },
+      "minItems": 1,
+      "title": "Pages",
+      "type": "array"
+    },
+    "raw_path": {
+      "minLength": 1,
+      "title": "Raw Path",
+      "type": "string"
+    },
+    "redaction_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Redaction Codes",
+      "type": "array"
+    },
+    "related_document_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Document Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceDocument"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source",
+    "media_type",
+    "raw_path",
+    "pages",
+    "normalized_text"
+  ],
+  "title": "ProcessedDocument",
+  "type": "object"
+}

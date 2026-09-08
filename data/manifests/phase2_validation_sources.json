@@ -14,6 +14,13 @@
       "rights_status": "public_domain",
       "rights_notes": "Official US General Services Administration template. Treated as a US federal government work under 17 U.S.C. 105; provenance must remain attached.",
       "is_template": true,
+      "media_type": "pdf",
+      "jurisdiction": "US",
+      "language": "en",
+      "related_document_ids": [
+        "gsa-amendment-template-2021"
+      ],
+      "training_eligible": false,
       "validation_role": "Office lease structure, premises, rent, options, services, and event-based obligations"
     },
     {
@@ -27,6 +34,13 @@
       "rights_status": "public_domain",
       "rights_notes": "Official US General Services Administration template. Treated as a US federal government work under 17 U.S.C. 105; provenance must remain attached.",
       "is_template": true,
+      "media_type": "pdf",
+      "jurisdiction": "US",
+      "language": "en",
+      "related_document_ids": [
+        "gsa-l100-2026"
+      ],
+      "training_eligible": false,
       "validation_role": "Related-document links and add, delete, replace, modify, and effective-date behavior"
     },
     {
@@ -41,6 +55,11 @@
       "source_license": "MIT",
       "rights_notes": "The repository LICENSE is MIT and requires preservation of its copyright and license notice.",
       "is_template": true,
+      "media_type": "markdown",
+      "jurisdiction": "US",
+      "language": "en",
+      "related_document_ids": [],
+      "training_eligible": false,
       "validation_role": "Explicitly reusable office, retail, or industrial lease template"
     },
     {
@@ -54,6 +73,11 @@
       "rights_status": "review_required",
       "rights_notes": "Official municipal public record used for local ontology validation. State and local government works are not automatically covered by 17 U.S.C. 105. Do not place it in a released training corpus until reuse rights are confirmed.",
       "is_template": true,
+      "media_type": "pdf",
+      "jurisdiction": "US",
+      "language": "en",
+      "related_document_ids": [],
+      "training_eligible": false,
       "validation_role": "Retail-like concession use, rent, renewals, maintenance, assignment, insurance, default, and environmental obligations"
     }
   ]

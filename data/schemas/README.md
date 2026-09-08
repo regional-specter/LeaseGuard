@@ -13,6 +13,13 @@ Evaluation records currently expose:
 - `BenchmarkRun.schema.json` for official published runs.
 - `RegressionSuiteConfig.schema.json` and `RegressionReport.schema.json` for the internal product suite.
 
+Document-pipeline records currently expose:
+
+- `SourceManifest.schema.json` for approved sources.
+- `PipelineConfig.schema.json` for parser limits.
+- `ProcessedDocument.schema.json` for intermediate parsed records.
+- `BatchReport.schema.json` for one pipeline run.
+
 The source models live in `src/leaseguard/ontology` and `src/leaseguard/evaluation`. Regenerate the JSON Schema files after an approved model change:
 
 ```bash

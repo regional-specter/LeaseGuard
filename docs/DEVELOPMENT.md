@@ -110,11 +110,15 @@ Phase 3 is complete. The frozen registry, integrity rules, official-evaluator ch
 
 ## Phase 4 — Build the Document Pipeline
 
-The document pipeline will turn approved source documents into clean and traceable records. It will download or import a source, validate the file, perform parsing or OCR, preserve layout, divide the document into clauses, detect duplicates, remove private information, and export validated records.
+The document pipeline turns an approved source document into a clean and traceable intermediate record. It imports or downloads a source, validates the file, parses digital PDF or DOCX text, preserves page or heading boundaries, segments clauses, detects duplicates, redacts personal identifiers in the processed copy, and exports a schema-valid record.
 
-The raw document must never be silently overwritten. Raw, normalized, and labelled forms should remain separate. Every record should retain its source URL, license, download date, jurisdiction, page boundaries, filing information, and relationship to amendments or related agreements.
+The raw document is never overwritten. Raw, normalized, and labelled forms remain separate. Every record retains its source URL, license, checksum, jurisdiction, page boundaries, and family links to amendments or related agreements.
+
+OCR is deferred. Empty digital text is recorded as `unreadable_source` rather than guessed.
 
 Phase 4 is complete when an approved source document can be processed reproducibly from its manifest entry into a validated intermediate record.
+
+Phase 4 is complete. `SourceManifest` and `ProcessedDocument` schemas, the gated acquire/parse/segment pipeline, duplicate and family checks, and the Colab `process-documents` task are in place. Local tests use tiny synthetic PDF, DOCX, and markdown files. Full source downloads stay on Colab.
 
 ## Phase 5 — Build Dataset Version 1
 

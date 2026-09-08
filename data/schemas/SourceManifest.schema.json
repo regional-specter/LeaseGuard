@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "DocumentType": {
+      "description": "Supported document types.",
+      "enum": [
+        "office_lease",
+        "retail_lease",
+        "amendment",
+        "exhibit",
+        "other_related"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    },
+    "RightsStatus": {
+      "description": "Review status for using and redistributing a source.",
+      "enum": [
+        "public_domain",
+        "open_license",
+        "permission_granted",
+        "review_required",
+        "restricted"
+      ],
+      "title": "RightsStatus",
+      "type": "string"
+    },
+    "SourceEntry": {
+      "additionalProperties": false,
+      "description": "One approved document listed in a source manifest.",
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "is_template": {
+          "default": false,
+          "title": "Is Template",
+          "type": "boolean"
+        },
+        "jurisdiction": {
+          "const": "US",
+          "default": "US",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "language": {
+          "const": "en",
+          "default": "en",
+          "title": "Language",
+          "type": "string"
+        },
+        "local_path": {
+          "minLength": 1,
+          "title": "Local Path",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": [
+            "pdf",
+            "docx",
+            "markdown",
+            "text"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "related_document_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Document Ids",
+          "type": "array"
+        },
+        "retrieved_at": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retrieved At"
+        },
+        "rights_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rights Notes"
+        },
+        "rights_status": {
+          "$ref": "#/$defs/RightsStatus"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source License"
+        },
+        "source_name": {
+          "minLength": 1,
+          "title": "Source Name",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "training_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Training Eligible",
+          "type": "boolean"
+        },
+        "validation_role": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Validation Role"
+        }
+      },
+      "required": [
+        "document_id",
+        "family_id",
+        "document_type",
+        "source_name",
+        "local_path",
+        "sha256",
+        "rights_status",
+        "media_type"
+      ],
+      "title": "SourceEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Versioned list of approved source documents.",
+  "properties": {
+    "manifest_version": {
+      "const": "1.0.0",
+      "title": "Manifest Version",
+      "type": "string"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceEntry"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "storage_policy": {
+      "minLength": 1,
+      "title": "Storage Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "manifest_version",
+    "purpose",
+    "storage_policy",
+    "sources"
+  ],
+  "title": "SourceManifest",
+  "type": "object"
+}
