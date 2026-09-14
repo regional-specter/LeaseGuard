@@ -1,0 +1,53 @@
+{
+  "split_version": "1.0.0",
+  "frozen_on": "2026-09-14",
+  "dataset_version": "1.0.0",
+  "dataset_config": "configs/data/dataset.v1.json",
+  "method": "family_hash",
+  "salt": "leaseguard-dataset-v1",
+  "purpose": "Frozen Dataset v1 evaluation split for unmodified base-model baselines. This split is a product holdout, not a professional benchmark, and cannot support a breakthrough claim.",
+  "headline_claim_allowed": false,
+  "scored_subsets": [
+    "structured_extraction",
+    "evidence_conversation",
+    "refusal_uncertainty"
+  ],
+  "seed_families": [
+    {
+      "family_id": "ds1-office-family",
+      "split": "test"
+    },
+    {
+      "family_id": "ds1-retail-family",
+      "split": "train"
+    }
+  ],
+  "seed_eval_record_ids": [
+    "ds1-extract-amendment",
+    "ds1-extract-office",
+    "ds1-qa-office-rent",
+    "ds1-refuse-state-law"
+  ],
+  "professional_benchmarks": [
+    "legalbench",
+    "cuad",
+    "contractnli",
+    "legalbench-rag"
+  ],
+  "blocked_from_training_document_ids": [
+    "gsa-l100-2026",
+    "gsa-amendment-template-2021",
+    "pandadoc-commercial-lease-template",
+    "st-joseph-concession-2020",
+    "sample-office-lease"
+  ],
+  "forbidden_uses": [
+    "fine-tuning",
+    "continued-pretraining",
+    "preference-data",
+    "synthetic-prompts",
+    "prompt-selection",
+    "hyperparameter-selection",
+    "error-driven-training"
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "CandidateRanking": {
+      "additionalProperties": false,
+      "description": "Lexicographic rank for one practical candidate. Not a blended score.",
+      "properties": {
+        "answer_status_accuracy": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Answer Status Accuracy",
+          "type": "number"
+        },
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "dominant_error_class": {
+          "enum": [
+            "correct",
+            "model_error",
+            "parse_error",
+            "validation_error",
+            "prompt_error",
+            "retrieval_error"
+          ],
+          "title": "Dominant Error Class",
+          "type": "string"
+        },
+        "evidence_recall": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Evidence Recall",
+          "type": "number"
+        },
+        "extraction_f1": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Extraction F1",
+          "type": "number"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        },
+        "peak_vram_mb": {
+          "minimum": 0,
+          "title": "Peak Vram Mb",
+          "type": "number"
+        },
+        "practical": {
+          "title": "Practical",
+          "type": "boolean"
+        },
+        "schema_validity": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Schema Validity",
+          "type": "number"
+        },
+        "tokens_per_second": {
+          "minimum": 0,
+          "title": "Tokens Per Second",
+          "type": "number"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "practical",
+        "schema_validity",
+        "extraction_f1",
+        "answer_status_accuracy",
+        "evidence_recall",
+        "tokens_per_second",
+        "peak_vram_mb",
+        "dominant_error_class",
+        "notes"
+      ],
+      "title": "CandidateRanking",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured choice of the strongest practical unmodified base model.",
+  "properties": {
+    "baseline_registry_version": {
+      "const": "1.0.0",
+      "title": "Baseline Registry Version",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "eval_split_version": {
+      "const": "1.0.0",
+      "title": "Eval Split Version",
+      "type": "string"
+    },
+    "fine_tuning_hypothesis": {
+      "minLength": 1,
+      "title": "Fine Tuning Hypothesis",
+      "type": "string"
+    },
+    "headline_claim_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Headline Claim Allowed",
+      "type": "boolean"
+    },
+    "incomplete": {
+      "title": "Incomplete",
+      "type": "boolean"
+    },
+    "notes": {
+      "minLength": 1,
+      "title": "Notes",
+      "type": "string"
+    },
+    "rankings": {
+      "items": {
+        "$ref": "#/$defs/CandidateRanking"
+      },
+      "title": "Rankings",
+      "type": "array"
+    },
+    "report_id": {
+      "minLength": 1,
+      "title": "Report Id",
+      "type": "string"
+    },
+    "required_comparison_id": {
+      "minLength": 1,
+      "title": "Required Comparison Id",
+      "type": "string"
+    },
+    "selected_candidate_id": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Candidate Id"
+    }
+  },
+  "required": [
+    "report_id",
+    "eval_split_version",
+    "baseline_registry_version",
+    "completed_at",
+    "required_comparison_id",
+    "incomplete",
+    "rankings",
+    "fine_tuning_hypothesis",
+    "notes"
+  ],
+  "title": "BaselineComparisonReport",
+  "type": "object"
+}

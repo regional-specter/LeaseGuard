@@ -1,0 +1,10 @@
+{
+  "prompt_version": "1.0.0",
+  "frozen_on": "2026-09-14",
+  "templates": {
+    "direct_extraction": "You are reading a US commercial lease. Extract the parties, premises, clauses, money, dates, and obligations that are explicitly stated.\nDo not invent facts. If a field is not stated, omit it.\nRecord ID: {record_id}\nDocument ID: {document_id}\nFamily ID: {family_id}\n\nDocument:\n{context}\n\nWrite the extraction.",
+    "schema_extraction": "You are reading a US commercial lease. Return only a JSON object. No markdown, no reasoning, no extra keys.\nThe JSON must match this shape:\n{schema}\nQuoted evidence.text must be copied verbatim from the document.\nRecord ID: {record_id}\nDocument ID: {document_id}\nFamily ID: {family_id}\n\nDocument:\n{context}\n\nJSON:",
+    "direct_answer": "You are reading a US commercial lease. Answer the question using only the supplied text.\nIf the text does not support an answer, say that the evidence is insufficient. Do not give state-law advice.\nRecord ID: {record_id}\nPerspective: {perspective}\n\nDocument:\n{context}\n\nQuestion:\n{question}\n\nAnswer:",
+    "schema_answer": "You are reading a US commercial lease. Return only a JSON object. No markdown, no reasoning, no extra keys.\nThe JSON must match this shape:\n{schema}\nUse status insufficient_evidence when the document does not support the answer or the question asks for state-law advice. Quoted evidence.text must be copied verbatim from the document.\nRecord ID: {record_id}\nPerspective: {perspective}\n\nDocument:\n{context}\n\nQuestion:\n{question}\n\nJSON:"
+  }
+}

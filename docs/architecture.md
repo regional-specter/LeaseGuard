@@ -39,3 +39,7 @@ Labelled examples are assembled from processed text into six subsets: raw domain
 Construction is gated by `configs/data/dataset.v1.json`. Agreement families are hashed into train, validation, and test together. Quoted evidence must occur in registered source text. Regression-holdout document IDs, `review_required` sources, and official benchmark test splits cannot enter training or validation.
 
 The repository stores a synthetic seed under `data/samples/dataset_v1/`. Full exports stay in ignored `data/datasets/` or Drive. Use `scripts/prepare/build_dataset.py` locally for the seed and `TASK=build-dataset` in Colab for larger approved corpora.
+
+## Unmodified base-model baselines
+
+Phase 6 runs publisher checkpoints on the frozen Dataset v1 evaluation split before any LeaseGuard adapter exists. Candidate configs, prompt templates, and the T4 comparison matrix live in `configs/evaluation/baselines.v1.json` and `configs/inference/prompts.v1.json`. Transformers and bitsandbytes stay on Colab; local tests use a scripted backend that cannot be published as a baseline.

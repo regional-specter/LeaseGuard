@@ -1,0 +1,395 @@
+{
+  "$defs": {
+    "BaselinePrediction": {
+      "additionalProperties": false,
+      "description": "One product-task example scored for an unmodified base model.",
+      "properties": {
+        "content_score": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Content Score",
+          "type": "number"
+        },
+        "context_mode": {
+          "enum": [
+            "full_document",
+            "clause_level",
+            "retrieval_assisted"
+          ],
+          "title": "Context Mode",
+          "type": "string"
+        },
+        "detail": {
+          "minLength": 1,
+          "title": "Detail",
+          "type": "string"
+        },
+        "error_class": {
+          "enum": [
+            "correct",
+            "model_error",
+            "parse_error",
+            "validation_error",
+            "prompt_error",
+            "retrieval_error"
+          ],
+          "title": "Error Class",
+          "type": "string"
+        },
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "gold_evidence_in_context": {
+          "title": "Gold Evidence In Context",
+          "type": "boolean"
+        },
+        "parsed_payload": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parsed Payload"
+        },
+        "prompt_mode": {
+          "enum": [
+            "direct",
+            "schema_constrained"
+          ],
+          "title": "Prompt Mode",
+          "type": "string"
+        },
+        "quantization": {
+          "enum": [
+            "4bit",
+            "8bit"
+          ],
+          "title": "Quantization",
+          "type": "string"
+        },
+        "raw_output": {
+          "title": "Raw Output",
+          "type": "string"
+        },
+        "record_id": {
+          "minLength": 1,
+          "title": "Record Id",
+          "type": "string"
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourceMetrics"
+        },
+        "schema_valid": {
+          "title": "Schema Valid",
+          "type": "boolean"
+        },
+        "source_identity_injected": {
+          "default": false,
+          "title": "Source Identity Injected",
+          "type": "boolean"
+        },
+        "subset": {
+          "enum": [
+            "structured_extraction",
+            "evidence_conversation",
+            "refusal_uncertainty"
+          ],
+          "title": "Subset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "family_id",
+        "subset",
+        "prompt_mode",
+        "context_mode",
+        "quantization",
+        "error_class",
+        "schema_valid",
+        "content_score",
+        "gold_evidence_in_context",
+        "raw_output",
+        "detail",
+        "resources"
+      ],
+      "title": "BaselinePrediction",
+      "type": "object"
+    },
+    "MetricResult": {
+      "additionalProperties": false,
+      "description": "One score normalized to a zero-to-one scale.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "official": {
+          "default": false,
+          "title": "Official",
+          "type": "boolean"
+        },
+        "value": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "MetricResult",
+      "type": "object"
+    },
+    "ResourceMetrics": {
+      "additionalProperties": false,
+      "description": "Runtime cost of one generation or one completed run.",
+      "properties": {
+        "completion_tokens": {
+          "minimum": 0,
+          "title": "Completion Tokens",
+          "type": "integer"
+        },
+        "context_length_limit": {
+          "minimum": 1,
+          "title": "Context Length Limit",
+          "type": "integer"
+        },
+        "hardware": {
+          "minLength": 1,
+          "title": "Hardware",
+          "type": "string"
+        },
+        "latency_seconds": {
+          "minimum": 0,
+          "title": "Latency Seconds",
+          "type": "number"
+        },
+        "peak_vram_mb": {
+          "minimum": 0,
+          "title": "Peak Vram Mb",
+          "type": "number"
+        },
+        "prompt_tokens": {
+          "minimum": 0,
+          "title": "Prompt Tokens",
+          "type": "integer"
+        },
+        "tokens_per_second": {
+          "minimum": 0,
+          "title": "Tokens Per Second",
+          "type": "number"
+        }
+      },
+      "required": [
+        "hardware",
+        "peak_vram_mb",
+        "latency_seconds",
+        "prompt_tokens",
+        "completion_tokens",
+        "tokens_per_second",
+        "context_length_limit"
+      ],
+      "title": "ResourceMetrics",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Audit record for one candidate on one comparison using Dataset v1 eval.",
+  "properties": {
+    "backend_kind": {
+      "enum": [
+        "scripted",
+        "transformers"
+      ],
+      "title": "Backend Kind",
+      "type": "string"
+    },
+    "candidate_id": {
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "comparison_id": {
+      "minLength": 1,
+      "title": "Comparison Id",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "contamination_notes": {
+      "minLength": 1,
+      "title": "Contamination Notes",
+      "type": "string"
+    },
+    "context_mode": {
+      "enum": [
+        "full_document",
+        "clause_level",
+        "retrieval_assisted"
+      ],
+      "title": "Context Mode",
+      "type": "string"
+    },
+    "dataset_version": {
+      "const": "1.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "error_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Error Counts",
+      "type": "object"
+    },
+    "eval_split_version": {
+      "const": "1.0.0",
+      "title": "Eval Split Version",
+      "type": "string"
+    },
+    "hardware": {
+      "minLength": 1,
+      "title": "Hardware",
+      "type": "string"
+    },
+    "headline_claim_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Headline Claim Allowed",
+      "type": "boolean"
+    },
+    "metrics": {
+      "items": {
+        "$ref": "#/$defs/MetricResult"
+      },
+      "minItems": 1,
+      "title": "Metrics",
+      "type": "array"
+    },
+    "model_id": {
+      "minLength": 1,
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_revision": {
+      "minLength": 1,
+      "title": "Model Revision",
+      "type": "string"
+    },
+    "oom": {
+      "default": false,
+      "title": "Oom",
+      "type": "boolean"
+    },
+    "paid_api_used": {
+      "const": false,
+      "default": false,
+      "title": "Paid Api Used",
+      "type": "boolean"
+    },
+    "predictions": {
+      "items": {
+        "$ref": "#/$defs/BaselinePrediction"
+      },
+      "minItems": 1,
+      "title": "Predictions",
+      "type": "array"
+    },
+    "prompt_mode": {
+      "enum": [
+        "direct",
+        "schema_constrained"
+      ],
+      "title": "Prompt Mode",
+      "type": "string"
+    },
+    "prompt_template_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Prompt Template Sha256",
+      "type": "string"
+    },
+    "prompt_version": {
+      "const": "1.0.0",
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "quantization": {
+      "enum": [
+        "4bit",
+        "8bit"
+      ],
+      "title": "Quantization",
+      "type": "string"
+    },
+    "random_seed": {
+      "title": "Random Seed",
+      "type": "integer"
+    },
+    "resolved_revision": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolved Revision"
+    },
+    "resources": {
+      "$ref": "#/$defs/ResourceMetrics"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "candidate_id",
+    "comparison_id",
+    "model_id",
+    "model_revision",
+    "dataset_version",
+    "eval_split_version",
+    "prompt_version",
+    "prompt_template_sha256",
+    "backend_kind",
+    "hardware",
+    "quantization",
+    "prompt_mode",
+    "context_mode",
+    "random_seed",
+    "started_at",
+    "completed_at",
+    "contamination_notes",
+    "metrics",
+    "error_counts",
+    "resources",
+    "predictions"
+  ],
+  "title": "BaselineRun",
+  "type": "object"
+}

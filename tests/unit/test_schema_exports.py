@@ -8,8 +8,12 @@ from pydantic import BaseModel
 
 from leaseguard.dataset import DatasetBundle, DatasetConfig, DatasetReport
 from leaseguard.evaluation import (
+    BaselineComparisonReport,
+    BaselineRegistry,
+    BaselineRun,
     BenchmarkRegistry,
     BenchmarkRun,
+    EvalSplitConfig,
     RegressionReport,
     RegressionSuiteConfig,
 )
@@ -29,6 +33,10 @@ VALIDATION_DIRECTORY = Path(__file__).resolve().parents[2] / "data" / "validatio
         DocumentAnswer,
         BenchmarkRegistry,
         BenchmarkRun,
+        EvalSplitConfig,
+        BaselineRegistry,
+        BaselineRun,
+        BaselineComparisonReport,
         RegressionReport,
         RegressionSuiteConfig,
         SourceManifest,

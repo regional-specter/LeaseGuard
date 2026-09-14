@@ -7,8 +7,12 @@ from pydantic import BaseModel
 
 from leaseguard.dataset import DatasetBundle, DatasetConfig, DatasetReport
 from leaseguard.evaluation import (
+    BaselineComparisonReport,
+    BaselineRegistry,
+    BaselineRun,
     BenchmarkRegistry,
     BenchmarkRun,
+    EvalSplitConfig,
     RegressionReport,
     RegressionSuiteConfig,
 )
@@ -21,6 +25,10 @@ SCHEMA_MODELS: tuple[type[BaseModel], ...] = (
     DocumentAnswer,
     BenchmarkRegistry,
     BenchmarkRun,
+    EvalSplitConfig,
+    BaselineRegistry,
+    BaselineRun,
+    BaselineComparisonReport,
     RegressionReport,
     RegressionSuiteConfig,
     SourceManifest,

@@ -221,7 +221,7 @@ Headline research claims must come from published professional benchmarks scored
 
 The internal office and retail set is a regression suite for LeaseGuard's JSON schema, evidence, family splits, and abstention. It is not a substitute for those benchmarks and cannot support a breakthrough claim.
 
-There is no blended “LeaseGuard score.” Numeric thresholds are frozen only after unmodified base models are run on the official protocols.
+There is no blended “LeaseGuard score.” Numeric thresholds are frozen only after unmodified base models are run on the official protocols. Phase 6 Colab notebooks score the unmodified 4B, 9B, and 12B candidates on the frozen Dataset v1 evaluation split and write the practical-model report to Drive.
 
 ## Free Tooling
 

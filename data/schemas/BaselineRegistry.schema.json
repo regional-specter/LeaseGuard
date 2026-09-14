@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "CandidateConfig": {
+      "additionalProperties": false,
+      "description": "One unmodified publisher checkpoint evaluated on Colab T4.",
+      "properties": {
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "display_name": {
+          "minLength": 1,
+          "title": "Display Name",
+          "type": "string"
+        },
+        "gated": {
+          "title": "Gated",
+          "type": "boolean"
+        },
+        "license": {
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        },
+        "model_id": {
+          "minLength": 1,
+          "title": "Model Id",
+          "type": "string"
+        },
+        "native_context_length": {
+          "minimum": 1024,
+          "title": "Native Context Length",
+          "type": "integer"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        },
+        "parameter_count": {
+          "minLength": 1,
+          "title": "Parameter Count",
+          "type": "string"
+        },
+        "practical_context_length": {
+          "minimum": 512,
+          "title": "Practical Context Length",
+          "type": "integer"
+        },
+        "quantizations": {
+          "items": {
+            "enum": [
+              "4bit",
+              "8bit"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Quantizations",
+          "type": "array"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "display_name",
+        "model_id",
+        "revision",
+        "license",
+        "parameter_count",
+        "native_context_length",
+        "practical_context_length",
+        "quantizations",
+        "gated",
+        "notes"
+      ],
+      "title": "CandidateConfig",
+      "type": "object"
+    },
+    "ComparisonSpec": {
+      "additionalProperties": false,
+      "description": "One prompt, context, and quantization combination.",
+      "properties": {
+        "candidate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "comparison_id": {
+          "minLength": 1,
+          "title": "Comparison Id",
+          "type": "string"
+        },
+        "context_mode": {
+          "enum": [
+            "full_document",
+            "clause_level",
+            "retrieval_assisted"
+          ],
+          "title": "Context Mode",
+          "type": "string"
+        },
+        "prompt_mode": {
+          "enum": [
+            "direct",
+            "schema_constrained"
+          ],
+          "title": "Prompt Mode",
+          "type": "string"
+        },
+        "quantization": {
+          "enum": [
+            "4bit",
+            "8bit"
+          ],
+          "title": "Quantization",
+          "type": "string"
+        }
+      },
+      "required": [
+        "comparison_id",
+        "prompt_mode",
+        "context_mode",
+        "quantization",
+        "candidate_ids"
+      ],
+      "title": "ComparisonSpec",
+      "type": "object"
+    },
+    "GenerationSettings": {
+      "additionalProperties": false,
+      "description": "Deterministic generation limits shared by every candidate.",
+      "properties": {
+        "do_sample": {
+          "default": false,
+          "title": "Do Sample",
+          "type": "boolean"
+        },
+        "max_new_tokens": {
+          "maximum": 4096,
+          "minimum": 16,
+          "title": "Max New Tokens",
+          "type": "integer"
+        },
+        "temperature": {
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "top_p": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Top P",
+          "type": "number"
+        }
+      },
+      "required": [
+        "max_new_tokens",
+        "temperature",
+        "top_p"
+      ],
+      "title": "GenerationSettings",
+      "type": "object"
+    },
+    "RetrievalSettings": {
+      "additionalProperties": false,
+      "description": "Keyword-retrieval limits for retrieval-assisted context.",
+      "properties": {
+        "min_score": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Min Score",
+          "type": "number"
+        },
+        "top_k": {
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Top K",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "top_k",
+        "min_score"
+      ],
+      "title": "RetrievalSettings",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Versioned set of unmodified base-model experiments.",
+  "properties": {
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/CandidateConfig"
+      },
+      "minItems": 1,
+      "title": "Candidates",
+      "type": "array"
+    },
+    "comparisons": {
+      "items": {
+        "$ref": "#/$defs/ComparisonSpec"
+      },
+      "minItems": 1,
+      "title": "Comparisons",
+      "type": "array"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "generation": {
+      "$ref": "#/$defs/GenerationSettings"
+    },
+    "hardware": {
+      "const": "Google Colab T4",
+      "title": "Hardware",
+      "type": "string"
+    },
+    "headline_claim_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Headline Claim Allowed",
+      "type": "boolean"
+    },
+    "max_practical_vram_mb": {
+      "minimum": 1024,
+      "title": "Max Practical Vram Mb",
+      "type": "integer"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "random_seed": {
+      "title": "Random Seed",
+      "type": "integer"
+    },
+    "registry_version": {
+      "const": "1.0.0",
+      "title": "Registry Version",
+      "type": "string"
+    },
+    "required_comparison_id": {
+      "minLength": 1,
+      "title": "Required Comparison Id",
+      "type": "string"
+    },
+    "retrieval": {
+      "$ref": "#/$defs/RetrievalSettings"
+    }
+  },
+  "required": [
+    "registry_version",
+    "frozen_on",
+    "hardware",
+    "purpose",
+    "random_seed",
+    "required_comparison_id",
+    "max_practical_vram_mb",
+    "candidates",
+    "comparisons",
+    "generation",
+    "retrieval"
+  ],
+  "title": "BaselineRegistry",
+  "type": "object"
+}

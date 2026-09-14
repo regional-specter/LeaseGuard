@@ -4,6 +4,8 @@ LeaseGuard Dataset v1 is a leakage-safe, schema-validated set of lease-domain ex
 
 The Git copy is a tiny synthetic seed plus frozen rules. Full corpora are written to ignored `data/datasets/` or Colab Drive and must not be committed.
 
+The Dataset v1 evaluation split is frozen in `configs/evaluation/eval_split.v1.json`. The seed office family hashes into `test`; the seed retail family hashes into `train`. Unmodified base-model product-task scoring uses only the test split.
+
 ## Version
 
 Dataset version `1.0.0` was frozen on 2026-09-08 against ontology version `1.0.0`. Construction rules live in `configs/data/dataset.v1.json`.

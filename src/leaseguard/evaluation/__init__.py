@@ -1,5 +1,11 @@
 """Repeatable quality, grounding, and safety evaluation."""
 
+from leaseguard.evaluation.baseline_models import (
+    BaselineComparisonReport,
+    BaselineRegistry,
+    BaselineRun,
+    EvalSplitConfig,
+)
 from leaseguard.evaluation.cli import main as evaluation_cli
 from leaseguard.evaluation.metrics import (
     CharacterSpan,
@@ -34,11 +40,15 @@ from leaseguard.evaluation.registry import get_benchmark, load_benchmark_registr
 from leaseguard.evaluation.regression import load_regression_suite, run_regression_suite
 
 __all__ = [
+    "BaselineComparisonReport",
+    "BaselineRegistry",
+    "BaselineRun",
     "BenchmarkRegistry",
     "BenchmarkRun",
     "BenchmarkSpec",
     "CharacterSpan",
     "ClassificationMetrics",
+    "EvalSplitConfig",
     "HeadlineClaimError",
     "HoldoutIntegrityError",
     "MetricResult",

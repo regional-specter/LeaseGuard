@@ -2,6 +2,15 @@
 
 Notebooks are for exploration, reports, and Colab orchestration. Production logic must live in `src/leaseguard` and be tested before the notebook calls it.
 
-`colab_orchestrator.ipynb` is the thin Google Colab T4 entry point. It mounts Drive, clones this repository, selects a named task, and calls package CLIs. Use `process-documents` for parsing, `build-dataset` for Dataset v1, `regression` for the internal lease suite, and `evaluate-*` for official professional benchmarks.
+`colab_orchestrator.ipynb` is the thin Google Colab T4 entry point. It mounts Drive, clones this repository, selects a named task, and calls package CLIs. Use `process-documents` for parsing, `build-dataset` for Dataset v1, `regression` for the internal lease suite, `evaluate-*` for official professional benchmarks, `baseline-*` for unmodified base-model product-task runs, and `compare-baselines` to rank those runs.
+
+Phase 6 also has dedicated T4 notebooks. Run them one candidate per session:
+
+- `colab_baseline_qwen35_4b.ipynb`
+- `colab_baseline_qwen35_9b.ipynb`
+- `colab_baseline_gemma3_12b.ipynb`
+- `colab_baseline_compare.ipynb` (CPU is enough after the three GPU runs)
+
+Set Runtime to **T4 GPU** for the candidate notebooks. Gemma requires a Hugging Face token after you accept the Gemma license. Completed predictions resume from Drive checkpoints if Colab disconnects.
 
 Do not commit notebook outputs containing lease text, personal information, or large generated files.

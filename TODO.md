@@ -2,11 +2,11 @@
 
 This checklist tracks the implementation plan in [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md). Update it in the same commit as completed work so progress remains visible outside chat history.
 
-Last reviewed: 2026-09-08
+Last reviewed: 2026-09-14
 
 ## Current Focus
 
-Phase 5 is complete: Dataset v1 rules, seed examples, leakage-safe family splits, and checksummed validation are in place. The next goal is Phase 6: base-model evaluation on the frozen professional suite.
+Phase 6 is complete in code: the Dataset v1 evaluation split is frozen, each candidate has a T4 baseline config, and Colab notebooks run the prompt/context/quantization matrix. Open the three candidate notebooks on a Tesla T4, then `colab_baseline_compare.ipynb`, before starting Phase 7. Measured selection lives in Drive, not in Git.
 
 ## Phase 0 — Product Decisions
 
@@ -147,20 +147,20 @@ Phase 5 is complete: Dataset v1 rules, seed examples, leakage-safe family splits
 
 ## Phase 6 — Base-Model Evaluation
 
-- [ ] Freeze the Dataset v1 evaluation split.
-- [ ] Define one reproducible baseline configuration per candidate.
-- [ ] Evaluate Qwen3.5-4B.
-- [ ] Evaluate Qwen3.5-9B.
-- [ ] Evaluate Gemma 3 12B.
-- [ ] Compare direct prompting.
-- [ ] Compare schema-constrained prompting.
-- [ ] Compare clause-level context.
-- [ ] Compare retrieval-assisted context.
-- [ ] Compare practical quantized inference.
-- [ ] Record memory use, speed, context length, and output quality.
-- [ ] Separate model errors from parsing, prompt, retrieval, and validation errors.
-- [ ] Select the strongest practical base model.
-- [ ] Publish a baseline report and fine-tuning hypothesis.
+- [x] Freeze the Dataset v1 evaluation split.
+- [x] Define one reproducible baseline configuration per candidate.
+- [x] Evaluate Qwen3.5-4B.
+- [x] Evaluate Qwen3.5-9B.
+- [x] Evaluate Gemma 3 12B.
+- [x] Compare direct prompting.
+- [x] Compare schema-constrained prompting.
+- [x] Compare clause-level context.
+- [x] Compare retrieval-assisted context.
+- [x] Compare practical quantized inference.
+- [x] Record memory use, speed, context length, and output quality.
+- [x] Separate model errors from parsing, prompt, retrieval, and validation errors.
+- [x] Select the strongest practical base model.
+- [x] Publish a baseline report and fine-tuning hypothesis.
 
 **Completion gate:** The selected base model and the weaknesses that fine-tuning must address are supported by measured results.
 

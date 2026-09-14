@@ -11,6 +11,9 @@ Evaluation records currently expose:
 
 - `BenchmarkRegistry.schema.json` for the frozen professional benchmark list.
 - `BenchmarkRun.schema.json` for official published runs.
+- `EvalSplitConfig.schema.json` for the frozen Dataset v1 evaluation split.
+- `BaselineRegistry.schema.json` and `BaselineRun.schema.json` for unmodified base-model product-task runs.
+- `BaselineComparisonReport.schema.json` for the Phase 6 practical-model selection.
 - `RegressionSuiteConfig.schema.json` and `RegressionReport.schema.json` for the internal product suite.
 
 Document-pipeline records currently expose:

@@ -20,3 +20,18 @@ def default_registry_path() -> Path:
 def default_regression_path() -> Path:
     """Return the internal lease regression suite configuration."""
     return repo_root() / "configs" / "evaluation" / "regression.v1.json"
+
+
+def default_eval_split_path() -> Path:
+    """Return the frozen Dataset v1 evaluation-split pin."""
+    return repo_root() / "configs" / "evaluation" / "eval_split.v1.json"
+
+
+def default_baselines_path() -> Path:
+    """Return the frozen unmodified base-model baseline registry."""
+    return repo_root() / "configs" / "evaluation" / "baselines.v1.json"
+
+
+def default_prompts_path() -> Path:
+    """Return the frozen Phase 6 prompt templates."""
+    return repo_root() / "configs" / "inference" / "prompts.v1.json"

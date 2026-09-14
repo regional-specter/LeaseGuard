@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "SeedFamilySplit": {
+      "additionalProperties": false,
+      "description": "Pinned family-hash outcome for one Dataset v1 seed family.",
+      "properties": {
+        "family_id": {
+          "minLength": 1,
+          "title": "Family Id",
+          "type": "string"
+        },
+        "split": {
+          "enum": [
+            "train",
+            "validation",
+            "test"
+          ],
+          "title": "Split",
+          "type": "string"
+        }
+      },
+      "required": [
+        "family_id",
+        "split"
+      ],
+      "title": "SeedFamilySplit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen Dataset v1 evaluation split used for unmodified base-model runs.",
+  "properties": {
+    "blocked_from_training_document_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Blocked From Training Document Ids",
+      "type": "array"
+    },
+    "dataset_config": {
+      "minLength": 1,
+      "title": "Dataset Config",
+      "type": "string"
+    },
+    "dataset_version": {
+      "const": "1.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "forbidden_uses": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Forbidden Uses",
+      "type": "array"
+    },
+    "frozen_on": {
+      "format": "date",
+      "title": "Frozen On",
+      "type": "string"
+    },
+    "headline_claim_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Headline Claim Allowed",
+      "type": "boolean"
+    },
+    "method": {
+      "const": "family_hash",
+      "title": "Method",
+      "type": "string"
+    },
+    "professional_benchmarks": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Professional Benchmarks",
+      "type": "array"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "salt": {
+      "minLength": 1,
+      "title": "Salt",
+      "type": "string"
+    },
+    "scored_subsets": {
+      "items": {
+        "enum": [
+          "structured_extraction",
+          "evidence_conversation",
+          "refusal_uncertainty"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scored Subsets",
+      "type": "array"
+    },
+    "seed_eval_record_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Seed Eval Record Ids",
+      "type": "array"
+    },
+    "seed_families": {
+      "items": {
+        "$ref": "#/$defs/SeedFamilySplit"
+      },
+      "minItems": 1,
+      "title": "Seed Families",
+      "type": "array"
+    },
+    "split_version": {
+      "const": "1.0.0",
+      "title": "Split Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "split_version",
+    "frozen_on",
+    "dataset_version",
+    "dataset_config",
+    "method",
+    "salt",
+    "purpose",
+    "scored_subsets",
+    "seed_families",
+    "seed_eval_record_ids",
+    "professional_benchmarks",
+    "blocked_from_training_document_ids",
+    "forbidden_uses"
+  ],
+  "title": "EvalSplitConfig",
+  "type": "object"
+}

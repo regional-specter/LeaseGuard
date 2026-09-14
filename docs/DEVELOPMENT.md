@@ -140,6 +140,8 @@ Tests should compare direct prompting, structured prompting, clause-level contex
 
 Phase 6 is complete when a baseline report selects the strongest practical model and lists the exact weaknesses that fine-tuning needs to improve.
 
+Phase 6 is complete in repository form. `configs/evaluation/eval_split.v1.json` freezes the Dataset v1 evaluation split. `configs/evaluation/baselines.v1.json` pins Qwen3.5-4B, Qwen3.5-9B, and Gemma 3 12B to the same T4 prompt, context, and quantization matrix. Colab notebooks in `notebooks/` load 4-bit models, resume from Drive checkpoints, and write `BaselineRun` records. `compare-baselines` selects a practical winner with a lexicographic ranking and a fine-tuning hypothesis. Measured scores stay on Drive; Git does not invent them. Official LegalBench, CUAD, ContractNLI, and LegalBench-RAG numbers still require the orchestrator's `evaluate-*` tasks and those benchmarks' official evaluators.
+
 ## Phase 7 — Run the First Supervised Fine-Tune
 
 The first model adaptation should use QLoRA supervised fine-tuning through Unsloth. Initial training should focus on structured extraction, grounded answers, evidence citations, and safe refusal behavior.

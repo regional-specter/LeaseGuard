@@ -124,7 +124,7 @@ Fine-tuning work should continue only when a candidate:
 - Produces schema-valid output reliably
 - Preserves evidence and source references
 
-Exact numeric thresholds will be frozen after the unmodified candidate models are run. Choosing thresholds before observing task difficulty would create arbitrary targets.
+Numeric thresholds wait for unmodified Colab T4 baselines. `compare-baselines` records the measured winner and the dominant error class; it does not invent a blended score. Choosing gates before observing task difficulty would create arbitrary targets.
 
 ## Lease-Specific Regression Set
 
@@ -150,6 +150,8 @@ Local machines can inspect the frozen professional suite and run product regress
 uv run python scripts/evaluate/run_benchmark.py list
 uv run python scripts/evaluate/run_benchmark.py validate-registry
 uv run python scripts/evaluate/run_benchmark.py regression
+uv run python scripts/evaluate/run_benchmark.py validate-baselines
+uv run python scripts/evaluate/run_benchmark.py list-candidates
 ```
 
 `list` prints LegalBench, CUAD, ContractNLI, and LegalBench-RAG. `regression` scores the internal office and retail records and must be reported as regression, not as a lab result.
@@ -170,3 +172,24 @@ All full benchmark runs will execute from the single Google Colab T4 notebook. T
 8. Export a small report and run manifest.
 
 The local machine will run metric unit tests, validate small result fixtures, and execute the internal regression command.
+
+## Unmodified Base-Model Baselines
+
+Phase 6 scores Qwen3.5-4B, Qwen3.5-9B, and Gemma 3 12B on the frozen Dataset v1 evaluation split before any LeaseGuard adapter is trained. Each candidate uses the same prompts, context builders, and generation settings. The comparison matrix is:
+
+- Direct prompting versus schema-constrained JSON prompting
+- Full-document context versus clause-level context versus keyword retrieval
+- 4-bit NF4 inference on Tesla T4, plus 8-bit only for the 4B candidate
+
+Product-task scores are unofficial. They cannot support a breakthrough claim. Official LegalBench, CUAD, ContractNLI, and LegalBench-RAG numbers still require those evaluators.
+
+Run one candidate per Colab T4 session:
+
+```text
+notebooks/colab_baseline_qwen35_4b.ipynb
+notebooks/colab_baseline_qwen35_9b.ipynb
+notebooks/colab_baseline_gemma3_12b.ipynb
+notebooks/colab_baseline_compare.ipynb
+```
+
+`compare-baselines` ranks practical T4 runs lexicographically (schema validity, extraction F1, answer status, evidence recall, speed, lower peak VRAM) and writes a fine-tuning hypothesis. Scripted local dry-runs are not eligible for selection.

@@ -108,6 +108,41 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--predictions", type=Path, required=True)
     evaluate.add_argument("--output", type=Path, required=True)
 
+    subparsers.add_parser(
+        "list-candidates",
+        help="List frozen unmodified base-model candidates.",
+    )
+    subparsers.add_parser(
+        "validate-baselines",
+        help="Validate baseline configs against the frozen Dataset v1 eval split.",
+    )
+    subparsers.add_parser(
+        "show-eval-split",
+        help="Print the frozen Dataset v1 evaluation split.",
+    )
+
+    baseline = subparsers.add_parser(
+        "baseline",
+        help="Run one unmodified base-model comparison. Product-task scores are not a lab result.",
+    )
+    baseline.add_argument("--candidate", required=True)
+    baseline.add_argument("--comparison", required=True)
+    baseline.add_argument("--examples", type=Path)
+    baseline.add_argument("--output-dir", type=Path)
+    baseline.add_argument("--checkpoint-dir", type=Path)
+    baseline.add_argument("--backend", choices=("scripted", "transformers"), default="scripted")
+    baseline.add_argument("--script", type=Path)
+    baseline.add_argument("--allow-download", action="store_true")
+    baseline.add_argument("--hardware", default="Google Colab T4")
+    baseline.add_argument("--limit", type=int)
+
+    compare = subparsers.add_parser(
+        "compare-baselines",
+        help="Select the strongest practical candidate from saved run records.",
+    )
+    compare.add_argument("runs", nargs="+", type=Path)
+    compare.add_argument("--output", type=Path)
+
     return parser
 
 
@@ -263,6 +298,148 @@ def main(argv: Sequence[str] | None = None) -> int:
             sys.stderr.write(f"{error}\n")
             return 1
         sys.stdout.write(" ".join(command) + "\n")
+        return 0
+
+    if args.command == "list-candidates":
+        from leaseguard.evaluation.baseline import load_baseline_registry
+
+        baselines = load_baseline_registry()
+        for candidate in baselines.candidates:
+            sys.stdout.write(
+                f"{candidate.candidate_id}\t{candidate.model_id}\t"
+                f"{candidate.practical_context_length}\t{','.join(candidate.quantizations)}\n"
+            )
+        return 0
+
+    if args.command == "validate-baselines":
+        from leaseguard.evaluation.baseline import load_baseline_registry
+        from leaseguard.evaluation.eval_split import (
+            EvalSplitError,
+            assert_eval_split_matches_dataset,
+            load_eval_split,
+        )
+
+        try:
+            baselines = load_baseline_registry()
+            split = load_eval_split()
+            assert_eval_split_matches_dataset(split)
+        except (OSError, ValidationError, EvalSplitError) as error:
+            sys.stderr.write(f"{error}\n")
+            return 1
+        sys.stdout.write(
+            f"baselines {baselines.registry_version} candidates={len(baselines.candidates)} "
+            f"comparisons={len(baselines.comparisons)} eval_split={split.split_version}\n"
+        )
+        return 0
+
+    if args.command == "show-eval-split":
+        from leaseguard.evaluation.eval_split import (
+            EvalSplitError,
+            assert_eval_split_matches_dataset,
+            load_eval_split,
+        )
+
+        try:
+            split = load_eval_split()
+            assert_eval_split_matches_dataset(split)
+        except (OSError, ValidationError, EvalSplitError) as error:
+            sys.stderr.write(f"{error}\n")
+            return 1
+        sys.stdout.write(
+            f"split {split.split_version} salt={split.salt} "
+            f"seed_eval_records={len(split.seed_eval_record_ids)}\n"
+        )
+        return 0
+
+    if args.command == "baseline":
+        from leaseguard.evaluation.baseline import (
+            BaselineConfigError,
+            get_candidate,
+            get_comparison,
+            load_baseline_registry,
+            run_baseline,
+            write_run_manifest,
+        )
+        from leaseguard.inference.backend import (
+            ModelBackendNotAvailableError,
+            ModelDownloadError,
+            create_backend,
+            current_model_download_env,
+            load_scripted_outputs,
+        )
+
+        try:
+            baselines = load_baseline_registry()
+            candidate = get_candidate(baselines, args.candidate)
+            comparison = get_comparison(baselines, args.comparison)
+            scripted_outputs = (
+                load_scripted_outputs(args.script) if args.script is not None else None
+            )
+            backend = create_backend(
+                candidate,
+                comparison.quantization,
+                backend=args.backend,
+                allow_download=args.allow_download,
+                download_env=current_model_download_env(),
+                scripted_outputs=scripted_outputs,
+                context_length_limit=candidate.practical_context_length,
+            )
+            baseline_run = run_baseline(
+                candidate_id=args.candidate,
+                comparison_id=args.comparison,
+                backend=backend,
+                examples_root=args.examples,
+                output_dir=args.output_dir,
+                checkpoint_dir=args.checkpoint_dir,
+                registry=baselines,
+                hardware=args.hardware,
+                limit=args.limit,
+            )
+            backend.close()
+        except (
+            OSError,
+            ValidationError,
+            BaselineConfigError,
+            ModelDownloadError,
+            ModelBackendNotAvailableError,
+            ValueError,
+        ) as error:
+            sys.stderr.write(f"{error}\n")
+            return 1 if not isinstance(error, ModelDownloadError) else 2
+        if args.output_dir is not None:
+            write_run_manifest(
+                args.output_dir / f"{baseline_run.run_id}.manifest.json", baseline_run
+            )
+        sys.stdout.write(
+            f"run {baseline_run.run_id} backend={baseline_run.backend_kind} "
+            f"oom={baseline_run.oom} records={len(baseline_run.predictions)}\n"
+        )
+        if baseline_run.backend_kind == "scripted":
+            sys.stdout.write("scripted backend results cannot be published as baselines\n")
+        return 0
+
+    if args.command == "compare-baselines":
+        from leaseguard.evaluation.baseline import load_baseline_registry
+        from leaseguard.evaluation.compare import (
+            compare_baseline_runs,
+            load_baseline_runs,
+            write_comparison_report,
+        )
+
+        try:
+            baselines = load_baseline_registry()
+            runs = load_baseline_runs(args.runs)
+            comparison_report = compare_baseline_runs(runs, baselines)
+        except (OSError, ValidationError) as error:
+            sys.stderr.write(f"{error}\n")
+            return 1
+        if args.output is not None:
+            write_comparison_report(args.output, comparison_report)
+        selected = comparison_report.selected_candidate_id or "none"
+        sys.stdout.write(
+            f"selected {selected} incomplete={str(comparison_report.incomplete).lower()}\n"
+        )
+        sys.stdout.write(comparison_report.fine_tuning_hypothesis + "\n")
         return 0
 
     parser.error(f"unknown command: {args.command}")

@@ -1,0 +1,98 @@
+{
+  "registry_version": "1.0.0",
+  "frozen_on": "2026-09-14",
+  "hardware": "Google Colab T4",
+  "purpose": "Reproducible unmodified base-model baselines. Each candidate uses the same frozen Dataset v1 evaluation split, prompt templates, context builders, and generation settings. Product-task scores are not professional-benchmark results.",
+  "headline_claim_allowed": false,
+  "random_seed": 3407,
+  "required_comparison_id": "schema-full-4bit",
+  "max_practical_vram_mb": 15000,
+  "candidates": [
+    {
+      "candidate_id": "qwen35-4b",
+      "display_name": "Qwen3.5-4B",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "revision": "main",
+      "license": "Apache-2.0",
+      "parameter_count": "4B",
+      "native_context_length": 262144,
+      "practical_context_length": 8192,
+      "quantizations": ["4bit", "8bit"],
+      "gated": false,
+      "notes": "Instruction-tuned publisher checkpoint, not a LeaseGuard adapter. T4 runs use float16 compute."
+    },
+    {
+      "candidate_id": "qwen35-9b",
+      "display_name": "Qwen3.5-9B",
+      "model_id": "Qwen/Qwen3.5-9B",
+      "revision": "main",
+      "license": "Apache-2.0",
+      "parameter_count": "9B",
+      "native_context_length": 262144,
+      "practical_context_length": 4096,
+      "quantizations": ["4bit"],
+      "gated": false,
+      "notes": "Instruction-tuned publisher checkpoint, not a LeaseGuard adapter. 4-bit NF4 is the T4 path."
+    },
+    {
+      "candidate_id": "gemma3-12b",
+      "display_name": "Gemma 3 12B",
+      "model_id": "google/gemma-3-12b-it",
+      "revision": "main",
+      "license": "Gemma",
+      "parameter_count": "12B",
+      "native_context_length": 131072,
+      "practical_context_length": 4096,
+      "quantizations": ["4bit"],
+      "gated": true,
+      "notes": "Instruction-tuned publisher checkpoint. Hugging Face Gemma license acceptance is required before Colab download. OOM on T4 means this candidate is not practical."
+    }
+  ],
+  "comparisons": [
+    {
+      "comparison_id": "direct-full-4bit",
+      "prompt_mode": "direct",
+      "context_mode": "full_document",
+      "quantization": "4bit",
+      "candidate_ids": ["qwen35-4b", "qwen35-9b", "gemma3-12b"]
+    },
+    {
+      "comparison_id": "schema-full-4bit",
+      "prompt_mode": "schema_constrained",
+      "context_mode": "full_document",
+      "quantization": "4bit",
+      "candidate_ids": ["qwen35-4b", "qwen35-9b", "gemma3-12b"]
+    },
+    {
+      "comparison_id": "schema-clause-4bit",
+      "prompt_mode": "schema_constrained",
+      "context_mode": "clause_level",
+      "quantization": "4bit",
+      "candidate_ids": ["qwen35-4b", "qwen35-9b", "gemma3-12b"]
+    },
+    {
+      "comparison_id": "schema-retrieval-4bit",
+      "prompt_mode": "schema_constrained",
+      "context_mode": "retrieval_assisted",
+      "quantization": "4bit",
+      "candidate_ids": ["qwen35-4b", "qwen35-9b", "gemma3-12b"]
+    },
+    {
+      "comparison_id": "schema-full-8bit",
+      "prompt_mode": "schema_constrained",
+      "context_mode": "full_document",
+      "quantization": "8bit",
+      "candidate_ids": ["qwen35-4b"]
+    }
+  ],
+  "generation": {
+    "max_new_tokens": 1024,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "do_sample": false
+  },
+  "retrieval": {
+    "top_k": 4,
+    "min_score": 0.0
+  }
+}
