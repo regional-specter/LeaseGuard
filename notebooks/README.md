@@ -13,4 +13,6 @@ Phase 6 also has dedicated T4 notebooks. Run them one candidate per session:
 
 Set Runtime to **T4 GPU** for the candidate notebooks. Gemma requires a Hugging Face token after you accept the Gemma license. Completed predictions resume from Drive checkpoints if Colab disconnects.
 
+The first config cell clones `https://github.com/regional-specter/LeaseGuard.git`. Change `REPO_URL` if you are on a fork. If GitHub is private, copy the repo to Drive as `MyDrive/leaseguard/repo` instead. Install uses `src/` on `sys.path` when Colab's PEP 668 marker blocks `pip install -e .`.
+
 Do not commit notebook outputs containing lease text, personal information, or large generated files.
